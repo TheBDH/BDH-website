@@ -1,4 +1,5 @@
 {% extends "base_generic.html" %}
+{% load render_bundle from webpack_loader %}
 
 {% block content %}
 <h1>Brown Daily Herald</h1>
@@ -12,5 +13,13 @@
     <li><strong>Articles:</strong> {{ num_articles }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
   </ul>
+
+{% endblock %}
+
+{% block article %}
+
+	<div id='root'>
+	</div>
+		{% render_bundle 'main' %}
 
 {% endblock %}
