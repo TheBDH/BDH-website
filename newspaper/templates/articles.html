@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block content %}
+<h1>Brown Daily Herald</h1>
+
+  <p>Welcome to <em>BDH</em> </p>
+
+{% endblock %}
+
+{% block article %}
+
+	<div id='article-component' year={{year}} title={{title}}>
+	</div>
+		{% render_bundle 'main' %}
+
+{% endblock %}

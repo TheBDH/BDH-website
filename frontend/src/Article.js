@@ -5,12 +5,28 @@ class Article extends Component {
     return (
       <div className="article">
         <header className="article-header">
-          <h1 className="article-title">My Article</h1>
+          <p className='section-header'>Section Header </p>
+          <h1 className="article-title">{this.props.title}</h1>
           <h3 className='article-subtitle'>Fun subtitle</h3>
         </header>
-        <p className="article-body">
-          Lorem ipsum dolor sum. 
-        </p>
+        <div className='info-bars'>
+          <div className='author-info'>
+            <p>Author Name</p>
+            <p>Position</p>
+            <p id='year'>{this.props.year}</p>
+          </div>
+          <div className='share-info'>
+            <p>SHARE</p>
+          </div>
+        </div>
+        <div className='featured-image'>
+          <p className='caption'></p>
+        </div>
+        <div className='article-body'>
+          <p className="article-body">
+            Lorem ipsum dolor sum. 
+          </p>
+        </div>
       </div>
     );
   }

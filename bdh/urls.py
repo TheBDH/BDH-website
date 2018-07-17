@@ -26,6 +26,7 @@ from django.urls import path
 
 urlpatterns += [
 	path('', views.index, name='index'),
+    path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
 ]
 
 from django.views.generic import RedirectView
