@@ -6,19 +6,11 @@
 
   <p>Welcome to <em>BDH</em> </p>
 
-<h2>Dynamic content</h2>
-
-  <p>The newspaper has the following record counts:</p>
-  <ul>
-    <li><strong>Articles:</strong> {{ num_articles }}</li>
-    <li><strong>Authors:</strong> {{ num_authors }}</li>
-  </ul>
-
 {% endblock %}
 
 {% block article %}
 
-	<div id='root'>
+	<div id='article-component' year={{year}} title={{title}}>
 	</div>
 		{% render_bundle 'main' %}
 

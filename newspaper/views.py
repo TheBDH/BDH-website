@@ -1,4 +1,6 @@
 from django.shortcuts import render
+import xml.etree.ElementTree as etree
+tree = etree.parse('sample-article-collection.xml')
 
 # Create your views here.
 
@@ -17,6 +19,18 @@ def index(request):
     # Render the HTML template index.html with the data in the context variable
     return render(
         request,
-        'index.html',
+        'articles.html',
         context={'num_articles':num_articles,'num_authors':num_authors,'num_published_articles':num_published_articles}
     )
+
+def articles(request, year, month, day, slug):
+    """
+    View function for article
+    """
+    title = 'my article title'
+    return render(
+        request,
+        'articles.html',
+        context={'title':title,'year':year}
+    )
+

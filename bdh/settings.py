@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'bdh.wsgi.application'
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+            'BUNDLE_DIR_NAME': 'bundles/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+        }
+}
 
 
 # Database
