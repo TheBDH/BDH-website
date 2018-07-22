@@ -1,18 +1,23 @@
-/*
-.sidebar-nav {
-    margin-top: 20px;
-    padding: 0;
-    list-style: none;
-}*/
+/* This CSS file contains styling for the header, navbar, and footer. */
+
+#header {
+   text-align:center;
+}
+
+#header img {
+   width: 50vw;
+}
 
 #centeredmenu {
+   font-family: "Avenir";
    float:left;
    width:100%;
    background:#fff;
-   border-bottom:4px solid #000;
    overflow:hidden;
    position:relative;
+   border-bottom:1px solid lightgray;
 }
+
 #centeredmenu ul {
    clear:left;
    float:left;
@@ -23,6 +28,13 @@
    left:50%;
    text-align:center;
 }
+
+#centeredmenu ul li input {
+   border:none;
+   margin-top:3px;
+   padding: 0 25px 0 25px;
+}
+
 #centeredmenu ul li {
    display:block;
    float:left;
@@ -31,20 +43,29 @@
    padding:0;
    position:relative;
    right:50%;
+   border-left:1px solid lightgray;
 }
+
 #centeredmenu ul li a {
    display:block;
    margin:0 0 0 1px;
-   padding:3px 10px;
-   background:#ddd;
+   padding:5px 10px;
+   background:white;
    color:#000;
    text-decoration:none;
    line-height:1.3em;
 }
+
+#centeredmenu ul li a img {
+   padding:-2px;
+   height:17px;
+}
+
 #centeredmenu ul li a:hover {
    background:#369;
    color:#fff;
 }
+
 #centeredmenu ul li a.active,
 #centeredmenu ul li a.active:hover {
    color:#fff;

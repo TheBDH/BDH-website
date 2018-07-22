@@ -13,7 +13,6 @@ def index(request):
     # Generate counts of some of the main objects
     num_articles=Article.objects.all().count()
     num_authors=Author.objects.all().count()
-    # Available books (status = 'a')
     num_published_articles=Article.objects.filter(status='p').count()
     
     # Render the HTML template index.html with the data in the context variable

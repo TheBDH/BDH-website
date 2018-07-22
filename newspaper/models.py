@@ -61,6 +61,7 @@ class Author(models.Model):
     	('so', 'Sophomore'),
     	('ju', 'Junior'),
     	('se', 'Senior'),
+        ('gs', 'Graduate Student'),
     )
 
     year = models.CharField(max_length=2, choices=AUTHOR_YEAR, blank=True, default='', help_text='Author Year')
