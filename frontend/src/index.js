@@ -6,9 +6,10 @@ import Article from './Article'
 import registerServiceWorker from './registerServiceWorker';
 
 function renderArticle(){
-	year = document.getElementById('article-component').prop('year');
-	console.log(year);
-	ReactDOM.render(<Article year='2020'/>, document.getElementById('article-component'));
+	var article = document.getElementById('article-component');
+	var year = article.getAttribute('year');
+	var title = article.getAttribute('title');
+	ReactDOM.render(<Article year={year} title={title}/>, document.getElementById('article-component'));
 }
 
 renderArticle();
