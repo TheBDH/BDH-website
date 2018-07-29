@@ -8,6 +8,10 @@
    width: 50vw;
 }
 
+#centeredmenu #navbar-top ul li a {
+   font-weight:lighter;
+}
+
 #centeredmenu {
    font-family: "Avenir";
    float:left;
@@ -16,6 +20,11 @@
    overflow:hidden;
    position:relative;
    border-bottom:1px solid lightgray;
+}
+
+#navbartop {
+   font-weight:lighter;
+   font-color:gray;
 }
 
 #centeredmenu ul {

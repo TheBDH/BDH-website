@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   
-  {% block title %}<title>Brown Daily Herald</title>{% endblock %}
+  {% block title %}<title>The Brown Daily Herald</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
@@ -19,13 +20,13 @@
   <div class="container-fluid">
     <div class="row">
       <div id="centeredmenu">
-      <ul class="nav">
+      <ul id="navbar-top">
           <li><a href="">ABOUT</a></li> 
           <li><a href="">SUBMIT</a></li>
           <li><a href="http://www.bdhsales.com" target="_blank">ADVERTISE</a></li>
           <li><a href="http://www.heraldalumni.org/donate.html" target="_blank">DONATE</a></li>
           <li><a href="">SUBSCRIBE</a></li>
-          <li><input type="text" placeholder="SEARCH"></li> <!-- Add event handler for enter -->
+          <li><input type="text" placeholder="SEARCH" onenter></li> <!-- Add event handler for enter: https://stackoverflow.com/questions/4418819/how-to-submit-a-form-on-enter-when-the-textarea-has-focus -->
           <li><a href="https://www.facebook.com/browndailyherald/"> <img src="/static/images/fb-logo.png"></a></li>
           <li><a href="https://www.twitter.com/browndailyherald/"> <img src="/static/images/twitter-logo.png"></a></li>
           <li><a href="https://www.instagram.com/browndailyherald/"> <img src="/static/images/insta-logo.png"></a></li>
@@ -39,14 +40,14 @@
     <div class="row">
       <div id="centeredmenu">
       <ul class="nav">
-          <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="">News</a></li>
-          <li><a href="">Arts and Culture</a></li>
-          <li><a href="">Science and Research</a></li>
-          <li><a href="">Sports</a></li>
-          <li><a href="">Opinion</a></li>
-          <li><a href="http://post.browndailyherald.com">POST</a></li>
-          <li><a href="http://www.blogdailyherald.com">Blog</a></li>
+          <li><a href="{% url 'index' %}"><b>HOME</b></a></li>
+          <li><a href="Sections/News"><b>NEWS</b></a></li>
+          <li><a href="Sections/Arts-and-Culture"><b>ARTS & CULTURE</b></a></li>
+          <li><a href="Sections/Science-and-Research"><b>SCIENCE & RESEARCH</b></a></li>
+          <li><a href="Sections/Sports"><b>SPORTS</b></a></li>
+          <li><a href="Sections/Opinions"><b>OPINION</b></a></li>
+          <li><a href="http://post.browndailyherald.com"><em>POST</em></a></li>
+          <li><a href="http://www.blogdailyherald.com"><b>BLOG</b></a></li>
       </ul>
     </div>
     Ad goes here

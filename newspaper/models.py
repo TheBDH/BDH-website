@@ -3,42 +3,44 @@ from django.db import models
 # Create your models here.
 
 class Article(models.Model):
-	title = models.CharField(help_text="Enter Article Title", max_length=10000)
-	authors = models.ManyToManyField('Author', help_text="Select Author Names") # dropdown for authors - could get unwieldy? evaluate later ... searchable?
-    #sections = models.ManyToManyField(Sections, help_text="Article Sections") #same as above
-	pubdate = models.DateField(auto_now=True) #use for last-modified time stamps
-    #topics = models.ManyToManyField(Topics, help_text="Article Topics")
+    title = models.CharField(help_text="Enter Article Title", max_length=10000)
+    authors = models.ManyToManyField('Author', help_text="Select Author Names") # dropdown for authors - could get unwieldy? evaluate later ... searchable?
+    tags = models.ManyToManyField('Tags', help_text="Tags for this Article")
+    sections = models.ManyToManyField("Sections", help_text="Article Sections")
+    pubdate = models.DateField(auto_now=True) #use for last-modified time stamps
     #comments and images as a ForeignKeyField ?
-	text = models.CharField(help_text="Article Text Goes Here", max_length=1000000000) #django is unhappy if we don't define max length
-	article_id = models.AutoField(primary_key=True) # automatically generate a unique Article ID, increments
+    text = models.CharField(help_text="Article Text Goes Here", max_length=1000000000) #django is unhappy if we don't define max length
+    article_id = models.AutoField(primary_key=True) # automatically generate a unique Article ID, increments
 
-	PUB_STATUS = (
+    PUB_STATUS = (
 		('d', 'Draft'),
 		('p', 'Published'),
     )
 
-	status = models.CharField(max_length=1, choices=PUB_STATUS, blank=True, default='d', help_text='Publication Status')
+    status = models.CharField(max_length=1, choices=PUB_STATUS, blank=True, default='d', help_text='Publication Status')
 
 	# Metadata
-	class Meta: 
-		ordering = ["-pubdate"]
+    class Meta: 
+        ordering = ["-pubdate"]
 
 	# Methods
-	def get_absolute_url(self):
-		 """
-		 Returns the url to access a particular instance of MyModelName.
-		 """
-		 return reverse('article-detail', args=[str(self.id)])
+    def get_absolute_url(self):
+        #Returns the url to access a particular instance of MyModelName.
+        return reverse('article-detail', args=[str(self.id)])
 
-	def __str__(self):
-		"""
-		String for representing the MyModelName object (in Admin site etc.)
-		"""
-		return self.title
+    def __str__(self):
+        return self.title
 
-	def disp_authors(self):
-		return ', '.join([ author.first_name + " " + author.last_name for author in self.authors.all()[:3] ])
-	disp_authors.short_description = 'Authors'
+    def disp_authors(self):
+        return ', '.join([ author.first_name + " " + author.last_name for author in self.authors.all()[:3] ])
+    disp_authors.short_description = 'Authors'
+
+class Tags(models.Model):
+    tag_value = models.CharField(max_length=1000)
+    number_of_contents_with_tag = models.IntegerField()
+
+class Sections(models.Model):
+    name = models.CharField(help_text="Section Name", max_length=100)
 
 class Author(models.Model):
     """
