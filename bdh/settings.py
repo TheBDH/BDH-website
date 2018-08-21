@@ -14,8 +14,6 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
@@ -26,6 +24,22 @@ SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
+WAGTAIL_APPEND_SLASH = False
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch2',
+        'INDEX': 'myapp'
+    }
+}
+WAGTAILSEARCH_RESULTS_TEMPLATE = 'newspaper/search_results.html'
+WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'newspaper/includes/search_listing.html'
+WAGTAILSEARCH_HITS_MAX_AGE = 300
+WAGTAIL_PASSWORD_MANAGEMENT_ENABLED = True
+WAGTAIL_PASSWORD_RESET_ENABLED = True
+WAGTAILUSERS_PASSWORD_ENABLED = True
 
 
 # Application definition
@@ -39,16 +53,35 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
     'webpack_loader',
+
+    'wagtail.contrib.forms',
+	'wagtail.contrib.redirects',
+	'wagtail.embeds',
+	'wagtail.sites',
+	'wagtail.users',
+	'wagtail.snippets',
+	'wagtail.documents',
+	'wagtail.images',
+	'wagtail.search',
+	'wagtail.admin',
+	'wagtail.core',
+
+	'taggit',
+	'modelcluster',
+
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.middleware.security.SecurityMiddleware',
+
+	'wagtail.core.middleware.SiteMiddleware',
+	'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'bdh.urls'
@@ -70,22 +103,32 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'bdh.wsgi.application'
+WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/media-root/'
 
 WEBPACK_LOADER = {
-    'DEFAULT': {
-            'BUNDLE_DIR_NAME': 'bundles/',
-            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
-        }
+	'DEFAULT': {
+		'BUNDLE_DIR_NAME': 'bundles/',
+		'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+	}
 }
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "wp_bdh",
+        "USER": "root",
+        "PASSWORD": "Since1891",
+        "HOST": "localhost",
+        "PORT": "",
     }
 }
 
