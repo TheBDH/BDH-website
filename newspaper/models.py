@@ -3,13 +3,17 @@ from django.db import models
 # Create your models here.
 
 class Article(models.Model):
-    title = models.CharField(help_text="Enter Article Title", max_length=10000)
+    title = models.TextField(help_text="Enter Article Title")
+    article_slug = models.TextField(help_text="Enter Article Slug Here", default="")
     authors = models.ManyToManyField('Author', help_text="Select Author Names") # dropdown for authors - could get unwieldy? evaluate later ... searchable?
     tags = models.ManyToManyField('Tags', help_text="Tags for this Article")
     sections = models.ManyToManyField("Sections", help_text="Article Sections")
     pubdate = models.DateField(auto_now=True) #use for last-modified time stamps
+
+    metadata_article = models.DateField(auto_now = True)
+
     #comments and images as a ForeignKeyField ?
-    text = models.CharField(help_text="Article Text Goes Here", max_length=1000000000) #django is unhappy if we don't define max length
+    text = models.TextField(help_text="Article Text Goes Here", default="la la la") #django is unhappy if we don't define max length
     article_id = models.AutoField(primary_key=True) # automatically generate a unique Article ID, increments
 
     PUB_STATUS = (
@@ -56,6 +60,7 @@ class Author(models.Model):
     	('stw', 'Staff Writer'),
     )
 
+    articles = models.ManyToManyField('Article', help_text="Select Articles Names") # dropdown for authors - could get unwieldy? evaluate later ... searchable?
     rank = models.CharField(max_length=3, choices=AUTHOR_RANK, blank=True, default='con', help_text='Author Rank')
 
     AUTHOR_YEAR = (
@@ -83,3 +88,5 @@ class Author(models.Model):
         String for representing the Model object.
         """
         return '{0} {1}, {2}'.format(self.first_name,self.last_name,self.year)
+
+###add in utility methods to get stuff from the database - for testing, instantiate the local db
