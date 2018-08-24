@@ -47,15 +47,16 @@ WAGTAILUSERS_PASSWORD_ENABLED = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
     'webpack_loader',
 
     'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',
+    'wagtail.contrib.routable_page',
 	'wagtail.embeds',
 	'wagtail.sites',
 	'wagtail.users',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
 	'wagtail.search',
 	'wagtail.admin',
 	'wagtail.core',
+
 
 	'taggit',
 	'modelcluster',
@@ -106,7 +108,7 @@ WSGI_APPLICATION = 'bdh.wsgi.application'
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/media-root/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media-repo')
 
 WEBPACK_LOADER = {
 	'DEFAULT': {
@@ -131,6 +133,32 @@ DATABASES = {
         "PORT": "",
     }
 }
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch2',
+        'INDEX': 'myapp'
+    }
+}
+WAGTAILSEARCH_RESULTS_TEMPLATE = 'bdh/search_results.html'
+WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'bdh/includes/search_listing.html'
+
+WAGTAILSEARCH_HITS_MAX_AGE = 14
+WAGTAILADMIN_RECENT_EDITS_LIMIT = 5
+WAGTAILUSERS_PASSWORD_ENABLED = True
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': '127.0.0.1:6379',
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#         }
+#     }
+# }
+
+
+LANGUAGES = WAGTAILADMIN_PERMITTED_LANGUAGES = [('en', 'English')]
 
 
 # Password validation

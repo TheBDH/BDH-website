@@ -43,4 +43,5 @@ from wagtail.core import urls as wagtail_urls
 urlpatterns += [
     re_path(r'^cms/', include(wagtailadmin_urls)),
     re_path(r'^articles/', include(wagtaildocs_urls)),
+    re_path(r'^pages/', include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
