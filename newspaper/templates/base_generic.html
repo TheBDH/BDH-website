@@ -16,48 +16,17 @@
 </head>
 
 <body>
+  <div id="headerNew"></div>
+  <div class="main-container main-content">
+    <div id="sidebar"></div>
+    <div id="hero"></div>
+    <div id="section"></div>
+  </div>
+  <div id="footerNew"></div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div id="centeredmenu">
-      <ul id="navbar-top">
-          <li><a href="">ABOUT</a></li> 
-          <li><a href="">SUBMIT</a></li>
-          <li><a href="http://www.bdhsales.com" target="_blank">ADVERTISE</a></li>
-          <li><a href="http://www.heraldalumni.org/donate.html" target="_blank">DONATE</a></li>
-          <li><a href="">SUBSCRIBE</a></li>
-          <li><input type="text" placeholder="SEARCH" onenter></li> <!-- Add event handler for enter: https://stackoverflow.com/questions/4418819/how-to-submit-a-form-on-enter-when-the-textarea-has-focus -->
-          <li><a href="https://www.facebook.com/browndailyherald/"> <img src="/static/images/fb-logo.png"></a></li>
-          <li><a href="https://www.twitter.com/browndailyherald/"> <img src="/static/images/twitter-logo.png"></a></li>
-          <li><a href="https://www.instagram.com/browndailyherald/"> <img src="/static/images/insta-logo.png"></a></li>
-      </ul>
-    </div>
-  </div>
-  <div id= "header">
-    <a href="http://www.browndailyherald.com"><img src = "/static/images/bdh_flag.png"></a>
-  </div>
-  <div class="container-fluid">
-    <div class="row">
-      <div id="centeredmenu">
-      <ul class="nav">
-          <li><a href="{% url 'index' %}"><b>HOME</b></a></li>
-          <li><a href="Sections/News"><b>NEWS</b></a></li>
-          <li><a href="Sections/Arts-and-Culture"><b>ARTS & CULTURE</b></a></li>
-          <li><a href="Sections/Science-and-Research"><b>SCIENCE & RESEARCH</b></a></li>
-          <li><a href="Sections/Sports"><b>SPORTS</b></a></li>
-          <li><a href="Sections/Opinions"><b>OPINION</b></a></li>
-          <li><a href="http://post.browndailyherald.com"><em>POST</em></a></li>
-          <li><a href="http://www.blogdailyherald.com"><b>BLOG</b></a></li>
-      </ul>
-    </div>
-    Ad goes here
-    {% block article %}{% endblock %} <!-- not necessarily article -->
-    </div>
-  </div>
+  Ad goes here
+  {% block article %}{% endblock %} <!-- not necessarily article -->
+
   <hr>
-  <footer>
-  amazing footer goes here
-  -Abstract out footer, other things as react components?
-  </footer>
 </body>
 </html>
