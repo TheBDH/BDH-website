@@ -33,3 +33,9 @@ def articles(request, year, month, day, slug):
         context={'title':title,'year':year}
     )
 
+def authors(request, name):
+    """
+    View function for author
+    """
+    return render(request, 'articles.html', context={'title':title,'year':year})
+
