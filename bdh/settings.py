@@ -119,12 +119,12 @@ WEBPACK_LOADER = {
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# database setup is an issue
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    "default": {
+DATABASES = {"default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "wp_bdh",
         "USER": "root",
@@ -132,6 +132,7 @@ DATABASES = {
         "HOST": "localhost",
         "PORT": "",
     }
+    
 }
 
 WAGTAILSEARCH_BACKENDS = {

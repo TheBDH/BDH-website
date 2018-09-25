@@ -91,40 +91,32 @@ class Author(models.Model):
 
 ###add in utility methods to get stuff from the database - for testing, instantiate the local db
 
+from django.shortcuts import get_object_or_404
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from pprint import pprint #debugging
 
+# class ArticleIndexPage(Page):
+
+#     def filter_by_date(self):
+#         articles = ArticlePage.objects.live().descendant_of(self)
+#         articles = events.filter(date_from__gte=date)
+#         articles = events.order_by('date_from')
+#         return articles
+
 class ArticlePage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
+    date_published = models.DateField(auto_now=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
     ]
 
-    @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
-    def dated_article_with_slug(self, request, year, month, day, slug):
-        pprint(vars(self))
-        post_page = self.get_posts().filter(slug=slug).first()
-        if not post_page:
-            raise Http404
-        return Page.serve(post_page, request, *args, **kwargs)
-
-    def post_by_date_slug(self, request, year, month, day, slug, *args, **kwargs):
-        post_page = self.get_posts().filter(slug=slug).first()
-        if not post_page:
-            raise Http404
-        return Page.serve(post_page, request, *args, **kwargs)
-
-    # @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
-    # def post_by_date_slug(self, request, year, month, day, slug, *args, **kwargs):
-    #     post_page = self.get_posts().filter(slug=slug).first()
-    #     if not post_page:
-    #         raise Http404
-    #     return Page.serve(post_page, request, *args, **kwargs)
-
+    @route(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)/?$')
+    def article_page(self, request):
+        pprint(request)
 
 
