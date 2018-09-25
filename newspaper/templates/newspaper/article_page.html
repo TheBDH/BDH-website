@@ -5,9 +5,9 @@
 
  {% load wagtailcore_tags %}
 
-{{ page.body|richtext }}
+{{ page.body|richtext }}<!-- 
 	<div id='article-component' year={{year}} title={{title}}>
-	</div>
+	</div> -->
 		{% render_bundle 'main' %}
 
 {% endblock %}
