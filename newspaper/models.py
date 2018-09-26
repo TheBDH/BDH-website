@@ -96,6 +96,7 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.api import APIField
 from pprint import pprint #debugging
 
 # class ArticleIndexPage(Page):
@@ -113,6 +114,12 @@ class ArticlePage(RoutablePageMixin, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
+    ]
+
+    api_fields = [
+        APIField('intro'),
+        APIField('body'),
+        APIField('date_published'),
     ]
 
     @route(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)/?$')
