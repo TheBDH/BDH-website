@@ -2,3 +2,4 @@ bdh/__pycache__/
 newspaper/__pycache__/
 newspaper/migrations/
 media-repo/
+.idea/*
