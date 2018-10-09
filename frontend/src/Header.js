@@ -29,6 +29,7 @@ class Header extends Component {
           <div className="top-header">
             <ul className="main-container">
               <li><a href="#">about</a></li> 
+              <li><a href="#">contact</a></li> 
               <li><a href="#">submit</a></li>
               <li><a href="http://www.bdhsales.com" target="_blank">advertise</a></li>
               <li><a href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a></li>

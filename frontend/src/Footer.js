@@ -30,8 +30,8 @@ class Footer extends Component {
                   </ul>
                 </li>
                 <li><a href="#">comics</a></li>
-                <li><a href="#">blog daily herald</a></li>
-                <li><a href="#">post magazine</a></li>
+                <li><a href="www.blogdailyherald.com">blog daily herald</a></li>
+                <li><a href="post.browndailyherald.com">post magazine</a></li>
                 <li><a href="#">archives</a></li>
               </ul>
             </div>
@@ -41,9 +41,9 @@ class Footer extends Component {
                 <li><a href="#">about</a></li>
                 <li><a href="#">contact</a></li>
                 <li><a href="#">join</a></li>
-                <li><a href="#">advertise</a></li>
+                <li><a href="www.bdhsales.com">advertise</a></li>
                 <li><a href="#">donate</a></li>
-                <li><a href="#">alumni</a></li>
+                <li><a href="www.heraldalumni.org">alumni</a></li>
                 <li><a href="#">privacy policy</a></li>
               </ul>
             </div>
@@ -65,7 +65,8 @@ class Footer extends Component {
               </div>
               <div className="footer-break"></div>
               <div className="footer-donate">
-                <div className="med-nav-title">donate</div>
+                <a href="https://brownherald.z2systems.com/np/clients/brownherald/donation.jsp?campaign=1&" className = "med-nav-title">donate</a>
+                {/* This is the direct link to the donation website; the other donate link previously goes to the BDH donate page */}
               </div>
             </div>
           </div>

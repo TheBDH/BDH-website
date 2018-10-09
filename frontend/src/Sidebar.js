@@ -8,7 +8,7 @@ class Sidebar extends Component {
         <Advertisement_300x250 url={this.props.ad1.url} name={this.props.ad1.name} imgUrl={this.props.ad1.imgUrl}/>
         <div className="sidebar-post">
           <a href="http://post.browndailyherald.com/">
-            <img src="/static/images/post.png" alt="Post--Online"/>
+            <img src="/static/images/post-logo.png" alt="Post--Online" width="250"/>
           </a>
           <div className="sidebar-articles">
             {this.props.post_articles.map(article => <a className="small-article-title" href={article.url}>{article.title}</a>)} 
@@ -17,7 +17,7 @@ class Sidebar extends Component {
         <Advertisement_300x250 url={this.props.ad1.url} name={this.props.ad1.name} imgUrl={this.props.ad1.imgUrl}/>
         <div className="sidebar-blog">
           <a href="http://blogdailyherald.com/">
-            <img src="/static/images/blog.png" alt="Blog Daily Herald"/>
+            <img src="/static/images/blog-logo.png" alt="Blog Daily Herald" width="250"/>
           </a>
           <div className="sidebar-articles">
             {this.props.blog_articles.map(article => <a className="small-article-title" href={article.url}>{article.title}</a>)} 
