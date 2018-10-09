@@ -58,9 +58,9 @@ class Footer extends Component {
               <div className="footer-follow">
                 <div className="med-nav-title">follow us</div>
                 <div className="logo-strip">
-                  <a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb.png" /></a>
-                  <a href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter.png" /></a>
-                  <a href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig.png" /></a>
+                  <a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" /></a>
+                  <a href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter-logo-gray.png" /></a>
+                  <a href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig-logo-gray.png" /></a>
                 </div>
               </div>
               <div className="footer-break"></div>
