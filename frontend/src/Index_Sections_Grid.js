@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Section_Features from './Section_Features';
 
-class Index_Sections extends Component {
+class Index_Sections_Grid extends Component {
   render() {
     return (
       <div className="index_sections">
@@ -14,4 +14,4 @@ class Index_Sections extends Component {
   }
 }
 
-export default Index_Sections;
+export default Index_Sections_Grid;
