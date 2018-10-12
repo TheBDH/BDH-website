@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      burgerToggle: false
+    }
+    this.burgerToggle = this.burgerToggle.bind(this);
+  }
 
-  // function BurgerToggle(x) {
-  //   x.classList.toggle("open");
-  // }
+  burgerToggle() {
+    this.setState({burgerToggle: !this.state.burgerToggle});
+  }
+
+  burgerState() {
+    if (this.state.burgerToggle) {
+      return "open";
+    } else {
+      return "closed";
+    }
+  }
 
   render() {
+    var burgerState = this.burgerState();
     return (
       <header>
         <div className="desktop-only">
@@ -19,9 +35,9 @@ class Header extends Component {
               <li><a href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a></li>
               <li><a href="#">subscribe</a></li>
               <li className="header-search"><input type="search" placeholder="SEARCH"/></li>
-              <li className="header-icon"><a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo.png" alt="facebook"/></a></li>
-              <li className="header-icon"><a href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter-logo.png" alt="twitter"/></a></li>
-              <li className="header-icon"><a href="https://www.instagram.com/browndailyherald/"><img src="/static/images/insta-logo.png" alt="instagram"/></a></li>
+              <li className="header-icon"><a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a></li>
+              <li className="header-icon"><a href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter-logo-gray.png" alt="twitter"/></a></li>
+              <li className="header-icon"><a href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig-logo-gray.png" alt="instagram"/></a></li>
             </ul>
           </div>
           <div className="header-flag">
@@ -41,16 +57,30 @@ class Header extends Component {
           </div>
         </div>
         <div className="mobile-header-content mobile-only">
-          <div className="burger">
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
+          <div className="burger" onClick={this.burgerToggle}>
+            <div className={ burgerState }>
+              <div className="bar"></div>
+              <div className="bar"></div>
+              <div className="bar"></div>
+            </div>
+          </div>
+          <div className="mobile-nav">
+            <div className = {burgerState}>
+              <div className="med-nav-title">sections</div>
+              <ul>
+                <li><a href="#">news</a></li>
+                <li><a href="#">arts & culture</a></li>
+                <li><a href="#">science & research</a></li>
+                <li><a href="#">sports</a></li>
+                <li><a href="#">opinion</a></li>
+              </ul>
+            </div>
           </div>
           <div className="mobile-header-flag">
             <a href="http://www.browndailyherald.com"><img src="/static/images/bdh_flag.png" alt="Brown Daily Herald"/></a>
           </div>
           <div className="mobile-search">
-            <img src="/static/images/search.png" alt="click to search"/>
+            <img src="/static/images/search-icon-black.png" alt="click to search"/>
           </div>
         </div>
       </header>
