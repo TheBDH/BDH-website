@@ -5,8 +5,9 @@ import './general-style.css';
 import App from './App';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Index_Featured from './Index_Featured';
-import Index_Sections from './Index_Sections';
+import Index_Featured_Article_Grid from './Index_Featured_Article_Grid';
+import Index_Sections_Grid from './Index_Sections_Grid';
+import Advertisement_728x90 from './Advertisement_728x90';
 import Footer from './Footer';
 import Article from './Article'
 import registerServiceWorker from './registerServiceWorker';
@@ -34,7 +35,7 @@ function renderSidebar(){
 function renderIndexFeatured(){
 	var hero = {imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg",imgAlt:"bear",section:{name:"University News", url:"#"},url:"#",title:"Lorem ipsum dolor",author:{name:"John Doe", url:"#"},date:"May 10, 2010",excerpt:"Lorem ipsum dolor sit amet, elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem  minim veniam, quis nostrud exerci tation ullamcorper Lorem ipsum dolor sit amet, consectetuer [...]"}
 	var sections = [{section:{name:"University News", url:"#"},url:"#",title:"Lorem ipsum dolor",author:{name:"John Doe", url:"#"},date:"May 10, 2010",excerpt:"Lorem ipsum dolor sit amet, elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volut pat. Lorem  minim veniam, quis nostrud exerci tation ullamcorper Lorem ipsum dolor sit amet, consectetuer [...]"},{section:{name:"University News", url:"#"},url:"#",title:"Lorem ipsum dolor",author:{name:"John Doe", url:"#"},date:"May 10, 2010",excerpt:"Lorem ipsum dolor sit amet, elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volut pat. Lorem  minim veniam, quis nostrud exerci tation ullamcorper Lorem ipsum dolor sit amet, consectetuer [...]"}]
-	ReactDOM.render(<Index_Featured hero={hero} sections={sections}/>, document.getElementById('hero'));
+	ReactDOM.render(<Index_Featured_Article_Grid hero={hero} sections={sections}/>, document.getElementById('hero'));
 }
 
 function renderIndexSections(){
@@ -49,11 +50,18 @@ function renderIndexSections(){
 		]
 	}
 	var sections_list = [sample_section, sample_section, sample_section, sample_section, sample_section, sample_section];
-	ReactDOM.render(<Index_Sections sections={sections_list}/>, document.getElementById('section'));
+	ReactDOM.render(<Index_Sections_Grid sections={sections_list}/>, document.getElementById('section'));
 }
 
 function renderFooter(){
 	ReactDOM.render(<Footer/>, document.getElementById('footerNew'));
+}
+
+function renderAd() {
+	var name="advertisement 1";
+	var url="#";
+	var imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg";
+	ReactDOM.render(<Advertisement_728x90 url={url} name={name} imgUrl={imgUrl}/>, document.getElementById('728x90'));
 }
 
 renderHeader();
@@ -61,5 +69,6 @@ renderFooter();
 renderSidebar();
 renderIndexFeatured();
 renderIndexSections();
+renderAd();
 renderArticle();
 registerServiceWorker();
