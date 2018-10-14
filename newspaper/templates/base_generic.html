@@ -17,16 +17,22 @@
 
 <body>
   <div id="headerNew"></div>
-  <div class="main-container main-content">
-    <div id="sidebar"></div>
-    <div id="hero"></div>
-    <div id="section"></div>
+  <div class="main-container">
+    
+    <div class="top-ad" id="728x90"></div>
+
+    <div class="main-page">
+      <div class="main-content">
+    
+        <div id="hero"></div>
+        <div id="section"></div>
+
+      </div>
+      <div id="sidebar" class="main-sidebar"></div>
+    </div>
   </div>
-  <div id="footerNew"></div>
+  <div id="footerNew" class="main-footer"></div>
 
-  Ad goes here
-  {% block article %}{% endblock %} <!-- not necessarily article -->
-
-  <hr>
+  {% block article %}{% endblock %} <!-- not necessarily article, could be something else -->
 </body>
 </html>
