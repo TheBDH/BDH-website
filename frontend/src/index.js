@@ -10,6 +10,8 @@ import Index_Sections from './Index_Sections';
 import Footer from './Footer';
 import Article from './Article'
 import registerServiceWorker from './registerServiceWorker';
+import NonSports from './NonSports';
+import Author_Info from'./Author_Info';
 
 function renderArticle(){
 	var article = document.getElementById('article-component');
@@ -52,9 +54,36 @@ function renderIndexSections(){
 	ReactDOM.render(<Index_Sections sections={sections_list}/>, document.getElementById('section'));
 }
 
+
 function renderFooter(){
 	ReactDOM.render(<Footer/>, document.getElementById('footerNew'));
 }
+
+// function renderNonSports(){
+// 	var nonsports1 = <NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+// 									authorLink={"#"} articleLink={'#'} imageLink={'#'}
+// 									description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet."}
+// 									image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+//
+// 	var nonsports2 = <NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+// 									authorLink={"#"} articleLink={'#'} imageLink={'#'}
+// 									description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet."}
+// 									image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+//
+// 	var nonsports3 = <NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+// 									authorLink={"#"} articleLink={'#'} imageLink={'#'}
+// 									description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet."}
+// 									image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+//
+// 	ReactDOM.render([nonsports1, nonsports2, nonsports3], document.getElementById('nonsports'));
+// }
+//
+// function renderAuthorInfo(){
+// 	var author = <Author_Info name={"John Doe"} image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}
+// 								titlePosition={"Title Position"} description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet."}/>
+//
+// 	ReactDOM.render([author], document.getElementById('authorInfo'));
+// }
 
 renderHeader();
 renderFooter();
@@ -62,4 +91,6 @@ renderSidebar();
 renderIndexFeatured();
 renderIndexSections();
 renderArticle();
+//renderNonSports();
+//renderAuthorInfo();
 registerServiceWorker();
