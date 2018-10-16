@@ -11,6 +11,7 @@ import Advertisement_728x90 from './Advertisement_728x90';
 import Footer from './Footer';
 import Article from './Article'
 import registerServiceWorker from './registerServiceWorker';
+import {AdSlot, DFPManager} from 'react-dfp';
 
 function renderArticle(){
 	var article = document.getElementById('article-component');
@@ -24,12 +25,10 @@ function renderHeader(){
 }
 
 function renderSidebar(){
-	var ad1 = {name:"advertisement 1", url:"#", imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"};
-	var ad2 = {name:"advertisement 2", url:"#", imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"};
 	var post_articles = [{title:"Lorem ipsum", url:"#"},{title:"Nulla eu risus sem", url:"#"},{title:"article 3", url:"#"},{title:"article 4", url:"#"}]
 	var blog_articles = [{title:"article 1", url:"#"},{title:"article 2", url:"#"},{title:"article 3", url:"#"},{title:"article 4", url:"#"}]
 	var latest_issue = {title:"latest issue", url:"#", imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"};
-	ReactDOM.render(<Sidebar ad1={ad1} ad2={ad2} post_articles={post_articles} blog_articles={blog_articles} latest_issue={latest_issue}/>, document.getElementById('sidebar'));
+	ReactDOM.render(<Sidebar post_articles={post_articles} blog_articles={blog_articles} latest_issue={latest_issue}/>, document.getElementById('sidebar'));
 }
 
 function renderIndexFeatured(){
@@ -58,10 +57,8 @@ function renderFooter(){
 }
 
 function renderAd() {
-	var name="advertisement 1";
-	var url="#";
-	var imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg";
-	ReactDOM.render(<Advertisement_728x90 url={url} name={name} imgUrl={imgUrl}/>, document.getElementById('728x90'));
+	ReactDOM.render(<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />, document.getElementById('728x90'));
+	ReactDOM.render(<Advertisement_728x90 adUnit="BDH_Footer_728x90" />, document.getElementById('728x90f'));
 }
 
 renderHeader();
