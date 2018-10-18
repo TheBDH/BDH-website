@@ -33,7 +33,7 @@ class Sidebar extends Component {
       .then((rss) => {
         let blogArticles = [];
         let blogLinks = [];
-        rss.items.map(k => { blogArticles.push(k.title); blogLinks.push(k.link); });
+        rss.items.map(k => { blogArticles.push(k.title); blogLinks.push(k.links[0]); });
         this.setState( { blogArticles, blogLinks })
       });
   }
@@ -50,9 +50,11 @@ class Sidebar extends Component {
     var blogArticleLinks = [];
     if (this.state.blogArticles && this.state.blogLinks) {
       for(var i=0; i < 4; i++){
-        blogArticleLinks.push(<a className='small-article-title' href={this.state.blogLinks[i]}>{this.state.blogArticles[i]}</a>);
+        blogArticleLinks.push(<a className='small-article-title' href={this.state.blogLinks[i].url}>{this.state.blogArticles[i]}</a>);
       }
     }
+
+    console.log(this.state);
 
     return (
       <DFPSlotsProvider dfpNetworkId='1149905'>
