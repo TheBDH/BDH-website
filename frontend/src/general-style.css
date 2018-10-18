@@ -84,7 +84,7 @@ a:hover {
 		clear: both;
 	}
 	.top-ad {
-		margin-top: 25px;
+		margin-top: 8px;
 		text-align: center;
 	}
 }
@@ -544,6 +544,7 @@ header a:hover {
 		display: flex;
 		flex-direction: column;
 		border-left: 1px solid #c4c4c4;
+		padding-bottom: 35px;
 	}
 	.sidebar > div {
 		border-bottom: 1px solid #c4c4c4;
