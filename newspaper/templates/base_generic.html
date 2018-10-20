@@ -8,6 +8,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-7889946-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-7889946-1');
+  </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
   <!-- Add additional CSS in static file -->
@@ -17,12 +26,22 @@
 
 <body>
   <div id="headerNew"></div>
-  <div class="main-container main-content">
-    <div id="sidebar"></div>
-    <div id="hero"></div>
-    <div id="section"></div>
+  <div class="main-container">
+    
+    <div class="top-ad" id="728x90"></div>
+
+    <div class="main-page">
+      <div class="main-content">
+    
+        <div id="hero"></div>
+        <div id="section"></div>
+
+      </div>
+      <div id="sidebar" class="main-sidebar"></div>
+    </div>
+    <div class="top-ad" id="728x90f"></div> <!-- Footer ad-->
   </div>
-  <div id="footerNew"></div>
+  <div id="footerNew" class="main-footer"></div>
 
   {% block article %}{% endblock %} <!-- not necessarily article, could be something else -->
 </body>

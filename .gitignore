@@ -3,3 +3,4 @@ newspaper/__pycache__/
 newspaper/migrations/
 media-repo/
 .idea/*
+webpack-stats.dev.json
