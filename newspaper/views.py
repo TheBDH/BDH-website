@@ -39,3 +39,15 @@ def authors(request, name):
     """
     return render(request, 'articles.html', context={'title':title,'year':year})
 
+def error_404(request, exception):
+    """
+    View function to return page not found error
+    """
+    print("This is getting an error")
+    return render(request, '404.html', {})
+
+def error_500(exception):
+    """
+    View function to return server error
+    """
+    return render(exception, '500.html', {})
