@@ -1,3 +1,5 @@
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,16 +37,12 @@
         <div id="content">
           {% block content %} {% endblock %}
         </div>
-        <div id="hero"></div>
-        <div id="section"></div>
-
       </div>
       <div id="sidebar" class="main-sidebar"></div>
     </div>
     <div class="top-ad" id="728x90f"></div> <!-- Footer ad-->
   </div>
   <div id="footerNew" class="main-footer"></div>
-
-  {% block article %}{% endblock %} <!-- not necessarily article, could be something else -->
+  {% render_bundle 'main' %}
 </body>
 </html>
