@@ -2,6 +2,7 @@ beautifulsoup4==4.6.0
 certifi==2018.8.24
 chardet==3.0.4
 Django==2.0.8
+django-disqus==0.5
 django-modelcluster==4.2
 django-taggit==0.23.0
 django-treebeard==4.3
