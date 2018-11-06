@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-from django.conf.urls import include
+from django.conf.urls import include, handler404, handler500
 from django.urls import path
 
 urlpatterns += [
@@ -48,3 +48,6 @@ urlpatterns += [
     re_path(r'^articles/', include(wagtaildocs_urls)),
     re_path(r'^', include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = views.error_404
+handler500 = views.error_500

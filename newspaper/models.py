@@ -110,16 +110,15 @@ from pprint import pprint #debugging
 class ArticlePage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
-    date_published = models.DateField(auto_now=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full"),
         FieldPanel('body', classname="full"),
     ]
 
     api_fields = [
         APIField('intro'),
         APIField('body'),
-        APIField('date_published'),
     ]
 
     @route(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)/?$')
