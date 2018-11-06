@@ -335,6 +335,10 @@ header a:hover {
 /*============================================================================
   MOBILE BURGER NAVIGATION
 ==============================================================================*/
+.mobile-open {
+	overflow-y: hidden;
+}
+
 .mobile-header-content {
 	height: 75px;
 	position: relative;
@@ -370,6 +374,7 @@ header a:hover {
 
 .mobile-nav ul {
 	display: block;
+	height: auto;
 }
 .mobile-nav li {
 	border: none !important;
@@ -397,9 +402,19 @@ header a:hover {
 .mobile-nav .closed {
 	display: none;
 }
+.mobile-main-nav,
+.mobile-other-nav {
+	padding-bottom: 30px;
+}
+.mobile-social{
+	display: flex !important;
+	justify-content: space-between;
+	width: 150px;
+	margin: 0 auto;
+}
 
 .mobile-header-flag a{
-	width: 40%;
+	width: 250px;
 	height: 50px;
 	padding: 0;
 	position: absolute;
@@ -602,6 +617,9 @@ header a:hover {
 	width: 300px;
 	height: 250px;
 }
+.ad_728x90 {
+	text-align: center;
+}
 .ad_728x90 img {
 	width: 728px;
 	height: 90px;
@@ -611,6 +629,19 @@ header a:hover {
 @media screen and (max-width: 1170px) and (min-width: 768px) {
 	.advertisement p {
 		margin: 0;
+	}
+}
+
+/*mobile*/
+@media screen and (max-width: 768px) {
+	.ad_728x90_wrapper {
+		width: 100%;
+		height: 0;
+		padding-bottom: 12%;
+	}
+	.ad_728x90 img {
+		width: 100%;
+		height: 100%;
 	}
 }
 
@@ -624,7 +655,7 @@ header a:hover {
 }
 .featured-hero-article-text-overlay img {
 	width: 100%;
-	height: 100%;
+	height: auto;
 	object-fit: cover;
 	object-position: center;
 }
@@ -632,7 +663,8 @@ header a:hover {
 @media screen and (min-width: 768px) {
 	.featured-hero-article-text-overlay {
 		width: calc(100% - 35px);
-		height: 500px;
+		height: 0;
+		padding-bottom: 67%;
 		position: relative;
 	}
 	.featured-hero-article-text-overlay .hero-image {
@@ -651,6 +683,8 @@ header a:hover {
 		z-index: 1;
 	}
 	.featured-hero-article-text-overlay img {
+		width: 100%;
+		height: 100%;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -683,8 +717,18 @@ header a:hover {
 	.featured-hero-article-text-overlay {
 		width: calc(100% - 20px);
 	}
+	.featured-hero-article-text-overlay .text-overlay {
+		bottom: 15px;
+		left: 15px;
+	}
 	.index-featured .divider {
 		width: calc(100% - 20px);
+	}
+
+	@media screen and (max-width: 850px) {
+		.featured-hero-article-text-overlay .text-overlay p {
+			display: none;
+		}
 	}
 }
 
@@ -693,12 +737,12 @@ header a:hover {
 	.index-featured {
 		background-color: white;
 	}
-	.index-featured .med-nav-title {
-	}
 	.featured-hero-article-text-overlay .hero-image img {
 		width: 100%;
-		max-height: 500px;
-	}
+		height: auto;
+		max-height: 700px;
+/*		max-height: 500px;
+*/	}
 	.featured-hero-article-text-overlay .text-overlay {
 		margin: 0 15px auto;
 		padding: 20px 0;
@@ -742,6 +786,7 @@ header a:hover {
 @media screen and (max-width: 1170px) and (min-width: 768px) {
 	.featured-sub-articles {
 		width: calc(100% - 20px);
+		padding-right: 0;
 	}
 }
 
@@ -789,6 +834,7 @@ header a:hover {
 	object-fit: cover;
 	object-position: center;
 	margin-bottom: 5px;
+}
 /*desktop*/
 @media screen and (min-width: 768px) {
 	.index_sections {
@@ -815,9 +861,18 @@ header a:hover {
 	}
 	.section-features .section-featured-articles .section-article-excerpt-img {
 		width: 100%;
-		height: 200px;
+		height: 0;
+		padding-bottom: 67%;
 		margin-bottom: 5px;
 		border: none;
+		position: relative;
+	}
+	.section-features .section-featured-articles .section-article-excerpt-img-wrapper {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 	.section-features .section-featured-articles .section-article-excerpt-img img {
 		width: 100%;
@@ -843,6 +898,31 @@ header a:hover {
 	.section-features:nth-child(4) {
 		flex-basis: calc(33% - 20px);
 	}
+
+	@media screen and (max-width: 850px) {
+		.section-features {
+			flex-basis: 50%;
+			border-bottom: 1px solid #c4c4c4;
+		}
+		.section-features:nth-child(4) {
+			flex-basis: 50%;
+			padding: 20px;
+			border-left: 1px solid #c4c4c4;
+		}
+		.section-features:nth-child(1), 
+		.section-features:nth-child(3),
+		.section-features:nth-child(5) {
+			flex-basis: calc(50% - 20px);
+			padding-left: 0;
+			border-left: 0;
+		}
+		.section-features:nth-child(5),
+		.section-features:nth-child(6) {
+			border-bottom: 0;
+		}
+
+	}
+
 }
 
 /*mobile*/
@@ -881,6 +961,7 @@ header a:hover {
 		object-fit: cover;
 	}
 }
+
 
 /*============================================================================
   NonSports
@@ -1031,4 +1112,40 @@ header a:hover {
 	color: 414141;
 	font-weight: 300;
 	padding-bottom: 10px;
+}
+
+/*============================================================================
+  SPORTS LIST
+==============================================================================*/
+.sport-section {
+	padding: 35px 0;
+	border-bottom: 1px solid #c4c4c4;
+}
+.sport-section ul {
+	column-count: 3;
+}
+.sport-section li {
+	padding: 2px 0;
+}
+.sport-section a {
+	font-family: 'Avenir Medium', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 850px) and (min-width: 768px) {
+	.sport-section ul {
+		column-count: 2;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.sport-section {
+		border: 0;
+	}
+	.sport-section ul {
+		column-count: 2;
+		background-color: white;
+		padding: 15px;
+	}
 }

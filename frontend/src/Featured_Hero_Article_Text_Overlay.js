@@ -5,8 +5,10 @@ class Featured_Hero_Article_Text_Overlay extends Component {
     return (
       <div className="featured-hero-article-text-overlay">
         <div className="hero-image">
-          <div className="gradient-overlay"></div>
-          <img src={this.props.hero.imgUrl} alt={this.props.hero.imgAlt} />
+          <div className="hero-image-container">
+            <div className="gradient-overlay"></div>
+            <img src={this.props.hero.imgUrl} alt={this.props.hero.imgAlt} />
+          </div>
         </div>
         <div className="text-overlay">
           <a href={this.props.hero.section.url}>
