@@ -24,7 +24,7 @@ class Article(models.Model):
     status = models.CharField(max_length=1, choices=PUB_STATUS, blank=True, default='d', help_text='Publication Status')
 
 	# Metadata
-    class Meta: 
+    class Meta:
         ordering = ["-pubdate"]
 
 	# Methods
@@ -52,8 +52,9 @@ class Author(models.Model):
     """
     first_name = models.CharField(max_length=1000)
     last_name = models.CharField(max_length=1000)
+    #description = models.CharField(max_length=1000)
     #articles = models.ManyToManyField(Article)
-    
+
     AUTHOR_RANK = (
     	('con', 'Contributing Writer'),
     	('ssw', 'Senior Staff Writer'),
@@ -71,17 +72,17 @@ class Author(models.Model):
         ('gs', 'Graduate Student'),
     )
 
-    year = models.CharField(max_length=2, choices=AUTHOR_YEAR, blank=True, default='', help_text='Author Year')
+    #year = models.CharField(max_length=2, choices=AUTHOR_YEAR, blank=True, default='', help_text='Author Year')
 
     class Meta:
         ordering = ["last_name","first_name"]
-    
+
     def get_absolute_url(self):
         """
         Returns the url to access a particular author instance.
         """
         return reverse('author-detail', args=[str(self.id)])
-    
+
 
     def __str__(self):
         """
@@ -91,38 +92,64 @@ class Author(models.Model):
 
 ###add in utility methods to get stuff from the database - for testing, instantiate the local db
 
-from django.shortcuts import get_object_or_404
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
+from wagtail.core import blocks
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.api import APIField
 from pprint import pprint #debugging
 
-# class ArticleIndexPage(Page):
-
-#     def filter_by_date(self):
-#         articles = ArticlePage.objects.live().descendant_of(self)
-#         articles = events.filter(date_from__gte=date)
-#         articles = events.order_by('date_from')
-#         return articles
-
 class ArticlePage(RoutablePageMixin, Page):
-    intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
 
+
     content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full"),
         FieldPanel('body', classname="full"),
     ]
 
-    api_fields = [
-        APIField('intro'),
-        APIField('body'),
+    @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
+    def dated_article_with_slug(self, request, year, month, day, slug):
+        pprint(vars(self))
+        post_page = self.get_posts().filter(slug=slug).first()
+        if not post_page:
+            raise Http404
+        return Page.serve(post_page, request, *args, **kwargs)
+
+    def post_by_date_slug(self, request, year, month, day, slug, *args, **kwargs):
+        post_page = self.get_posts().filter(slug=slug).first()
+        if not post_page:
+            raise Http404
+        return Page.serve(post_page, request, *args, **kwargs)
+
+class AuthorsPage(RoutablePageMixin, Page):
+
+    name = models.CharField(max_length = 255)
+    lastName = models.CharField(max_length = 255)
+    description = RichTextField(blank=True)
+
+    author_rank = (
+    	('con', 'Contributing Writer'),
+    	('ssw', 'Senior Staff Writer'),
+    	('stw', 'Staff Writer'),
+    )
+
+    author_year = (
+    	('fr', 'Freshman'),
+    	('so', 'Sophomore'),
+    	('ju', 'Junior'),
+    	('se', 'Senior'),
+        ('gs', 'Graduate Student'),
+    )
+
+    articles = models.ManyToManyField(ArticlePage, help_text="Select article names")
+    position = models.CharField(max_length=3, choices=author_rank, blank=True, default='con')
+    year = models.CharField(max_length=5, choices=author_year, blank=True, default='fr',)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name', classname='class'),
+        FieldPanel('lastName', classname='class'),
+        FieldPanel('description', classname='class'),
+        FieldPanel('position', classname='class'),
+        FieldPanel('year', classname='class'),
+        FieldPanel('articles', classname='class'),
     ]
-
-    @route(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)/?$')
-    def article_page(self, request):
-        pprint(request)
-
-
