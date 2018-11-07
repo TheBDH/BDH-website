@@ -125,10 +125,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {"default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "wp_bdh",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db",
         "USER": "root",
-        "PASSWORD": "Since1891",
+        "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "",
     }

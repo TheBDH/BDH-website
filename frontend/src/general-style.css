@@ -400,53 +400,8 @@ header a:hover {
 /*============================================================================
   SIDEBAR
 ==============================================================================*/
-#sidebar {
-	/*position: absolute;
-	top: 0;
-	right: 0;*/
-	float: right;
-}
-.sidebar {
-	width: 285px;
-	display: flex;
-	flex-direction: column;
-	border-left: 1px solid #c4c4c4;
-}
-.sidebar > div {
-	border-bottom: 1px solid #c4c4c4;
-	padding: 35px 0 35px 35px;
-}
-.sidebar .advertisement {
-	padding-top: 20px;
-}
-.sidebar > div:first-child {
-	padding-top: 0;
-}
-.sidebar > div:last-child {
-	border-bottom: none;
-	padding-bottom: 0;
-}
 
-.sidebar-articles {
-	display: flex;
-	flex-direction: column;
-	margin-top: 10px;
-}
-.sidebar-articles a {
-	border-bottom: 1px solid #dddddd;
-	padding: 5px 0;
-}
-.sidebar-articles a:last-child {
-	border-bottom: none;
-	padding-bottom: 0;
-}
 
-.sidebar-latest .med-nav-title {
-	margin-top: 0;
-}
-.sidebar-latest img {
-	width: 100%;
-}
 
 /*============================================================================
   ADVERTISEMENTS

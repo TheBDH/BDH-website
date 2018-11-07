@@ -68,7 +68,8 @@ choosePort(HOST, DEFAULT_PORT)
     }
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
-    const urls = prepareUrls(protocol, HOST, port);
+    //CHANGE PORT TO 8000
+    const urls = prepareUrls(protocol, HOST, 8000);
     // Create a webpack compiler that is configured with custom messages.
     const compiler = createCompiler(webpack, config, appName, urls, useYarn);
     // Load proxy config
@@ -92,8 +93,8 @@ choosePort(HOST, DEFAULT_PORT)
       openBrowser(urls.localUrlForBrowser);
     });
 
-    ['SIGINT', 'SIGTERM'].forEach(function(sig) {
-      process.on(sig, function() {
+    ['SIGINT', 'SIGTERM'].forEach(function (sig) {
+      process.on(sig, function () {
         devServer.close();
         process.exit();
       });
