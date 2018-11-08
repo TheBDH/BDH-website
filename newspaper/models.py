@@ -95,47 +95,6 @@ class Author(models.Model):
 #NOTE: This is not 100% finalized
 
 
-
-
-class Article(models.Model):
-    id = models.IntegerField(primary_key=True)
-    body = models.TextField()
-    title = models.CharField(max_length=100)
-    posted_date = models.DateField()
-    modified_date = models.DateField()
-    author = models.ForeignKey('Author', models.DO_NOTHING)
-
-    #class Meta:
-    #    managed = False
-    #    db_table = 'Article'
-
-
-class ArticleAuthor(models.Model):
-    article = models.ForeignKey(Article, models.DO_NOTHING)
-    author = models.ForeignKey('Author', models.DO_NOTHING)
-
-    #class Meta:
-    #    managed = False
-    #    db_table = 'Article_Author'
-
-
-class ArticleImage(models.Model):
-    article = models.ForeignKey(Article, models.DO_NOTHING)
-    image_url = models.TextField()
-
-    #class Meta:
-    #    managed = False
-    #    db_table = 'Article_Image'
-
-
-class ArticleTopic(models.Model):
-    article = models.ForeignKey(Article, models.DO_NOTHING)
-    topic = models.ForeignKey('Topic', models.DO_NOTHING, db_column='topic')
-
-    #class Meta:
-    #    managed = False
-    #    db_table = 'Article_Topic'
-
 class Author(models.Model):
     id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=30)
@@ -144,11 +103,18 @@ class Author(models.Model):
     email = models.CharField(max_length=100, blank=True, null=True)
     since = models.DateField()
     about = models.TextField()
-    maybewrong = models.IntegerField()
+    valid = models.BooleanField()
+    maybewrong = models.BooleanField()
+
 
     #class Meta:
     #    managed = False
     #    db_table = 'Author'
+
+class Image(models.Model):
+    id = models.IntegerField(primary_key=True)
+    file_path = models.CharField(max_length=300)
+
 
 
 
@@ -156,17 +122,32 @@ class Section(models.Model):
     parent = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
 
-    #class Meta:
-    #    managed = False
-    #    db_table = 'Section'
 
 
-class Topic(models.Model):
+class Tag(models.Model):
     name = models.CharField(unique=True, max_length=50)
 
     #class Meta:
     #    managed = False
     #    db_table = 'Topic'
+
+
+class Article(models.Model):
+    id = models.IntegerField(primary_key=True)
+    body = models.TextField()
+    title = models.CharField(max_length=100)
+    #posted_date = models.DateField(auto_now=True)
+    #modified_date = models.DateField(auto_now_add=True)
+    posted_date = models.DateField()
+    modified_date = models.DateField()
+    authors = models.ManyToManyField(Author)
+    image_url = models.ManyToManyField(Image)
+    section = models.ForeignKey(Section)
+    topic = models.ManyToManyField(Tag)
+
+
+
+
 
 
 '''class AuthGroup(models.Model):
