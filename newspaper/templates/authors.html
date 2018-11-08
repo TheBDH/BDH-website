@@ -1,0 +1,7 @@
+{% extends "base_generic.html" %}
+{% load render_bundle from webpack_loader %}
+  {% block article %}
+ 	<div id='author-component' year={{year}} title={{title}}>
+	</div>
+		{% render_bundle 'main' %}
+ {% endblock %}
