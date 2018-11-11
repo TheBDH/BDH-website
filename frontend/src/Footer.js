@@ -30,8 +30,8 @@ class Footer extends Component {
                   </ul>
                 </li>
                 <li><a href="#">comics</a></li>
-                <li><a href="#">blog daily herald</a></li>
-                <li><a href="#">post magazine</a></li>
+                <li><a href="www.blogdailyherald.com">blog daily herald</a></li>
+                <li><a href="post.browndailyherald.com">post magazine</a></li>
                 <li><a href="#">archives</a></li>
               </ul>
             </div>
@@ -41,9 +41,9 @@ class Footer extends Component {
                 <li><a href="#">about</a></li>
                 <li><a href="#">contact</a></li>
                 <li><a href="#">join</a></li>
-                <li><a href="#">advertise</a></li>
+                <li><a href="www.bdhsales.com">advertise</a></li>
                 <li><a href="#">donate</a></li>
-                <li><a href="#">alumni</a></li>
+                <li><a href="www.heraldalumni.org">alumni</a></li>
                 <li><a href="#">privacy policy</a></li>
               </ul>
             </div>
@@ -58,14 +58,15 @@ class Footer extends Component {
               <div className="footer-follow">
                 <div className="med-nav-title">follow us</div>
                 <div className="logo-strip">
-                  <a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb.png" /></a>
-                  <a href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter.png" /></a>
-                  <a href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig.png" /></a>
+                  <a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" /></a>
+                  <a href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter-logo-gray.png" /></a>
+                  <a href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig-logo-gray.png" /></a>
                 </div>
               </div>
               <div className="footer-break"></div>
               <div className="footer-donate">
-                <div className="med-nav-title">donate</div>
+                <a href="https://brownherald.z2systems.com/np/clients/brownherald/donation.jsp?campaign=1&" className = "med-nav-title">donate</a>
+                {/* This is the direct link to the donation website; the other donate link previously goes to the BDH donate page */}
               </div>
             </div>
           </div>

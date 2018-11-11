@@ -21,16 +21,18 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-from django.conf.urls import include
+from django.conf.urls import include, handler404, handler500
 from django.urls import path
 
 urlpatterns += [
 	path('', views.index, name='index'),
     path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
+    path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>/', views.articles, name='articles'),
 ]
 
 from django.conf import settings
 from django.conf.urls.static import static
+from .api import api_router
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
@@ -41,7 +43,11 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.core import urls as wagtail_urls
 
 urlpatterns += [
+    re_path(r'^api/v2/', api_router.urls),
     re_path(r'^cms/', include(wagtailadmin_urls)),
     re_path(r'^articles/', include(wagtaildocs_urls)),
-    re_path(r'^pages/', include(wagtail_urls)),
+    re_path(r'^', include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = views.error_404
+handler500 = views.error_500

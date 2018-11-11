@@ -66,7 +66,8 @@ INSTALLED_APPS = [
 	'wagtail.search',
 	'wagtail.admin',
 	'wagtail.core',
-
+    'wagtail.api.v2',
+    'rest_framework',
 
 	'taggit',
 	'modelcluster',
@@ -119,19 +120,20 @@ WEBPACK_LOADER = {
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# database setup is an issue
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    "default": {
+DATABASES = {"default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "wp_bdh",
-        "USER": "root",
+        "USER": "bdh_developer",
         "PASSWORD": "Since1891",
         "HOST": "localhost",
         "PORT": "",
     }
+    
 }
 
 WAGTAILSEARCH_BACKENDS = {
