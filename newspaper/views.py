@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import xml.etree.ElementTree as etree
 tree = etree.parse('sample-article-collection.xml')
+from pprint import pprint #debugging
 
 # Create your views here.
 
@@ -26,17 +27,19 @@ def articles(request, year, month, day, slug):
         context={'title':title,'year':year}
     )
 
-def authors(request, name):
+def section(request, section):
+    return render(request, 'section.html', {})
+
+def author(request, author):
     """
     View function for author
     """
-    return render(request, 'articles.html', context={'title':title,'year':year})
+    return render(request, 'author.html', {})
 
 def error_404(request, exception):
     """
     View function to return page not found error
     """
-    print("This is getting an error")
     return render(request, '404.html', {})
 
 def error_500(exception):

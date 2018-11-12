@@ -27,7 +27,8 @@ from django.urls import path
 urlpatterns += [
 	path('', views.index, name='index'),
     path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
-    path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>/', views.articles, name='articles'),
+    path('authors/<author>', views.author),
+    path('section/<section>', views.section),
 ]
 
 from django.conf import settings
