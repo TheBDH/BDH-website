@@ -1,5 +1,5 @@
 import pymysql
-
+#from newspaper import models
 connection = pymysql.connect(host='localhost',
                              user='michaelbar98',
                              password='',
@@ -14,7 +14,7 @@ with open("/Users/michaelbardakji/Desktop/myBDH/xmlfiles/university news.xml","r
 
 print(len(university_news))
 
-'''
+
 try:
     with connection.cursor() as cursor:
 
@@ -24,14 +24,14 @@ try:
         cursor.execute(sql)
         myresult = cursor.fetchall()
 
-        id = models.IntegerField(primary_key=True)
-            first_name = models.CharField(max_length=30)
-            last_name = models.CharField(max_length=30)
-            pathtopicture = models.CharField(max_length=100, blank=True, null=True)
-            email = models.CharField(max_length=100, blank=True, null=True)
-            since = models.DateField()
-            about = models.TextField()
-            maybewrong = models.IntegerField()
+        '''id = models.IntegerField(primary_key=True)
+        first_name = models.CharField(max_length=30)
+        last_name = models.CharField(max_length=30)
+        pathtopicture = models.CharField(max_length=100, blank=True, null=True)
+        email = models.CharField(max_length=100, blank=True, null=True)
+        since = models.DateField()
+        about = models.TextField()
+        maybewrong = models.IntegerField()'''
         for res in myresult:
             boole = False
             if res[1] == "" or res[2] == "":
@@ -51,4 +51,4 @@ try:
 
           print(res)
 finally:
-    connection.close()'''
+    connection.close()

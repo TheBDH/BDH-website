@@ -98,7 +98,7 @@ class Author(models.Model):
 
 
 class Author(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     pathtopicture = models.CharField(max_length=100, blank=True, null=True)
@@ -106,7 +106,7 @@ class Author(models.Model):
     since = models.DateField()
     about = models.TextField()
     valid = models.BooleanField()
-    maybewrong = models.BooleanField()
+    maybewrong = models.BooleanField(default = False)
 
 
     #class Meta:
@@ -114,7 +114,7 @@ class Author(models.Model):
     #    db_table = 'Author'
 
 class Image(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #id = models.IntegerField(primary_key=True)
     file_path = models.CharField(max_length=300)
 
 
@@ -135,8 +135,8 @@ class Tag(models.Model):
 
 
 class Article(models.Model):
-    id = models.IntegerField(primary_key=True)
-    body = models.TextField()
+    #id = models.IntegerField(primary_key=True)
+    body = models.TextField(default = "")
     title = models.CharField(max_length=100)
     #posted_date = models.DateField(auto_now=True)
     #modified_date = models.DateField(auto_now_add=True)
@@ -144,8 +144,10 @@ class Article(models.Model):
     modified_date = models.DateField()
     authors = models.ManyToManyField(Author)
     image_url = models.ManyToManyField(Image)
-    section = models.ForeignKey(Section)
+    section = models.ForeignKey(Section, on_delete=models.PROTECT)
     topic = models.ManyToManyField(Tag)
+    maybewrong = models.BooleanField(default = False)
+
 
 
 

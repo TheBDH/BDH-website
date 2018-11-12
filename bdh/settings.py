@@ -136,6 +136,7 @@ DATABASES = {"default": {
     
 }
 
+
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.search.backends.elasticsearch2',
