@@ -20,12 +20,7 @@ def articles(request, year, month, day, slug):
     """
     View function for article
     """
-    title = 'my article title'
-    return render(
-        request,
-        'articles.html',
-        context={'title':title,'year':year}
-    )
+    return render(request, 'articles.html', {})
 
 def section(request, section):
     return render(request, 'section.html', {})

@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
 
@@ -207,8 +207,3 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
-
-STATIC_URL = '/static/'
