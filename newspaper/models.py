@@ -144,7 +144,7 @@ class Article(models.Model):
     modified_date = models.DateField()
     authors = models.ManyToManyField(Author)
     image_url = models.ManyToManyField(Image)
-    section = models.ForeignKey(Section)
+    section = models.ForeignKey(Section, on_delete=models.DO_NOTHING)
     topic = models.ManyToManyField(Tag)
 
 
