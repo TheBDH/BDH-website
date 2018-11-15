@@ -42,3 +42,9 @@ def error_500(exception):
     View function to return server error
     """
     return render(exception, '500.html', {})
+
+def print_subscriptions(request):
+    """
+    View function to return server error
+    """
+    return render(request, 'print_subscriptions.html', {})

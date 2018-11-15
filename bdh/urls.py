@@ -29,6 +29,7 @@ urlpatterns += [
     path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
     path('authors/<author>', views.author),
     path('section/<section>', views.section),
+    path('print-subscriptions', views.print_subscriptions)
 ]
 
 from django.conf import settings
