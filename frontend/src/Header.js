@@ -58,7 +58,7 @@ class Header extends Component {
               <li><a href="#">submit</a></li>
               <li><a href="http://www.bdhsales.com" target="_blank">advertise</a></li>
               <li><a href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a></li>
-              <li><a href="#">subscribe</a></li>
+              <li><a href="/print-subscriptions">subscribe</a></li>
               <li className="header-search"><input type="search" placeholder="SEARCH"/></li>
               <li className="header-icon"><a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a></li>
               <li className="header-icon"><a href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter-logo-gray.png" alt="twitter"/></a></li>
