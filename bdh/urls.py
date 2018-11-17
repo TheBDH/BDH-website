@@ -30,6 +30,7 @@ urlpatterns += [
     path('authors/<author>', views.author),
     path('section/<section>', views.section),
     path('print-subscriptions', views.print_subscriptions)
+    path('comments-policy', views.comments_policy)
 ]
 
 from django.conf import settings

@@ -48,3 +48,9 @@ def print_subscriptions(request):
     View function to return server error
     """
     return render(request, 'print_subscriptions.html', {})
+
+def comments_policy(request):
+    """
+    View function to return server error
+    """
+    return render(request, 'comments_policy.html', {})
