@@ -101,8 +101,8 @@ function renderAd() {
 renderHeader();
 renderFooter();
 renderSidebar();
-renderIndexFeatured();
-renderIndexSections();
+//renderIndexFeatured();
+//renderIndexSections();
 renderAd();
 //renderArticle();
 //renderNonSports();
