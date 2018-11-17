@@ -54,8 +54,9 @@ class Header extends Component {
         <div className="desktop-only">
           <div className="top-header">
             <ul className="main-container">
-              <li><a href="#">about</a></li> 
-              <li><a href="#">submit</a></li>
+              <li><a href="/about">about</a></li> 
+              <li><a href="/contact">contact</a></li> 
+              <li><a href="/submit">submit</a></li>
               <li><a href="http://www.bdhsales.com" target="_blank">advertise</a></li>
               <li><a href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a></li>
               <li><a href="/print-subscriptions">subscribe</a></li>
@@ -66,7 +67,7 @@ class Header extends Component {
             </ul>
           </div>
           <div className="header-flag">
-            <a href="http://www.browndailyherald.com"><img src="/static/images/bdh_flag.png" alt="Brown Daily Herald"/></a>
+            <a href="/"><img src="/static/images/bdh_flag.png" alt="Brown Daily Herald"/></a>
           </div>
           <div className="bottom-header">
             <ul className="main-container">
@@ -98,11 +99,11 @@ class Header extends Component {
               </ul>
               <div className="med-nav-title">more</div>
               <ul className="mobile-other-nav">
-                <li><a href="#">about</a></li> 
-                <li><a href="#">submit</a></li>
+                <li><a href="/about">about</a></li> 
+                <li><a href="/submit">submit</a></li>
                 <li><a href="http://www.bdhsales.com" target="_blank">advertise</a></li>
                 <li><a href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a></li>
-                <li><a href="#">subscribe</a></li>
+                <li><a href="/subscribe">subscribe</a></li>
               </ul>
               <ul className="mobile-social">
                 <li className="header-icon"><a href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a></li>
@@ -112,7 +113,7 @@ class Header extends Component {
             </div>
           </div>
           <div className="mobile-header-flag">
-            <a href="http://www.browndailyherald.com"><img src="/static/images/bdh_flag.png" alt="Brown Daily Herald"/></a>
+            <a href="/"><img src="/static/images/bdh_flag.png" alt="Brown Daily Herald"/></a>
           </div>
           <div className="mobile-search">
             <img src="/static/images/search-icon-black.png" alt="click to search"/>

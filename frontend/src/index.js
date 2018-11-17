@@ -23,7 +23,15 @@ function renderArticle(){
 }
 
 function renderHeader(){
-	var mainNav = [{url:'#', title:'Home'}, {url:'#', title:'News', dropList:[{url:'#', title:'Home'}, {url:'#', title:'Home'}]}, {url:'#', title:'Arts and Culture'}, {url:'#', title:'Science and Research'}, {url:'#', title:'Sports'}, {url:'#', title:'Opinion'}, {url:'http://post.browndailyherald.com', title:'POST'}, {url:'http://www.blogdailyherald.com', title:'Blog'}];
+	var mainNav = [
+		{link:'/', title:'Home'}, 
+		{link:'/sections/news', title:'News', dropList:[{url:'#', title:'Home'}, {url:'#', title:'Home'}]}, 
+		{link:'/sections/arts-and-culture', title:'Arts and Culture'}, 
+		{link:'/sections/science-research', title:'Science and Research'}, 
+		{link:'/sections/sports', title:'Sports'}, 
+		{link:'/sections/opinion', title:'Opinion'}, 
+		{link:'http://post.browndailyherald.com', title:'POST'}, 
+		{link:'http://www.blogdailyherald.com', title:'Blog'}];
 	ReactDOM.render(<Header mainNav={mainNav}/>, document.getElementById('headerNew'));
 }
 
@@ -93,8 +101,8 @@ function renderAd() {
 renderHeader();
 renderFooter();
 renderSidebar();
-//renderIndexFeatured();
-//renderIndexSections();
+renderIndexFeatured();
+renderIndexSections();
 renderAd();
 //renderArticle();
 //renderNonSports();
