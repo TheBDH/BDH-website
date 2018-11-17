@@ -31,6 +31,8 @@ urlpatterns += [
     path('section/<section>', views.section),
     path('print-subscriptions', views.print_subscriptions)
     path('comments-policy', views.comments_policy)
+    path('web-policy', views.web_policy)
+    path('find-paper', views.find_paper)
 ]
 
 from django.conf import settings
