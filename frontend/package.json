@@ -51,7 +51,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "./node_modules/.bin/webpack",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {

@@ -144,7 +144,7 @@ class Article(models.Model):
     modified_date = models.DateField()
     authors = models.ManyToManyField(Author)
     image_url = models.ManyToManyField(Image)
-    section = models.ForeignKey(Section)
+    section = models.ForeignKey(Section, on_delete=models.DO_NOTHING)
     topic = models.ManyToManyField(Tag)
 
 
@@ -279,12 +279,47 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from pprint import pprint #debugging
 
 class ArticlePage(RoutablePageMixin, Page):
-    body = RichTextField(blank=True)
 
+    content = RichTextField(blank=True)
+    section_list = (
+                ('h', 'Home'),
+            	('n', 'News'),
+            	('ac', 'Arts & Culture'),
+            	('sr', 'Science & Research'),
+            	('sp', 'Sports'),
+                ('op', 'Opinion'),
+                ('pt', 'Post'),
+                ('blg', 'Blog'),
+            )
+    section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
+    summary = RichTextField(blank=True)
+
+    yes_no = {
+            ('y', 'Yes'),
+            ('n', 'No'),
+        }
+
+    featured_on_section = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
+    featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
+
+    # make sure it displays both the authors' names and their position 
+    #authors = models.ManyToManyField(AuthorsPage, help_text="Select author names")
+
+    # need to figure out how to make the tags become links, should we use a list instead
+    # of plain charfield?
+    tags = models.CharField(max_length = 255, blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+        FieldPanel('content', classname="class"),
+        FieldPanel('section', classname='class'),
+        FieldPanel('summary', classname='class'),
+        FieldPanel('featured_on_section', classname='class'),
+        FieldPanel('featured_on_main', classname='class'),
+        FieldPanel('tags', classname='full'),
+        #FieldPanel('authors', classname='class'),
     ]
+
+
 
     @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
     def dated_article_with_slug(self, request, year, month, day, slug):
@@ -320,7 +355,7 @@ class AuthorsPage(RoutablePageMixin, Page):
         ('gs', 'Graduate Student'),
     )
 
-    articles = models.ManyToManyField(ArticlePage, help_text="Select article names")
+    #articles = models.ManyToManyField(ArticlePage, help_text="Select article names")
     position = models.CharField(max_length=3, choices=author_rank, blank=True, default='con')
     year = models.CharField(max_length=5, choices=author_year, blank=True, default='fr',)
 
@@ -330,5 +365,5 @@ class AuthorsPage(RoutablePageMixin, Page):
         FieldPanel('description', classname='class'),
         FieldPanel('position', classname='class'),
         FieldPanel('year', classname='class'),
-        FieldPanel('articles', classname='class'),
+        #FieldPanel('articles', classname='class'),
     ]
