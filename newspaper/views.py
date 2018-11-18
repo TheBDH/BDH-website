@@ -45,6 +45,25 @@ def error_500(exception):
 
 def print_subscriptions(request):
     """
-    View function to return server error
+    View function to return print subscriptions
     """
     return render(request, 'print_subscriptions.html', {})
+
+def comments_policy(request):
+    """
+    View function to return comments policy
+    """
+    return render(request, 'comments_policy.html', {})
+
+def web_policy(request):
+    """
+    View function to return web policy
+    """
+    return render(request, 'web_policy.html', {})
+
+
+def find_paper(request):
+    """
+    View function to return find paper
+    """
+    return render(request, 'find_paper.html', {})
