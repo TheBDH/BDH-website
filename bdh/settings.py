@@ -143,7 +143,7 @@ else:
     DATABASES = {"default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": "wp_bdh",
-            "USER": "root",
+            "USER": "bdh_developer",
             "PASSWORD": "Since1891",
             "HOST": "localhost",
             "PORT": "",
