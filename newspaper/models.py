@@ -135,8 +135,7 @@ class Tag(models.Model):
 
 
 class Article(models.Model):
-    id = models.IntegerField(primary_key=True)
-    body = models.TextField()
+    body = models.TextField(blank=True)
     title = models.CharField(max_length=100)
     #posted_date = models.DateField(auto_now=True)
     #modified_date = models.DateField(auto_now_add=True)
@@ -318,7 +317,6 @@ class ArticlePage(RoutablePageMixin, Page):
         FieldPanel('tags', classname='full'),
         #FieldPanel('authors', classname='class'),
     ]
-
 
 
     @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')

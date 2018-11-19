@@ -32,7 +32,9 @@ urlpatterns += [
     path('print-subscriptions', views.print_subscriptions),
     path('comments-policy', views.comments_policy),
     path('web-policy', views.web_policy),
-    path('find-paper', views.find_paper)
+    path('find-paper', views.find_paper),
+    path('staff-list', views.staff_list),
+    path('join', views.join),
 ]
 
 from django.conf import settings

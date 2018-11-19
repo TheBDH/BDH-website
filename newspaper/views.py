@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import xml.etree.ElementTree as etree
 tree = etree.parse('sample-article-collection.xml')
+from datetime import datetime
 from pprint import pprint #debugging
 
 # Create your views here.
@@ -67,3 +68,22 @@ def find_paper(request):
     View function to return find paper
     """
     return render(request, 'find_paper.html', {})
+
+def staff_list(request):
+    """
+    View function to return staff list
+    """
+    current_year = datetime.today().year
+    fall_range = (datetime(current_year, 9, 3), datetime(current_year, 12, 22))
+    semester = "Fall" if datetime.today() >= fall_range[0] and datetime.today() <= fall_range[1] else "Spring"
+    pprint(semester)
+    return render(request, 'staff_list.html', {
+        'current_semester': semester,
+        'year': current_year,
+    })
+
+def join(request):
+    """
+    View function to return join about page
+    """
+    return render(request, 'join.html', {})

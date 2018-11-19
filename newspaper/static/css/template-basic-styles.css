@@ -81,3 +81,28 @@
    background:#000;
    font-weight:bold;
 }
+
+.corporate-staff-block {
+   width: 100%;
+   text-align: center;
+}
+
+.bold-name {
+   font-weight: bold;
+}
+
+.staff-block-row {
+    width: 90%;
+}
+
+.editorial-staff-block {
+    display: inline-block;
+    float: left;
+    width: 45%;
+}
+
+.business-staff-block {
+    display: inline-block;
+    float: right;
+    width: 45%;
+}
