@@ -106,3 +106,23 @@
     float: right;
     width: 45%;
 }
+
+.two-column-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.left-column-container {
+    width: 40%;
+}
+
+.right-column-container {
+    width: 40%;
+}
+
+.text-block {
+    font-size: 16px;
+    margin: 8px 0px;
+}
