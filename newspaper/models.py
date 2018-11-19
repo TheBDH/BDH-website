@@ -276,6 +276,7 @@ from wagtail.core import blocks
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from pprint import pprint #debugging
+from wagtail.search import index
 
 class ArticlePage(RoutablePageMixin, Page):
 
@@ -318,6 +319,13 @@ class ArticlePage(RoutablePageMixin, Page):
         #FieldPanel('authors', classname='class'),
     ]
 
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+        index.SearchField('section'),
+        index.SearchField('summary'),
+        index.SearchField('tags'),
+        #index.SearchField('authors'),
+    ]
 
     @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
     def dated_article_with_slug(self, request, year, month, day, slug):

@@ -49,7 +49,12 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.core import urls as wagtail_urls
 
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
+
 urlpatterns += [
+    re_path(r'^api/graphql', csrf_exempt(GraphQLView.as_view())),
+    re_path(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
     re_path(r'^api/v2/', api_router.urls),
     re_path(r'^cms/', include(wagtailadmin_urls)),
     re_path(r'^articles/', include(wagtaildocs_urls)),

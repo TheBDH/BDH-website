@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'newspaper.apps.NewspaperConfig',
     'webpack_loader',
 
+    'api',
+    'graphene_django',
+
     'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',
     'wagtail.contrib.routable_page',
@@ -147,6 +150,10 @@ else:
         }
         
     }
+
+GRAPHENE = {
+    'SCHEMA': 'api.schema.schema',
+}
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
