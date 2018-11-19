@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
 
@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
     'webpack_loader',
+
+    'api',
+    'graphene_django',
 
     'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',
@@ -147,6 +150,10 @@ else:
         }
         
     }
+
+GRAPHENE = {
+    'SCHEMA': 'api.schema.schema',
+}
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
