@@ -1,4 +1,5 @@
 from django.db import models
+from django.apps import AppConfig
 
 # Create your models here.
 
@@ -120,7 +121,7 @@ class Image(models.Model):
 
 
 
-class Section(models.Model):
+class Category(models.Model):
     parent = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
 
@@ -144,7 +145,7 @@ class Article(models.Model):
     modified_date = models.DateField()
     authors = models.ManyToManyField(Author)
     image_url = models.ManyToManyField(Image)
-    section = models.ForeignKey(Section, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
     topic = models.ManyToManyField(Tag)
     maybewrong = models.BooleanField(default = False)
 
@@ -309,16 +310,16 @@ class AuthorsPage(RoutablePageMixin, Page):
     description = RichTextField(blank=True)
 
     author_rank = (
-    	('con', 'Contributing Writer'),
-    	('ssw', 'Senior Staff Writer'),
-    	('stw', 'Staff Writer'),
+        ('con', 'Contributing Writer'),
+        ('ssw', 'Senior Staff Writer'),
+        ('stw', 'Staff Writer'),
     )
 
     author_year = (
-    	('fr', 'Freshman'),
-    	('so', 'Sophomore'),
-    	('ju', 'Junior'),
-    	('se', 'Senior'),
+        ('fr', 'Freshman'),
+        ('so', 'Sophomore'),
+        ('ju', 'Junior'),
+        ('se', 'Senior'),
         ('gs', 'Graduate Student'),
     )
 
