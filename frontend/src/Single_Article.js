@@ -38,6 +38,7 @@ class Single_Article extends Component {
                 </div>
                 <div className="single-article-comments" >
                     <p className="single-article-comments-text" >COMMENTS</p>
+                    <div id="disqus_thread"></div>
                 </div>
             </div >
         );
