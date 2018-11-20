@@ -24,10 +24,7 @@ class HeaderLink extends Component {
   createLink() {
 
     // if (this.props.dropList) {
-    //   const dropList = this.props.dropList.map( (link) =>
-    //     <li><a href={link.link}>{link.title}</a></li>
-    //   );
-
+    //   const dropList = this.props.dropList.map( (link) => <li><a href={link.link}>{link.title}</a></li>);
     //   return (
     //     <div className="hasDropdown">
     //       <a href={this.props.link}>{this.props.title}</a>
@@ -35,18 +32,16 @@ class HeaderLink extends Component {
     //         {dropList}
     //       </ul>
     //     </div>
-    //   )
-
+    //   );
     // } else {
       return (
         <a href={this.props.link}>{this.props.title}</a>
-      )
-    // }
-  }
+      );
+  //}
+}
 
   render() {
     const link = this.createLink();
-    console.log("link", link);
     return (
       <li>{link}</li>
     );

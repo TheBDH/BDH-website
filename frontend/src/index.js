@@ -23,7 +23,16 @@ function renderArticle(){
 }
 
 function renderHeader(){
-	ReactDOM.render(<Header/>, document.getElementById('headerNew'));
+	var mainNav = [
+		{link:'/', title:'Home'}, 
+		{link:'/sections/news', title:'News', dropList:[{url:'#', title:'Home'}, {url:'#', title:'Home'}]}, 
+		{link:'/sections/arts-and-culture', title:'Arts and Culture'}, 
+		{link:'/sections/science-research', title:'Science and Research'}, 
+		{link:'/sections/sports', title:'Sports'}, 
+		{link:'/sections/opinion', title:'Opinion'}, 
+		{link:'http://post.browndailyherald.com', title:'POST'}, 
+		{link:'http://www.blogdailyherald.com', title:'Blog'}];
+	ReactDOM.render(<Header mainNav={mainNav}/>, document.getElementById('headerNew'));
 }
 
 function renderSidebar(){
@@ -92,10 +101,10 @@ function renderAd() {
 renderHeader();
 renderFooter();
 renderSidebar();
-renderIndexFeatured();
-renderIndexSections();
+//renderIndexFeatured();
+//renderIndexSections();
 renderAd();
-renderArticle();
+//renderArticle();
 //renderNonSports();
 //renderAuthorInfo();
 registerServiceWorker();

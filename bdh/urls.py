@@ -27,7 +27,14 @@ from django.urls import path
 urlpatterns += [
 	path('', views.index, name='index'),
     path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
-    path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>/', views.articles, name='articles'),
+    path('authors/<author>', views.author),
+    path('section/<section>', views.section),
+    path('print-subscriptions', views.print_subscriptions),
+    path('comments-policy', views.comments_policy),
+    path('web-policy', views.web_policy),
+    path('find-paper', views.find_paper),
+    path('staff-list', views.staff_list),
+    path('join', views.join),
 ]
 
 from django.conf import settings
@@ -42,7 +49,12 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.core import urls as wagtail_urls
 
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
+
 urlpatterns += [
+    re_path(r'^api/graphql', csrf_exempt(GraphQLView.as_view())),
+    re_path(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
     re_path(r'^api/v2/', api_router.urls),
     re_path(r'^cms/', include(wagtailadmin_urls)),
     re_path(r'^articles/', include(wagtaildocs_urls)),

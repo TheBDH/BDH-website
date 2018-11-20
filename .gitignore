@@ -4,3 +4,9 @@ newspaper/migrations/
 media-repo/
 .idea/*
 webpack-stats.dev.json
+bdh-env/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -23,7 +23,7 @@ SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
 
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 WAGTAIL_APPEND_SLASH = False
@@ -41,7 +41,6 @@ WAGTAIL_PASSWORD_MANAGEMENT_ENABLED = True
 WAGTAIL_PASSWORD_RESET_ENABLED = True
 WAGTAILUSERS_PASSWORD_ENABLED = True
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -53,6 +52,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
     'webpack_loader',
+
+    'api',
+    'graphene_django',
 
     'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',
@@ -109,7 +111,7 @@ WSGI_APPLICATION = 'bdh.wsgi.application'
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media-repo')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media-root')
 
 WEBPACK_LOADER = {
 	'DEFAULT': {
@@ -118,6 +120,7 @@ WEBPACK_LOADER = {
 	}
 }
 
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # database setup is an issue
@@ -125,15 +128,31 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {"default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "wp_bdh",
-        "USER": "bdh_developer",
-        "PASSWORD": "Since1891",
-        "HOST": "localhost",
-        "PORT": "",
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-    
+else:
+    DATABASES = {"default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "wp_bdh",
+            "USER": "bdh_developer",
+            "PASSWORD": "Since1891",
+            "HOST": "localhost",
+            "PORT": "",
+        }
+        
+    }
+
+GRAPHENE = {
+    'SCHEMA': 'api.schema.schema',
 }
 
 
@@ -196,8 +215,3 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
-
-STATIC_URL = '/static/'
