@@ -3,6 +3,10 @@ import Advertisement_300x250 from './Advertisement_300x250';
 import { DFPSlotsProvider } from 'react-dfp';
 import * as rssParser from 'react-native-rss-parser';
 
+const issuuStyle = {
+  width:'100%', 
+  height:'406px',
+}
 
 class Sidebar extends Component {
 
@@ -80,9 +84,7 @@ class Sidebar extends Component {
         <Advertisement_300x250 adUnit='BDH_RightSidebar3_300x250' />
         <div className="sidebar-latest">
           <h3 className="med-nav-title">Latest Issue</h3>
-          <a href={this.props.latest_issue.url}>
-            <img src={this.props.latest_issue.imgUrl} alt={this.props.latest_issue.title}/>
-          </a>
+          <div data-configid="1463144/65888671" style={issuuStyle} className="issuuembed"></div>
         </div>
         <Advertisement_300x250 adUnit='BDH_RightSidebar4_300x250' />
       </div>

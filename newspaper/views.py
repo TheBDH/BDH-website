@@ -32,6 +32,12 @@ def author(request, author):
     """
     return render(request, 'author.html', {})
 
+def error_401(request):
+    """
+    View function to return page unauthorized error
+    """
+    return render(request, '401.html', {})
+
 def error_404(request, exception):
     """
     View function to return page not found error
