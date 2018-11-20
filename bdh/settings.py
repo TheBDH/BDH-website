@@ -162,6 +162,7 @@ GRAPHENE = {
     'SCHEMA': 'api.schema.schema',
 }
 
+
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.search.backends.elasticsearch2',
