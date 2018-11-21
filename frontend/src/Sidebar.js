@@ -30,7 +30,7 @@ class Sidebar extends Component {
       this.setState( { postArticles, postLinks });
     });
 
-    var blogUrl = 'http://feeds.browndailyherald.com/BlogDailyHerald';
+    var blogUrl = 'http://blogdailyherald.com/feed/';
     fetch(proxyUrl + blogUrl)
       .then((response) => response.text())
       .then((responseData) => rssParser.parse(responseData))
