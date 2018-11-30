@@ -6,6 +6,17 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 
+const query = gql`
+    query GetArticles($searchQuery: String) {
+      articles(content_Icontains: $searchQuery) {
+        id
+        title
+        content
+        summary
+        tags
+      }
+    }`
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -64,18 +75,7 @@ class Header extends Component {
   //add authors to query later
   keyPress(event) {
     if(event.keyCode==13){
-      this.client.query({
-        query: gql`
-          query GetArticles {
-            articles {
-              id
-              title
-              content
-              summary
-              tags
-            }
-          }`,
-        })
+      this.client.query({ query })
       .then(data => console.log(data))
       .catch(error => console.error(error));
     }
