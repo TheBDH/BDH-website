@@ -1,14 +1,17 @@
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   
-  {% block title %}<title>The Brown Daily Herald</title>{% endblock %}
+  <title>The Brown Daily Herald</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  
+  <script type="text/javascript" src="https://e.issuu.com/embed.js" async={true}></script>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-7889946-1"></script>
   <script>
@@ -18,7 +21,6 @@
     gtag('config', 'UA-7889946-1');
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/template-basic-styles.css' %}">
@@ -27,22 +29,18 @@
 <body>
   <div id="headerNew"></div>
   <div class="main-container">
-    
     <div class="top-ad" id="728x90"></div>
-
     <div class="main-page">
       <div class="main-content">
-    
+   
         <div id="hero"></div>
         <div class="bot-ad" id="728x90f"></div> <!-- 728x90 ad -->
         <div id="section"></div>
-
       </div>
       <div id="sidebar" class="main-sidebar"></div>
     </div>
   </div>
   <div id="footerNew" class="main-footer"></div>
-
-  {% block article %}{% endblock %} <!-- not necessarily article, could be something else -->
+  {% render_bundle 'main' %}
 </body>
 </html>

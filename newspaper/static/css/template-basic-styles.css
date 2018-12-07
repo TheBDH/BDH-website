@@ -81,3 +81,48 @@
    background:#000;
    font-weight:bold;
 }
+
+.corporate-staff-block {
+   width: 100%;
+   text-align: center;
+}
+
+.bold-name {
+   font-weight: bold;
+}
+
+.staff-block-row {
+    width: 90%;
+}
+
+.editorial-staff-block {
+    display: inline-block;
+    float: left;
+    width: 45%;
+}
+
+.business-staff-block {
+    display: inline-block;
+    float: right;
+    width: 45%;
+}
+
+.two-column-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.left-column-container {
+    width: 40%;
+}
+
+.right-column-container {
+    width: 40%;
+}
+
+.text-block {
+    font-size: 16px;
+    margin: 8px 0px;
+}

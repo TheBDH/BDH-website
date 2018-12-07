@@ -188,6 +188,7 @@
 	object-position: center;
 	margin-bottom: 5px;
 }
+
 /*desktop*/
 @media screen and (min-width: 768px) {
 	.index_sections {
@@ -413,7 +414,7 @@
 	font-family: 'Avenir Medium', sans-serif;
 	overflow: hidden;
 	flex-basis: calc(33% - 35px);
-	width: 878px;
+	max-width: 860px;
 }
 
 .authorInfo .profile{
@@ -432,6 +433,7 @@
 	margin-bottom: 40px;
 	margin-top: 15px;
 	padding-bottom: 10px;
+	line-height: 27px;
 }
 
 .authorInfo .profile .name{
@@ -440,6 +442,7 @@
 	margin-bottom: 10px;
 	margin-top: 15px;
 	padding-top: 15px;
+	line-height: 33px;
 }
 
 .authorInfo .profile .image img {
