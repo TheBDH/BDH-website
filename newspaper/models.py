@@ -150,11 +150,6 @@ class Article(models.Model):
     maybewrong = models.BooleanField(default = False)
 
 
-
-
-
-
-
 '''class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 
