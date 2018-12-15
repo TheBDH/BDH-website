@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 
     'api',
     'graphene_django',
+    'widget_tweaks',
 
     'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',

@@ -23,7 +23,7 @@ setuptools==40.4.1
 six==1.11.0
 Unidecode==1.0.22
 urllib3==1.23
-wagtail==2.2.2
+wagtail>=2.3.0
 webencodings==0.5.1
 wheel==0.31.1
 Willow==1.1
