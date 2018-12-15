@@ -53,17 +53,19 @@ class HeaderMainStatic extends Component {
           <div className="main-container nav">
             <a className="has-dropdown" href="/about">about▾
               <div className="nav-dropdown">
-                <a href="#">fake link</a>
-                <a href="#">fake link</a>
-                <a href="#">fake link</a>
+                <a href="/staff-list">Staff List</a>
+                <a href="/join">Join</a>
+                <a href="#">Comments Policy</a>
+                <a href="/web-policy">Web Policy</a>
+                <a href="/find-paper">Find a Paper</a>
+                <a href="http://www.issuu.com/browndailyherald/docs" target="_blank">Read the Print Edition</a>
               </div>
             </a>
             <a className="has-dropdown" href="/contact">contact▾
               <div className="nav-dropdown">
-                <a href="#">fake link</a>
-                <a href="#">fake link</a>
-                <a href="#">fake link</a>
-                <a href="#">fake link</a>
+                <a href="#">Tips</a>
+                <a href="#">Questions</a>
+                <a href="#">Reprint and Permissions Requests</a>
               </div>
             </a>
             <a href="/submit">submit</a>
