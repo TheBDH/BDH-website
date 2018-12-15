@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './general-style.css';
+import './fixed-style.css';
 import App from './App';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -9,17 +10,24 @@ import Index_Featured_Article_Grid from './Index_Featured_Article_Grid';
 import Index_Sections_Grid from './Index_Sections_Grid';
 import Advertisement_728x90 from './Advertisement_728x90';
 import Footer from './Footer';
-import Article from './Article'
+import Single_Article from './Single_Article'
 import registerServiceWorker from './registerServiceWorker';
 import {AdSlot, DFPManager} from 'react-dfp';
 import NonSports from './NonSports';
 import Author_Info from'./Author_Info';
 
 function renderArticle(){
-	var article = document.getElementById('article-component');
-	var year = article.getAttribute('year');
-	var title = article.getAttribute('title');
-	ReactDOM.render(<Article year={year} title={title}/>, document.getElementById('article-component'));
+	ReactDOM.render(<Single_Article 
+		sectionHeader = {{url: '#', title: 'Section'}}
+		articleTitle = 'Sample Title'
+		articleSubTitle = 'Sample subtitle'
+		authorName = {{url: '#', name: 'Jane Doe'}}
+		authorPosition = 'Senior Staff Writer'
+		publishDate = 'November 19, 2018'
+		articleBody = 'Lorem ipsum dolor sit amet'
+		topics = {['asdf']}
+		relatedArticles = {[]} />, 
+	document.getElementById('article-component'));
 }
 
 function renderHeader(){
@@ -104,7 +112,7 @@ renderSidebar();
 //renderIndexFeatured();
 //renderIndexSections();
 renderAd();
-//renderArticle();
+renderArticle();
 //renderNonSports();
 //renderAuthorInfo();
 registerServiceWorker();

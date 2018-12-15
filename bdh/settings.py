@@ -50,12 +50,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+
     'newspaper.apps.NewspaperConfig',
     'webpack_loader',
 
     'api',
     'graphene_django',
     'widget_tweaks',
+    'disqus',
 
     'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',
@@ -76,6 +80,9 @@ INSTALLED_APPS = [
 	'modelcluster',
 
 ]
+
+DISQUS_API_KEY = 'uPP1mWOtXuKJ11NajNcYIHIbbYRlG94yggaUgI1Z8UWjRN7NLPD6d16FT33zzPiD'
+DISQUS_WEBSITE_SHORTNAME = 'browndailyherald'
 
 MIDDLEWARE = [
 	'django.contrib.sessions.middleware.SessionMiddleware',

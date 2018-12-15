@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  
+  <script type="text/javascript" src="https://e.issuu.com/embed.js" async={true}></script>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-7889946-1"></script>
   <script>
@@ -31,13 +32,13 @@
     <div class="top-ad" id="728x90"></div>
     <div class="main-page">
       <div class="main-content">
-        <div id="content">
-          {% block content %} {% endblock %}
-        </div>
+   
+        <div id="hero"></div>
+        <div class="bot-ad" id="728x90f"></div> <!-- 728x90 ad -->
+        <div id="section"></div>
       </div>
       <div id="sidebar" class="main-sidebar"></div>
     </div>
-    <div class="top-ad" id="728x90f"></div> <!-- Footer ad-->
   </div>
   <div id="footerNew" class="main-footer"></div>
   {% render_bundle 'main' %}
