@@ -126,3 +126,9 @@
     font-size: 16px;
     margin: 8px 0px;
 }
+
+.previous-staff-lists-block {
+  width: 100%;
+  text-align: left;
+  display: inline-block;
+}

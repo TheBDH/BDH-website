@@ -75,18 +75,15 @@ def find_paper(request):
     """
     return render(request, 'find_paper.html', {})
 
-def staff_list(request):
+def staff_list(request, year, semester):
     """
-    View function to return staff list
+    View function to return current staff list
     """
-    current_year = datetime.today().year
-    fall_range = (datetime(current_year, 9, 3), datetime(current_year, 12, 22))
-    semester = "Fall" if datetime.today() >= fall_range[0] and datetime.today() <= fall_range[1] else "Spring"
-    pprint(semester)
-    return render(request, 'staff_list.html', {
-        'current_semester': semester,
-        'year': current_year,
-    })
+    print(year, semester)
+    return render(request, 'staff_list_' + semester + '_' + str(year) + '.html', {})
+
+def current_staff_list(request):
+    return render(request, 'current_staff_list.html', {})
 
 def join(request):
     """

@@ -33,7 +33,8 @@ urlpatterns += [
     path('comments-policy', views.comments_policy),
     path('web-policy', views.web_policy),
     path('find-paper', views.find_paper),
-    path('staff-list', views.staff_list),
+    path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
+    path('staff-list', views.current_staff_list, name='current-staff-list'),
     path('join', views.join),
     path('api/graphiql/', views.error_401),
     path('api/graphiql', views.error_401)

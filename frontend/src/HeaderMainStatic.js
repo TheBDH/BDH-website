@@ -68,7 +68,7 @@ class HeaderMainStatic extends Component {
                 <a href="#">Reprint and Permissions Requests</a>
               </div>
             </a>
-            <a href="/submit">submit</a>
+            <a href="/submit">submissions</a>
             <a href="http://www.bdhsales.com" target="_blank">advertise</a>
             <a className="nav-special" href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a>
             <a className="nav-special" href="/print-subscriptions">subscribe</a>
