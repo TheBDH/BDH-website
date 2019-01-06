@@ -42,15 +42,13 @@ class Header extends Component {
   // }
 
   render() {
-
     return (
       <header>
         <div className="desktop-only">
-          <HeaderMain mainNav={this.props.mainNav} />
+          <HeaderMain />
         </div>
         <div className="mobile-header-content mobile-only">
           <HeaderMobile />
-
         </div>
       </header>
     );

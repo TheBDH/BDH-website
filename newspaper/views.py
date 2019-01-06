@@ -30,7 +30,7 @@ def author(request, author):
     """
     View function for author
     """
-    return render(request, 'author.html', {})
+    return render(request, 'newspaper/authors_page.html', {})
 
 def error_401(request):
     """

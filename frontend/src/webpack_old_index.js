@@ -30,19 +30,6 @@ function renderArticle(){
 	document.getElementById('article-component'));
 }
 
-function renderHeader(){
-	var mainNav = [
-		{link:'/', title:'Home'}, 
-		{link:'/sections/news', title:'News', dropList:[{url:'#', title:'Home'}, {url:'#', title:'Home'}]}, 
-		{link:'/sections/arts-and-culture', title:'Arts and Culture'}, 
-		{link:'/sections/science-research', title:'Science and Research'}, 
-		{link:'/sections/sports', title:'Sports'}, 
-		{link:'/sections/opinion', title:'Opinion'}, 
-		{link:'http://post.browndailyherald.com', title:'POST'}, 
-		{link:'http://www.blogdailyherald.com', title:'Blog'}];
-	ReactDOM.render(<Header mainNav={mainNav}/>, document.getElementById('headerNew'));
-}
-
 function renderSidebar(){
 	var post_articles = [{title:"Lorem ipsum", url:"#"},{title:"Nulla eu risus sem", url:"#"},{title:"article 3", url:"#"},{title:"article 4", url:"#"}]
 	var blog_articles = [{title:"article 1", url:"#"},{title:"article 2", url:"#"},{title:"article 3", url:"#"},{title:"article 4", url:"#"}]
