@@ -78,7 +78,6 @@ class HeaderMainFixed extends Component {
               <div className="nav-dropdown">
                 <a href="#">University News</a>
                 <a href="#">Metro</a>
-                <a href="#">Science/Research</a>
               </div>
             </a>
             <a href="/sections/arts-and-culture">arts and culture</a>
@@ -97,7 +96,6 @@ class HeaderMainFixed extends Component {
                 <a href="/sections/photo-galleries">Photo Galleries</a>
                 <a href="/sections/graphics">Graphics</a>
                 <a href="/sections/videos">Videos</a>
-                <a href="/sections/podcasts">podcasts</a>
                 <a href="/sections/illustrations">illustrations</a>
                 <a href="/sections/comics">comics</a>
               </div>

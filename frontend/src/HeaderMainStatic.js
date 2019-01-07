@@ -95,7 +95,6 @@ class HeaderMainStatic extends Component {
               <div className="nav-dropdown">
                 <a href="/sections/university-news">University News</a>
                 <a href="/sections/metro">Metro</a>
-                <a href="/sections/science-research">Science/Research</a>
               </div>
             </a>
             <a href="/sections/arts-culture">arts and culture</a>
@@ -114,7 +113,6 @@ class HeaderMainStatic extends Component {
                 <a href="/sections/photo-galleries">Photo Galleries</a>
                 <a href="/sections/graphics">Graphics</a>
                 <a href="/sections/videos">Videos</a>
-                <a href="/sections/podcasts">podcasts</a>
                 <a href="/sections/illustrations">illustrations</a>
                 <a href="/sections/comics">comics</a>
               </div>
