@@ -62,7 +62,7 @@ class HeaderMainFixed extends Component {
             <a href="/print-subscriptions">subscribe</a>
           </div>
 
-          <a href="/"><img src="/static/images/bdh_flag.png" alt="Brown Daily Herald"/></a>
+          <a href="/"><img src="/static/images/sticky_flag.jpg" alt="Brown Daily Herald"/></a>
 
           <div className="nav-fixed-social">
             <a className="header-icon" href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a>

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import HeaderMain from './HeaderMain';
 import HeaderMobile from './HeaderMobile';
 
+let query='';
 
 class Header extends Component {
   constructor(props) {
