@@ -33,22 +33,24 @@ class Header extends Component {
   }
 
   //add authors to query later
-  // keyPress(event) {
-  //   if(event.keyCode==13){
-  //     this.client.query({ query })
-  //     .then(data => console.log(data))
-  //     .catch(error => console.error(error));
-  //   }
-  // }
+  keyPress(event) {
+    if(event.keyCode==13){
+      this.client.query({ query })
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+    }
+  }
 
   render() {
+
     return (
       <header>
         <div className="desktop-only">
-          <HeaderMain />
+          <HeaderMain mainNav={this.props.mainNav} />
         </div>
         <div className="mobile-header-content mobile-only">
           <HeaderMobile />
+
         </div>
       </header>
     );

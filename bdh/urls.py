@@ -26,15 +26,14 @@ from django.urls import path
 
 urlpatterns += [
 	path('', views.index, name='index'),
-    path('<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
+    path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
     path('authors/<author>', views.author),
-    path('sections/<section>', views.section),
+    path('section/<section>', views.section),
     path('print-subscriptions', views.print_subscriptions),
     path('comments-policy', views.comments_policy),
     path('web-policy', views.web_policy),
     path('find-paper', views.find_paper),
-    path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
-    path('staff-list', views.current_staff_list, name='current-staff-list'),
+    path('staff-list', views.staff_list),
     path('join', views.join),
     path('api/graphiql/', views.error_401),
     path('api/graphiql', views.error_401)

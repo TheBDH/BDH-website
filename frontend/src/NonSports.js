@@ -18,11 +18,11 @@ class NonSports extends Component {
 
   renderSectionHeader(displaySectionHeader){
     if(displaySectionHeader){
-      return <div className='section-header'>{this.props.sectionHeader}</div>;
+      return <div class='section-header'>{this.props.sectionHeader}</div>;
     }
 
     else{
-      return <div className= 'blank-section-header'></div>;
+      return <div class= 'blank-section-header'></div>;
     }
   }
 
@@ -30,26 +30,26 @@ class NonSports extends Component {
     const { sectionHeader, title, author, date, description, image, authorLink, articleLink, imageLink} = this.props
 
     return (
-        <div className='nonsports-column'>
+        <div class='nonsports-column'>
 
-          <div className='image'>
+          <div class='image'>
             <a href={this.props.imageLink}>
               <img src={this.props.image} />
             </a>
           </div>
 
-          <div className='content'>
+          <div class='content'>
             {this.renderSectionHeader(this.state.displaySectionHeader)}
             <a href={this.props.articleLink}>
-              <div className='title'>{this.props.title}</div>
+              <div class='title'>{this.props.title}</div>
             </a>
-            <div className='meta'>
+            <div class='meta'>
               <a href={this.props.authorLink}>
-                <span className='author'>{this.props.author}</span>
+                <span class='author'>{this.props.author}</span>
               </a>
-              <span className='date'> | {this.props.date}</span>
+              <span class='date'> | {this.props.date}</span>
             </div>
-            <div className='description'>
+            <div class='description'>
               <span>{this.props.description}</span>
             </div>
           </div>

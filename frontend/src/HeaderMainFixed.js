@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+
 
 class HeaderMainFixed extends Component {
 
@@ -59,7 +59,7 @@ class HeaderMainFixed extends Component {
         <div className="header-flag main-container">
           <div className="nav-fixed-special">
             <a href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a>
-            <a href="http://eepurl.com/sDrDr">subscribe</a>
+            <a href="/print-subscriptions">subscribe</a>
           </div>
 
           <a href="/"><img src="/static/images/sticky_flag.jpg" alt="Brown Daily Herald"/></a>
@@ -71,50 +71,38 @@ class HeaderMainFixed extends Component {
           </div>
         </div>
 
+
         <div className="bottom-header nav-wrapper">
           <div className="main-container nav">
             <a href="/">home</a>
             <a className="has-dropdown" href="/sections/news">news▾
               <div className="nav-dropdown">
-                <a href="#">University News</a>
-                <a href="#">Metro</a>
+                <a href="#">fake link</a>
+                <a href="#">fake link</a>
+                <a href="#">fake link</a>
+                <a href="#">fake link</a>
               </div>
             </a>
             <a href="/sections/arts-and-culture">arts and culture</a>
             <a href="/sections/science-research">science and research</a>
             <a href="/sections/sports">sports</a>
-            <a className="has-dropdown" href="/sections/opinion">opinion▾
-              <div className="nav-dropdown">
-                <a href="/sections/columns">columns</a>
-                <a href="/sections/op-eds">op-eds</a>
-                <a href="/sections/editorials">editorials</a>
-                <a href="/sections/letters-to-the-editor">letters to the editor</a>
-              </div>
-            </a>
-            <a className= 'has-dropdown' href="/sections/multimedia">multimedia▾
-              <div className="nav-dropdown">
-                <a href="/sections/photo-galleries">Photo Galleries</a>
-                <a href="/sections/graphics">Graphics</a>
-                <a href="/sections/videos">Videos</a>
-                <a href="/sections/illustrations">illustrations</a>
-                <a href="/sections/comics">comics</a>
-              </div>
-            </a>
-            <a href="http://post.browndailyherald.com">post-</a>
+            <a href="/sections/opinion">opinion</a>
+            <a href="http://post.browndailyherald.com">post</a>
             <a href="http://www.blogdailyherald.com">blog</a>
             <a className="has-dropdown">more▾
               <div className="nav-dropdown">
                 <a href="/about">about</a>
-                <a href="/contact">contact</a>
+                <a href="/contant">contact</a>
                 <a href="/submit">submit</a>
                 <a href="http://www.bdhsales.com" target="_blank">advertise</a>
                 <a className="nav-special" href="http://www.heraldalumni.org/donate.html" target="_blank">donate</a>
-                <a className="nav-special" href="http://eepurl.com/sDrDr">subscribe</a>
+                <a className="nav-special" href="/print-subscriptions">subscribe</a>
               </div>
             </a>
           </div>
         </div>
       </div>
+
     );
   }
 }

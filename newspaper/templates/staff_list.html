@@ -2,7 +2,7 @@
 {% load render_bundle from webpack_loader %}
 
 {% block content %}
-<h1>Staff List, Spring 2018</h1>
+<h1>Staff List, {{ current_semester }} {{ year }}</h1>
 <div class="corporate-staff-block">
 <h3>CORPORATE</h3>
 <p class="bold-name">Elena Renken</p>
@@ -30,28 +30,28 @@
         <p>Editor-in-Chief: Kasturi Pananjady</p>
         <p>Managing Editor: Alex Skidmore</p>
         <p>Senior Editor: Madison Rivlin</p>
-        <p>Senior Editor: Julianne Center</p>
+        <p>Senior Editor: Ben Shumate</p>
         <p>Senior Editor: Hattie Xu</p>
         <br>
         <h4>Section Editors</h4>
-        <p>Post-: Saanya Jain</p>
-        <p>Features: Isabel Gensler</p>
-        <p>University News: Anna Kramer, Eduard Muñoz-Suñé, Priyanka Podugu, Sarah Wang</p>
-        <p>Metro: Emily Davies, Bella Roberts</p>
+        <p>Post-: Jennifer Osborne</p>
+        <p>University News: Eduard Muñoz-Suñé, Priyanka Podugu, Sarah Wang</p>
+        <p>Metro: Emily Davies, Isabel Gensler</p>
         <p>Science and Research: Jonathan Douglas, Jackson Wells</p>
-        <p>Arts & Culture: Connor Sullivan, Mia Pattillo</p>
-        <p>Sports: Alexandra Russell, Nicholas Wey</p>
+        <p>Arts & Culture: Ethel Renia</p>
+        <p>Sports: Alexandra Russell, James Schapiro</p>
         <br>
         <h4>Commentary</h4>
-        <p>Opinions Editors: Connor Cardoso, Anuj Krishnamurthy, Clare Steinman</p>
+        <p>Opinions Editors: Connor Cardoso, Anuj Krishnamurthy, Emily Miller, Clare Steinman</p>
         <br>
         <h4>Multimedia and Production</h4>
         <p>Design Editors: Kyle Cui, Eduard Muñoz-Suñé</p>
         <p>Assistant Design Editors: Julie Wang, Kelvin Yang</p>
+        <p>Graphics Editors: Marlis Flinn, Sarah Martinez</p>
         <p>Head Photo Editor: Sam Berube, Anita Sheih</p>
-        <p>Illustrations Editor: Pia Mileaf-Patel</p>
-        <p>Copy Desk Chief: Abby Borges</p>
-        <p>Director of Web Development: Eli White</p>
+        <p>Illustrations Editor: Daphne Zhao</p>
+        <p>Copy Desk Chief: Kelley Tackett</p>
+        <p>Director of Web Development: Rahul Jayaraman</p>
     </div>
     <div class="business-staff-block">
         <h3>BUSINESS</h3>
@@ -61,12 +61,8 @@
         <h4>Directors</h4>
         <p>Sales: Shreya Raghunandan</p>
         <p>Finance: Ravi Betzig</p>
-        <p>Strategy: Caroline Ziegler</p>
+        <p>Strategy: Edwin Farley, Caroline Ziegler</p>
     </div>
 </div>
 
-<div class="previous-staff-lists-block">
-    <hr>
-    <b>Previous Staff Lists</b>: Spring 2018, Fall 2017, Spring 2017, Fall 2016, Spring 2016, Fall 2015, Spring 2015, Fall 2014, Spring 2014, Fall 2013
-</div>
 {% endblock %}
