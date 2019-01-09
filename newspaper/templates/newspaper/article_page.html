@@ -1,13 +1,12 @@
 {% extends "base_generic.html" %}
 {% load render_bundle from webpack_loader %}
+{% load wagtailcore_tags %}
 
- {% block article %}
+ {% block content %}
 
- {% load wagtailcore_tags %}
 
-{{ page.body|richtext }}<!-- 
+{{ page.content|richtext }}<!-- 
 	<div id='article-component' year={{year}} title={{title}}>
 	</div> -->
-		{% render_bundle 'main' %}
 
 {% endblock %}

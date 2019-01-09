@@ -86,7 +86,6 @@ class Sidebar extends Component {
           <h3 className="med-nav-title">Latest Issue</h3>
           <div data-configid="1463144/65888671" style={issuuStyle} className="issuuembed"></div>
         </div>
-        <Advertisement_300x250 adUnit='BDH_RightSidebar4_300x250' />
       </div>
       </DFPSlotsProvider>
     );

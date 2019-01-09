@@ -25,19 +25,21 @@ from django.conf.urls import include, handler404, handler500
 from django.urls import path
 
 urlpatterns += [
-	path('', views.index, name='index'),
+    path('print-subscriptions', views.static_page_template),
+    path('comments-policy', views.static_page_template),
+    path('web-policy', views.static_page_template),
+    path('find-paper', views.static_page_template),
+    path('join', views.static_page_template),
+
+    path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
+    path('staff-list', views.current_staff_list, name='current-staff-list'),
+    path('api/graphiql/', views.error_401),
+    path('api/graphiql', views.error_401),
+
+    path('', views.index, name='index'),
     path('<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
     path('authors/<author>', views.author),
     path('sections/<section>', views.section),
-    path('print-subscriptions', views.print_subscriptions),
-    path('comments-policy', views.comments_policy),
-    path('web-policy', views.web_policy),
-    path('find-paper', views.find_paper),
-    path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
-    path('staff-list', views.current_staff_list, name='current-staff-list'),
-    path('join', views.join),
-    path('api/graphiql/', views.error_401),
-    path('api/graphiql', views.error_401)
 ]
 
 from django.conf import settings

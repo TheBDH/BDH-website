@@ -21,6 +21,8 @@ const SectionPage = (props) => {
 	var section_name = props.match.params.section;
 	return (
 		<div className = 'main-content'>
+			<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
+			<br/>
 			<p>{section_name}</p>
 			<Section_Features section={section} />
 
@@ -31,6 +33,38 @@ const SectionPage = (props) => {
 				lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
 				massa. Fusce luctus vestibulum augue ut aliquet."}
 				image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+			<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+				authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+				description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+				lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+				massa. Fusce luctus vestibulum augue ut aliquet."}
+				image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+			<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+				authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+				description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+				lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+				massa. Fusce luctus vestibulum augue ut aliquet."}
+				image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+			<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+				authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+				description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+				lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+				massa. Fusce luctus vestibulum augue ut aliquet."}
+				image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+			<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+				authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+				description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+				lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+				massa. Fusce luctus vestibulum augue ut aliquet."}
+				image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+			<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+				authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+				description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+				lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+				massa. Fusce luctus vestibulum augue ut aliquet."}
+				image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+			 // add in pagination
+			<Advertisement_728x90 adUnit="BDH_Footer_728x90" />
 		</div>
 	);
 }

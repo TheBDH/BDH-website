@@ -50,30 +50,14 @@ def error_500(exception):
     """
     return render(exception, '500.html', {})
 
-def print_subscriptions(request):
+def static_page_template(request):
     """
-    View function to return print subscriptions
+    View function to return server error
     """
-    return render(request, 'print_subscriptions.html', {})
-
-def comments_policy(request):
-    """
-    View function to return comments policy
-    """
-    return render(request, 'comments_policy.html', {})
-
-def web_policy(request):
-    """
-    View function to return web policy
-    """
-    return render(request, 'web_policy.html', {})
+    return render(request, 'static_template.html', {})
 
 
-def find_paper(request):
-    """
-    View function to return find paper
-    """
-    return render(request, 'find_paper.html', {})
+
 
 def staff_list(request, year, semester):
     """
@@ -84,9 +68,3 @@ def staff_list(request, year, semester):
 
 def current_staff_list(request):
     return render(request, 'current_staff_list.html', {})
-
-def join(request):
-    """
-    View function to return join about page
-    """
-    return render(request, 'join.html', {})

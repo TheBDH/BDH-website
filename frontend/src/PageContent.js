@@ -5,6 +5,12 @@ import SectionPage from './SectionPage'
 import ArticlePage from './ArticlePage'
 import AuthorPage from './AuthorPage'
 
+import JoinPage from './JoinPage'
+import SubscriptionsPage from './SubscriptionsPage'
+import WebPolicyPage from './WebPolicyPage'
+import CommentsPolicyPage from './CommentsPolicyPage'
+import FindPaperPage from './FindPaperPage'
+
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
@@ -14,9 +20,15 @@ const PageContent = () => (
   <main>
     <Switch>
       <Route exact path='/' component={HomePage}/>
-      <Route path='/sections/:section' component={SectionPage}/>
-      <Route path='/:year/:month/:day/:slug' component={ArticlePage} />
-      <Route path='/author/:authName' component={AuthorPage} />
+      <Route exact path='/sections/:section' component={SectionPage}/>
+      <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
+      <Route exact path='/author/:authName' component={AuthorPage} />
+
+      <Route path='/join' component={JoinPage}/>
+      <Route path='/print-subscriptions' component={SubscriptionsPage} />
+      <Route path='/web-policy' component={WebPolicyPage} />
+      <Route path='/comments-policy' component={CommentsPolicyPage} />
+      <Route path='/find-paper' component={FindPaperPage} />
     </Switch>
   </main>
 )
@@ -25,3 +37,7 @@ export default PageContent;
 
 
 //need to add in functionality to get more articles (pagination on section pages)
+
+
+//     path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
+//     path('staff-list', views.current_staff_list, name='current-staff-list'),

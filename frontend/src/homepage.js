@@ -19,6 +19,8 @@ var sections_list = [sample_section, sample_section, sample_section, sample_sect
 
 const HomePage = () => (
 	<div className = 'main-content'>
+		<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
+		<br/>
 		<Index_Featured_Article_Grid hero={hero} sections={sections}/>
 		<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 		<Index_Sections_Grid sections={sections_list}/>

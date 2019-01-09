@@ -7,8 +7,10 @@ import './general-style.css';
 
 const ArticlePage = (props) => {
 	var section_name = props.match.params.section;
+	console.log(props);
+
 	return (
-		<p> hi</p>
+		<p>asdf</p>
 	);
 }
 

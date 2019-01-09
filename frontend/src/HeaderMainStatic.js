@@ -5,6 +5,8 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 
+import { Link } from 'react-router-dom'
+
 const query = gql`
     query GetArticles($searchQuery: String) {
       articles(content_Icontains: $searchQuery) {
@@ -55,7 +57,7 @@ class HeaderMainStatic extends Component {
               <div className="nav-dropdown">
                 <a href="/staff-list">Staff List</a>
                 <a href="/join">Join</a>
-                <a href="#">Comments Policy</a>
+                <a href="/comments-policy">Comments Policy</a>
                 <a href="/web-policy">Web Policy</a>
                 <a href="/find-paper">Find a Paper</a>
                 <a href="http://www.issuu.com/browndailyherald/docs" target="_blank">Read the Print Edition</a>
