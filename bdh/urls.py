@@ -35,6 +35,7 @@ urlpatterns += [
     path('find-paper', views.find_paper),
     path('staff-list', views.staff_list),
     path('join', views.join),
+    path('api/graphiql/', views.error_401),
     path('api/graphiql', views.error_401)
 ]
 
