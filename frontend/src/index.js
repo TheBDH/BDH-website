@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {bdhRequester} from './requests';
 import './index.css';
 import './general-style.css';
 import './fixed-style.css';
@@ -117,4 +116,3 @@ renderArticle();
 //renderNonSports();
 //renderAuthorInfo();
 registerServiceWorker();
-

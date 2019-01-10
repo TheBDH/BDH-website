@@ -324,10 +324,8 @@ class AuthorsPage(RoutablePageMixin, Page):
 
 class ArticlePage(RoutablePageMixin, Page):
 
-    summary = models.CharField(max_length = 1000)
+    summary = models.CharField(max_length=1000)
     content = RichTextField(blank=True)
-
-
     section_list = (
                 ('h', 'Home'),
                 ('n', 'News'),
@@ -341,13 +339,6 @@ class ArticlePage(RoutablePageMixin, Page):
 
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
 
-    # search_fields = Page.search_fields + (
-    #                     index.SearchField('section'),
-    #                     index.FilterField('section'),
-    #                 )
-
-    # summary = RichTextField(blank=True)
-
     yes_no = {
             ('y', 'Yes'),
             ('n', 'No'),
@@ -356,16 +347,7 @@ class ArticlePage(RoutablePageMixin, Page):
     featured_on_section = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
     featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
 
-    # make sure it displays both the authors' names and their position
-    # authors = models.ManyToManyField(AuthorsPage, help_text="Select author names")
-
-    tags = models.CharField(max_length = 255, blank=True)
-
-    # search_fields = Page.search_fields + [
-    #     # Index the human-readable string for searching.
-    #     index.SearchField('authors'),
-
-    # ]
+    tags = models.CharField(max_length=255, blank=True)
 
     api_fields = [
         APIField('summary'),
@@ -391,6 +373,7 @@ class ArticlePage(RoutablePageMixin, Page):
         index.SearchField('section'),
         index.SearchField('summary'),
         index.SearchField('tags'),
+        index.SearchField('authors'),
     ]
 
 
