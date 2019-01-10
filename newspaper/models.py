@@ -371,8 +371,6 @@ class ArticlePage(RoutablePageMixin, Page):
         FieldPanel('authors', classname='class'),
     ]
 
-<<<<<<< HEAD
-=======
     search_fields = Page.search_fields + [
         index.SearchField('content'),
         index.SearchField('section'),
@@ -380,7 +378,6 @@ class ArticlePage(RoutablePageMixin, Page):
         index.SearchField('tags'),
         index.SearchField('authors'),
     ]
->>>>>>> 2b6bf435b4b635883129f13cdd97b4f6f20a7bad
 
     @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
     def dated_article_with_slug(self, request, year, month, day, slug):

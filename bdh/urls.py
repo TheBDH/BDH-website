@@ -35,16 +35,13 @@ urlpatterns += [
     path('find-paper', views.find_paper),
     path('staff-list', views.staff_list),
     path('join', views.join),
-<<<<<<< HEAD
-=======
-    path('api/graphiql/', views.error_401),
     path('api/graphiql', views.error_401)
->>>>>>> 2b6bf435b4b635883129f13cdd97b4f6f20a7bad
 ]
 
 from django.conf import settings
 from django.conf.urls.static import static
 from .api import api_router
+    path('api/graphiql/', views.error_401),
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
