@@ -35,6 +35,11 @@ urlpatterns += [
     path('find-paper', views.find_paper),
     path('staff-list', views.staff_list),
     path('join', views.join),
+<<<<<<< HEAD
+=======
+    path('api/graphiql/', views.error_401),
+    path('api/graphiql', views.error_401)
+>>>>>>> 2b6bf435b4b635883129f13cdd97b4f6f20a7bad
 ]
 
 from django.conf import settings
@@ -49,7 +54,12 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.core import urls as wagtail_urls
 
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
+
 urlpatterns += [
+    re_path(r'^api/graphql', csrf_exempt(GraphQLView.as_view())),
+    re_path(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
     re_path(r'^api/v2/', api_router.urls),
     re_path(r'^cms/', include(wagtailadmin_urls)),
     re_path(r'^articles/', include(wagtaildocs_urls)),

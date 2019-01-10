@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+{% load render_bundle from webpack_loader %}
+{% load wagtailcore_tags widget_tweaks %}
+
+{% block content %}
+	
+    <h1>{{ page.title }}</h1>
+    {{ page.intro|richtext }}
+
+    <div style="float:left; width: 346px;">
+        Is something going on at Brown that you want us to cover?
+        <br> <br>
+        We want to hear from you! Please use this form to let us know if you have any tips for us. You my provide contact information if you want but the only
+        required field is the mesage.
+        <br><br>
+    </div>
+
+    <div style="float:right; width: 346px; padding-right: 25px">
+        <form action="{% pageurl page %}" method="POST">
+            {% csrf_token %}
+            
+            {% for field in form.visible_fields %}
+            
+            <div class="form-group">
+            	{{ field.label_tag }}
+
+            	{% render_field field class+="form-control" %}
+
+            </div>
+            {% endfor %}
+            <input type="submit"> 
+        </form>
+    </div>
+{% endblock %}

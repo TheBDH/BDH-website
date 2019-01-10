@@ -105,4 +105,27 @@
     display: inline-block;
     float: right;
     width: 45%;
+<<<<<<< HEAD
+=======
+}
+
+.two-column-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.left-column-container {
+    width: 40%;
+}
+
+.right-column-container {
+    width: 40%;
+}
+
+.text-block {
+    font-size: 16px;
+    margin: 8px 0px;
+>>>>>>> 2b6bf435b4b635883129f13cdd97b4f6f20a7bad
 }

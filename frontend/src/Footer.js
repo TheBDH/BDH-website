@@ -9,50 +9,47 @@ class Footer extends Component {
             <div className="footer-section">
               <div className="med-nav-title">sections</div>
               <ul>
-                <li><a href="#">news</a></li>
-                <li><a href="#">arts & culture</a></li>
-                <li><a href="#">science & research</a></li>
-                <li><a href="#">sports</a></li>
-                <li><a href="#">opinion</a></li>
+                <li><a href="/sections/news">news</a></li>
+                <li><a href="/sections/arts-and-culture">arts & culture</a></li>
+                <li><a href="/sections/science-research">science & research</a></li>
+                <li><a href="/sections/sports">sports</a></li>
+                <li><a href="/sections/opinion">opinion</a></li>
               </ul>
             </div>
             <div className="footer-section">
               <div className="med-nav-title">online</div>
               <ul>
                 <li className="has-child">
-                  <a href="#">multimedia</a>
+                  <a href="sections/multimedia">multimedia</a>
                   <ul>
-                    <li><a href="#">photo galleries</a></li>
-                    <li><a href="#">videos</a></li>
-                    <li><a href="#">data science</a></li>
-                    <li><a href="#">graphics</a></li>
-                    <li><a href="#">illustrations</a></li>              
+                    <li><a href="sections/multimedia/photo-galleries">photo galleries</a></li>
+                    <li><a href="sections/multimedia/videos">videos</a></li>
+                    <li><a href="sections/multimedia/data-science">data science</a></li>
+                    <li><a href="sections/multimedia/graphics">graphics</a></li>
+                    <li><a href="sections/multimedia/illustrations">illustrations</a></li>              
                   </ul>
                 </li>
-                <li><a href="#">comics</a></li>
+                <li><a href="sections/comics">comics</a></li>
                 <li><a href="www.blogdailyherald.com">blog daily herald</a></li>
                 <li><a href="post.browndailyherald.com">post magazine</a></li>
-                <li><a href="#">archives</a></li>
+                <li><a href="/archives">archives</a></li>
               </ul>
             </div>
             <div className="footer-section">
               <div className="med-nav-title">information</div>
               <ul>
-                <li><a href="#">about</a></li>
-                <li><a href="#">contact</a></li>
-                <li><a href="#">join</a></li>
+                <li><a href="/about">about</a></li>
+                <li><a href="/contact">contact</a></li>
+                <li><a href="/join">join</a></li>
                 <li><a href="www.bdhsales.com">advertise</a></li>
-                <li><a href="#">donate</a></li>
+                <li><a href="https://brownherald.z2systems.com/np/clients/brownherald/donation.jsp?campaign=1&">donate</a></li>
                 <li><a href="www.heraldalumni.org">alumni</a></li>
-                <li><a href="#">privacy policy</a></li>
+                <li><a href="/privacy-policy">privacy policy</a></li>
               </ul>
             </div>
             <div className="footer-section">
               <div className="footer-subscribe">
-                <div className="med-nav-title">subscribe</div>
-                <form>
-                  <input type="email" placeholder="EMAIL ADDRESS" />
-                </form>
+                <a href="http://eepurl.com/sDrDr" target="_blank" className="med-nav-title">subscribe</a>
               </div>
               <div className="footer-break"></div>
               <div className="footer-follow">

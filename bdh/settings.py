@@ -19,11 +19,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
+SITE_ID = 1
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = []
 
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 WAGTAIL_APPEND_SLASH = False
@@ -50,8 +52,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+
     'newspaper.apps.NewspaperConfig',
     'webpack_loader',
+
+    'api',
+    'graphene_django',
+    'widget_tweaks',
+    'disqus',
 
     'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',
@@ -72,6 +82,9 @@ INSTALLED_APPS = [
 	'modelcluster',
 
 ]
+
+DISQUS_API_KEY = 'uPP1mWOtXuKJ11NajNcYIHIbbYRlG94yggaUgI1Z8UWjRN7NLPD6d16FT33zzPiD'
+DISQUS_WEBSITE_SHORTNAME = 'browndailyherald'
 
 MIDDLEWARE = [
 	'django.contrib.sessions.middleware.SessionMiddleware',
@@ -147,6 +160,11 @@ else:
         }
         
     }
+
+GRAPHENE = {
+    'SCHEMA': 'api.schema.schema',
+}
+
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {

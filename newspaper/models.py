@@ -1,4 +1,5 @@
 from django.db import models
+from django.apps import AppConfig
 
 # Create your models here.
 
@@ -17,17 +18,17 @@ from django.db import models
     article_id = models.AutoField(primary_key=True) # automatically generate a unique Article ID, increments
 
     PUB_STATUS = (
-		('d', 'Draft'),
-		('p', 'Published'),
+        ('d', 'Draft'),
+        ('p', 'Published'),
     )
 
     status = models.CharField(max_length=1, choices=PUB_STATUS, blank=True, default='d', help_text='Publication Status')
 
-	# Metadata
+    # Metadata
     class Meta:
         ordering = ["-pubdate"]
 
-	# Methods
+    # Methods
     def get_absolute_url(self):
         #Returns the url to access a particular instance of MyModelName.
         return reverse('article-detail', args=[str(self.id)])
@@ -56,19 +57,19 @@ class Author(models.Model):
     #articles = models.ManyToManyField(Article)
 
     AUTHOR_RANK = (
-    	('con', 'Contributing Writer'),
-    	('ssw', 'Senior Staff Writer'),
-    	('stw', 'Staff Writer'),
+        ('con', 'Contributing Writer'),
+        ('ssw', 'Senior Staff Writer'),
+        ('stw', 'Staff Writer'),
     )
 
     articles = models.ManyToManyField('Article', help_text="Select Articles Names") # dropdown for authors - could get unwieldy? evaluate later ... searchable?
     rank = models.CharField(max_length=3, choices=AUTHOR_RANK, blank=True, default='con', help_text='Author Rank')
 
     AUTHOR_YEAR = (
-    	('fr', 'Freshman'),
-    	('so', 'Sophomore'),
-    	('ju', 'Junior'),
-    	('se', 'Senior'),
+        ('fr', 'Freshman'),
+        ('so', 'Sophomore'),
+        ('ju', 'Junior'),
+        ('se', 'Senior'),
         ('gs', 'Graduate Student'),
     )
 
@@ -98,7 +99,7 @@ class Author(models.Model):
 
 
 class Author(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     pathtopicture = models.CharField(max_length=100, blank=True, null=True)
@@ -106,7 +107,7 @@ class Author(models.Model):
     since = models.DateField()
     about = models.TextField()
     valid = models.BooleanField()
-    maybewrong = models.BooleanField()
+    maybewrong = models.BooleanField(default = False)
 
 
     #class Meta:
@@ -114,13 +115,13 @@ class Author(models.Model):
     #    db_table = 'Author'
 
 class Image(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #id = models.IntegerField(primary_key=True)
     file_path = models.CharField(max_length=300)
 
 
 
 
-class Section(models.Model):
+class Category(models.Model):
     parent = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
 
@@ -135,7 +136,12 @@ class Tag(models.Model):
 
 
 class Article(models.Model):
+<<<<<<< HEAD
     body = models.TextField(blank=True)
+=======
+    #id = models.IntegerField(primary_key=True)
+    body = models.TextField(default = "")
+>>>>>>> 2b6bf435b4b635883129f13cdd97b4f6f20a7bad
     title = models.CharField(max_length=100)
     #posted_date = models.DateField(auto_now=True)
     #modified_date = models.DateField(auto_now_add=True)
@@ -143,12 +149,9 @@ class Article(models.Model):
     modified_date = models.DateField()
     authors = models.ManyToManyField(Author)
     image_url = models.ManyToManyField(Image)
-    section = models.ForeignKey(Section, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
     topic = models.ManyToManyField(Tag)
-
-
-
-
+    maybewrong = models.BooleanField(default = False)
 
 
 '''class AuthGroup(models.Model):
@@ -269,29 +272,75 @@ class DjangoSession(models.Model):
 
 #END OF NEW MODELS
 from django.shortcuts import get_object_or_404
-
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
-from wagtail.core import blocks
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from django.forms import ModelForm
 from pprint import pprint #debugging
+
+from wagtail.search import index
+
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from modelcluster.fields import ParentalKey
+
+class AuthorsPage(RoutablePageMixin, Page):
+
+    name = models.CharField(max_length = 255)
+    lastName = models.CharField(max_length = 255)
+    description = RichTextField(blank=True)
+
+    author_rank = (
+        ('con', 'Contributing Writer'),
+        ('ssw', 'Senior Staff Writer'),
+        ('stw', 'Staff Writer'),
+    )
+
+    author_year = (
+        ('fr', 'Freshman'),
+        ('so', 'Sophomore'),
+        ('ju', 'Junior'),
+        ('se', 'Senior'),
+        ('gs', 'Graduate Student'),
+    )
+
+    position = models.CharField(max_length=3, choices=author_rank, blank=True, default='con')
+    year = models.CharField(max_length=5, choices=author_year, blank=True, default='fr',)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name', classname='class'),
+        FieldPanel('lastName', classname='class'),
+        FieldPanel('description', classname='class'),
+        FieldPanel('position', classname='class'),
+        FieldPanel('year', classname='class'),
+    ]
 
 class ArticlePage(RoutablePageMixin, Page):
 
+    summary = models.CharField(max_length = 1000)
     content = RichTextField(blank=True)
+
+
     section_list = (
                 ('h', 'Home'),
-            	('n', 'News'),
-            	('ac', 'Arts & Culture'),
-            	('sr', 'Science & Research'),
-            	('sp', 'Sports'),
+                ('n', 'News'),
+                ('ac', 'Arts & Culture'),
+                ('sr', 'Science & Research'),
+                ('sp', 'Sports'),
                 ('op', 'Opinion'),
                 ('pt', 'Post'),
                 ('blg', 'Blog'),
             )
+
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
-    summary = RichTextField(blank=True)
+
+    # search_fields = Page.search_fields + (
+    #                     index.SearchField('section'),
+    #                     index.FilterField('section'),
+    #                 )
+
+    # summary = RichTextField(blank=True)
 
     yes_no = {
             ('y', 'Yes'),
@@ -301,23 +350,37 @@ class ArticlePage(RoutablePageMixin, Page):
     featured_on_section = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
     featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
 
-    # make sure it displays both the authors' names and their position 
-    #authors = models.ManyToManyField(AuthorsPage, help_text="Select author names")
+    # make sure it displays both the authors' names and their position
+    authors = models.ManyToManyField(AuthorsPage, help_text="Select author names")
 
-    # need to figure out how to make the tags become links, should we use a list instead
-    # of plain charfield?
     tags = models.CharField(max_length = 255, blank=True)
 
+    # search_fields = Page.search_fields + [
+    #     # Index the human-readable string for searching.
+    #     index.SearchField('authors'),
+
+    # ]
+
+
     content_panels = Page.content_panels + [
-        FieldPanel('content', classname="class"),
         FieldPanel('section', classname='class'),
         FieldPanel('summary', classname='class'),
         FieldPanel('featured_on_section', classname='class'),
         FieldPanel('featured_on_main', classname='class'),
         FieldPanel('tags', classname='full'),
-        #FieldPanel('authors', classname='class'),
+        FieldPanel('authors', classname='class'),
     ]
 
+<<<<<<< HEAD
+=======
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+        index.SearchField('section'),
+        index.SearchField('summary'),
+        index.SearchField('tags'),
+        index.SearchField('authors'),
+    ]
+>>>>>>> 2b6bf435b4b635883129f13cdd97b4f6f20a7bad
 
     @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
     def dated_article_with_slug(self, request, year, month, day, slug):
@@ -333,35 +396,24 @@ class ArticlePage(RoutablePageMixin, Page):
             raise Http404
         return Page.serve(post_page, request, *args, **kwargs)
 
-class AuthorsPage(RoutablePageMixin, Page):
 
-    name = models.CharField(max_length = 255)
-    lastName = models.CharField(max_length = 255)
-    description = RichTextField(blank=True)
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
 
-    author_rank = (
-    	('con', 'Contributing Writer'),
-    	('ssw', 'Senior Staff Writer'),
-    	('stw', 'Staff Writer'),
-    )
+class FormPage(AbstractEmailForm):
 
-    author_year = (
-    	('fr', 'Freshman'),
-    	('so', 'Sophomore'),
-    	('ju', 'Junior'),
-    	('se', 'Senior'),
-        ('gs', 'Graduate Student'),
-    )
+    #isTipPage = models.BooleanField()
 
-    #articles = models.ManyToManyField(ArticlePage, help_text="Select article names")
-    position = models.CharField(max_length=3, choices=author_rank, blank=True, default='con')
-    year = models.CharField(max_length=5, choices=author_year, blank=True, default='fr',)
+    content = models.CharField(max_length=500)
 
-    content_panels = Page.content_panels + [
-        FieldPanel('name', classname='class'),
-        FieldPanel('lastName', classname='class'),
-        FieldPanel('description', classname='class'),
-        FieldPanel('position', classname='class'),
-        FieldPanel('year', classname='class'),
-        #FieldPanel('articles', classname='class'),
+    content_panels = AbstractEmailForm.content_panels + [
+        InlinePanel('form_fields', label="Form fields"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel('subject'),
+            FieldPanel('content'),
+        ], "Email"),
     ]
