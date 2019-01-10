@@ -41,7 +41,6 @@ urlpatterns += [
 from django.conf import settings
 from django.conf.urls.static import static
 from .api import api_router
-    path('api/graphiql/', views.error_401),
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
