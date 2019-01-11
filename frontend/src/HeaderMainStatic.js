@@ -120,7 +120,6 @@ class HeaderMainStatic extends Component {
               </div>
             </a>
             <a href="http://post.browndailyherald.com">post-</a>
-            <a href="http://www.blogdailyherald.com">blog</a>
           </div>
         </div>
       </div>
