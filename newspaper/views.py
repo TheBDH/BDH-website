@@ -63,8 +63,4 @@ def staff_list(request, year, semester):
     """
     View function to return current staff list
     """
-    print(year, semester)
-    return render(request, 'staff_list_' + semester + '_' + str(year) + '.html', {})
-
-def current_staff_list(request):
-    return render(request, 'current_staff_list.html', {})
+    return render(request, 'static_template.html', {})

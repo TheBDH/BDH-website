@@ -30,11 +30,11 @@ urlpatterns += [
     path('web-policy', views.static_page_template),
     path('find-paper', views.static_page_template),
     path('join', views.static_page_template),
-
     path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
-    path('staff-list', views.current_staff_list, name='current-staff-list'),
-    path('api/graphiql/', views.error_401),
-    path('api/graphiql', views.error_401),
+    path('staff-list', views.static_page_template, name='current-staff-list'),
+
+    # path('api/graphiql/', views.error_401),
+    # path('api/graphiql', views.error_401),
 
     path('', views.index, name='index'),
     path('<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),

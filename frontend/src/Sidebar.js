@@ -51,15 +51,6 @@ class Sidebar extends Component {
       }
     }
 
-    var blogArticleLinks = [];
-    if (this.state.blogArticles && this.state.blogLinks) {
-      for(var i=0; i < 4; i++){
-        blogArticleLinks.push(<a className='small-article-title' href={this.state.blogLinks[i].url}>{this.state.blogArticles[i]}</a>);
-      }
-    }
-
-    console.log(this.state);
-
     return (
       <DFPSlotsProvider dfpNetworkId='1149905'>
       <div className="sidebar">
@@ -73,19 +64,11 @@ class Sidebar extends Component {
           </div>
         </div>
         <Advertisement_300x250 adUnit='BDH_RightSidebar2_300x250'/>
-        <div className="sidebar-blog">
-          <a href="http://blogdailyherald.com/">
-            <img src="/static/images/blog-logo.png" alt="Blog Daily Herald" width="250"/>
-          </a>
-          <div className="sidebar-articles">
-            {blogArticleLinks}
-          </div>
-        </div>
-        <Advertisement_300x250 adUnit='BDH_RightSidebar3_300x250' />
         <div className="sidebar-latest">
           <h3 className="med-nav-title">Latest Issue</h3>
           <div data-configid="1463144/65888671" style={issuuStyle} className="issuuembed"></div>
         </div>
+        <Advertisement_300x250 adUnit='BDH_RightSidebar3_300x250' />
       </div>
       </DFPSlotsProvider>
     );

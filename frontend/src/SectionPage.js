@@ -4,6 +4,7 @@ import Advertisement_728x90 from './Advertisement_728x90';
 import NonSports from './NonSports';
 import Section_Features from './Section_Features';
 import './general-style.css';
+import './fixed-style.css';
 
 var hero = {imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg",
 			imgAlt:"bear",section:{name:"University News", url:"#"},url:"#",title:"Lorem ipsum dolor",

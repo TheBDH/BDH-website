@@ -10,6 +10,7 @@ import SubscriptionsPage from './SubscriptionsPage'
 import WebPolicyPage from './WebPolicyPage'
 import CommentsPolicyPage from './CommentsPolicyPage'
 import FindPaperPage from './FindPaperPage'
+import StaffListPage from './StaffListPage'
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -29,6 +30,9 @@ const PageContent = () => (
       <Route path='/web-policy' component={WebPolicyPage} />
       <Route path='/comments-policy' component={CommentsPolicyPage} />
       <Route path='/find-paper' component={FindPaperPage} />
+      <Route path='/staff-list' component={StaffListPage} />
+
+      <Route path='/staff-list/:year/:semester' component={StaffListPage} />
     </Switch>
   </main>
 )
