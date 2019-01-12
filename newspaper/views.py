@@ -30,7 +30,7 @@ def author(request, author):
     """
     View function for author
     """
-    return render(request, 'author.html', {})
+    return render(request, 'newspaper/authors_page.html', {})
 
 def error_401(request):
     """
@@ -50,46 +50,17 @@ def error_500(exception):
     """
     return render(exception, '500.html', {})
 
-def print_subscriptions(request):
+def static_page_template(request):
     """
-    View function to return print subscriptions
+    View function to return server error
     """
-    return render(request, 'print_subscriptions.html', {})
-
-def comments_policy(request):
-    """
-    View function to return comments policy
-    """
-    return render(request, 'comments_policy.html', {})
-
-def web_policy(request):
-    """
-    View function to return web policy
-    """
-    return render(request, 'web_policy.html', {})
+    return render(request, 'static_template.html', {})
 
 
-def find_paper(request):
-    """
-    View function to return find paper
-    """
-    return render(request, 'find_paper.html', {})
 
-def staff_list(request):
-    """
-    View function to return staff list
-    """
-    current_year = datetime.today().year
-    fall_range = (datetime(current_year, 9, 3), datetime(current_year, 12, 22))
-    semester = "Fall" if datetime.today() >= fall_range[0] and datetime.today() <= fall_range[1] else "Spring"
-    pprint(semester)
-    return render(request, 'staff_list.html', {
-        'current_semester': semester,
-        'year': current_year,
-    })
 
-def join(request):
+def staff_list(request, year, semester):
     """
-    View function to return join about page
+    View function to return current staff list
     """
-    return render(request, 'join.html', {})
+    return render(request, 'static_template.html', {})

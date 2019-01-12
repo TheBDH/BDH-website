@@ -1,0 +1,43 @@
+{
+  "Corporate": {
+    "pres": {},
+    "vp": {},
+    "treas": {},
+    "sec": {}
+  },
+  "Editorial": {
+    "eic": {},
+    "manEd": {},
+    "senEd": {},
+    "SecEds": {
+      "post": {},
+      "uNews": {},
+      "metro": {},
+      "sAndR": {},
+      "aAndC": {},
+      "sports": {}
+    },
+    "Ops": {
+      "eds": {}
+    },
+    "MultiProd": {
+      "desEds": {},
+      "assDesEds": {},
+      "graphEds": {},
+      "headPhotoEd": {},
+      "illEd": {},
+      "copyEd": {},
+      "webDev": {}
+    }
+  },
+  "Business": {
+    "genMan": {},
+    "offMan": {},
+    "": {},
+    "Dirs": {
+      "sales": {},
+      "fin": {},
+      "strat": {}
+    }
+  }
+}
