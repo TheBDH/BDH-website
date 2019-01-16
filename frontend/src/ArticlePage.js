@@ -2,7 +2,6 @@ import React from 'react';
 import Index_Featured_Article_Grid from './Index_Featured_Article_Grid';
 import Advertisement_728x90 from './Advertisement_728x90';
 import NonSports from './NonSports';
-<<<<<<< HEAD
 import './general-style.css';
 import Single_Article from './Single_Article';
 
