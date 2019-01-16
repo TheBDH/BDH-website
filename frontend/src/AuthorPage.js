@@ -6,17 +6,87 @@ import Section_Features from './Section_Features';
 import Author_Info from './Author_Info';
 import './general-style.css';
 
-var author = {name: "John Doe", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg",
-	titlePosition: "Title Position", description: "Lorem ipsum dolor sit amet,consectetur adipiscing elit."};
+import bdhRequester from './requests.js'
 
-const AuthorPage = (props) => {
-	var section_name = props.match.params.authName;
-	return (
-		<div className = 'main-content'>
-			<Author_Info author={author} />
-			<Advertisement_728x90 adUnit="BDH_Footer_728x90" />
-		</div>
-	);
+class AuthorPage extends React.Component {
+
+	constructor(props) {
+		super(props);
+	}
+
+	state = { fetchedApiData: null };
+
+	componentDidMount() {
+		this._asyncRequest = bdhRequester.getAuthors({ }).then(
+			fetchedApiData => {
+				this._asyncRequest = null;
+				this.setState({fetchedApiData});
+				console.log("API Data Fetched for Author");
+			}
+		);
+	}
+
+	render() {
+		if (this.state.fetchedApiData === null) { 
+			return null;
+		} else {
+			var authorData = this.state.fetchedApiData.data.items[0];
+			return (
+				<div className = 'main-content'>
+					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
+					<Author_Info 
+						name={authorData.name}
+						titlePosition = {authorData.position}
+						description = {authorData.description} />
+					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+						massa. Fusce luctus vestibulum augue ut aliquet."}
+						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+						massa. Fusce luctus vestibulum augue ut aliquet."}
+						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+						massa. Fusce luctus vestibulum augue ut aliquet."}
+						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+						massa. Fusce luctus vestibulum augue ut aliquet."}
+						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+						massa. Fusce luctus vestibulum augue ut aliquet."}
+						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+						massa. Fusce luctus vestibulum augue ut aliquet."}
+						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
+						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
+						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
+						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
+						massa. Fusce luctus vestibulum augue ut aliquet."}
+						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
+
+
+					<Advertisement_728x90 adUnit="BDH_Footer_728x90" />
+				</div>
+			);
+		}
+	}
 }
 
 export default AuthorPage;

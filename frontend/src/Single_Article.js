@@ -4,6 +4,8 @@ import Related_Articles from "./Related_Articles"
 class Single_Article extends Component {
 
     render() {
+        var fbShareLink = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
+        var twShareLink = 'https://twitter.com/home?status=' + window.location.href;
         return (
             <div className='single-article' >
                 <div className='single-article-header'>
@@ -15,22 +17,21 @@ class Single_Article extends Component {
                 </div>
                 <div className='single-article-info-bars' >
                     <div className='author-info'>
-                        <div><a href={this.props.authorName.url}>{this.props.authorName.name}</a>  |  <a>{this.props.authorPosition}</a></div>
-                        <p>{this.props.publishDate}</p>
+                        <div><a href={this.props.authorName.url}>{this.props.authorName.name}</a>  |  {this.props.authorPosition}</div>
+                        <p>First published {this.props.publishDate} | Last updated {this.props.updateDate}</p>
                     </div>
                 </div>
                 <img className="single-article-image" src="http://www.browndailyherald.com/wp-content/uploads/2018/10/goldberg-3-1024x576.jpg" />
-                <div className='single-article-body'>
-                    <p>
-                        {this.props.articleBody}
-                    </p>
+                <div className='single-article-body' dangerouslySetInnerHTML={{__html: this.props.articleBody}}>
+                    
                 </div>
                 <div className="single-article-topics" >
-                    <p>TOPICS: {this.props.topics.map((topic, index) => <a target="blank" href={topic.url}>{topic.title}{index < this.props.topics.length - 1 ? ', ' : ''}</a>)}</p>
+                    <p>TOPICS: {this.props.topics.join()}</p>
                 </div>
                 <div className='single-article-share' >
-                    <a >SHARE THIS ARTICLE</a>
-                    <img src="/facebookIcon.png" style={{ width: 13, height: 13 }} />
+                    <p >SHARE THIS ARTICLE</p> &nbsp; &nbsp;
+                    <a href= {{ fbShareLink }}><img src="/static/images/fb-logo.png" style={{ width: 28, height: 28 }} /></a> &nbsp; &nbsp;
+                    <a href= {{ twShareLink }}><img src="/static/images/twitter-logo.png" style={{ width: 28, height: 28 }} /> </a>
                 </div>
                 <div className="single-article-related-articles" >
                     <a >RELATED ARTICLES</a>
@@ -46,6 +47,7 @@ class Single_Article extends Component {
     }
 }
 
-
+//Known Bug: Disqus only loads on force refresh of page.
+//Add in capability for displaying multiple authors on front-end.
 
 export default Single_Article;

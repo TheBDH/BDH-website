@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export const bdhRequester = {
+const bdhRequester = {
 
     defaultArticleParams: {
         type: 'newspaper.ArticlePage',
@@ -21,17 +21,15 @@ export const bdhRequester = {
      *
      * @param customParams
      */
-    getArticle(customParams) {
+    async getArticle(customParams) {
         const params = {
             limit: 1,
         };
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
-        Axios.get('/api/v2/pages/', {params: mergedParams})
-            .then(function (response) {
-                return response;
-            });
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        return await res;
     },
 
     /**
@@ -39,39 +37,33 @@ export const bdhRequester = {
      *
      * @param customParams
      */
-    getArticles(customParams) {
+    async getArticles(customParams) {
         const params = {};
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
-        Axios.get('/api/v2/pages/', {params: mergedParams})
-            .then(function (response) {
-                return response;
-            });
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        return await res;
     },
 
-    getAuthor(customParams) {
+    async getAuthor(customParams) {
         const params = {
             limit: 1,
         };
 
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
-        Axios.get('/api/v2/pages/', {params: mergedParams})
-            .then(function (response) {
-                return response;
-            });
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        return await res;
     },
 
-    getAuthors(customParams) {
+    async getAuthors(customParams) {
         const params = {};
 
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
-        Axios.get('/api/v2/pages/', {params: mergedParams})
-            .then(function (response) {
-                return response;
-            });
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams})
+        return await res;
     },
 
     ////////////////////////
@@ -88,7 +80,7 @@ export const bdhRequester = {
 
     getArticlesBySection(section) {
         return this.getArticles({section: section})
-    },
-
-    
+    },  
 };
+
+export default bdhRequester;

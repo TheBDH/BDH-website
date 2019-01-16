@@ -12,6 +12,8 @@ import CommentsPolicyPage from './CommentsPolicyPage'
 import FindPaperPage from './FindPaperPage'
 import StaffListPage from './StaffListPage'
 
+import PreviewPage from './PreviewPage'
+
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
@@ -23,7 +25,7 @@ const PageContent = () => (
       <Route exact path='/' component={HomePage}/>
       <Route exact path='/sections/:section' component={SectionPage}/>
       <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
-      <Route exact path='/author/:authName' component={AuthorPage} />
+      <Route exact path='/authors/:authName' component={AuthorPage} />
 
       <Route path='/join' component={JoinPage}/>
       <Route path='/print-subscriptions' component={SubscriptionsPage} />
@@ -33,6 +35,7 @@ const PageContent = () => (
       <Route path='/staff-list' component={StaffListPage} />
 
       <Route path='/staff-list/:year/:semester' component={StaffListPage} />
+      //<Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} />
     </Switch>
   </main>
 )

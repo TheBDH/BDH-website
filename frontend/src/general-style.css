@@ -332,7 +332,6 @@
 	font-family: 'Avenir Medium', sans-serif;
 	overflow: hidden;
 	flex-basis: calc(33% - 35px);
-	width: 878px;
 	border-bottom: 1px solid #c4c4c4;
 }
 
