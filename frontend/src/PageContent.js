@@ -25,7 +25,7 @@ const PageContent = () => (
       <Route exact path='/' component={HomePage}/>
       <Route exact path='/sections/:section' component={SectionPage}/>
       <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
-      <Route exact path='/authors/:authName' component={AuthorPage} />
+      <Route exact path='/author/:authName' component={AuthorPage} />
 
       <Route path='/join' component={JoinPage}/>
       <Route path='/print-subscriptions' component={SubscriptionsPage} />
