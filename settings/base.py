@@ -24,6 +24,7 @@ SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
+SITE_ID = 1
 
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 WAGTAIL_APPEND_SLASH = False
@@ -151,7 +152,7 @@ else:
     DATABASES = {"default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": "wp_bdh",
-            "USER": "bdh_developer",
+            "USER": "root",
             "PASSWORD": "Since1891",
             "HOST": "localhost",
             "PORT": "",
@@ -186,7 +187,6 @@ WAGTAILUSERS_PASSWORD_ENABLED = True
 #         }
 #     }
 # }
-
 
 LANGUAGES = WAGTAILADMIN_PERMITTED_LANGUAGES = [('en', 'English')]
 
