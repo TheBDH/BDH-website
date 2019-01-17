@@ -7,10 +7,9 @@ class Author_Info extends Component {
 
     return (
         <div class='authorInfo'>
-
           <div class='profile'>
-            <div class='image' alt='Avatar'>
-              <img src={this.props.image} />
+            <div class='image'>
+              <img src={this.props.image} alt='Avatar' />
             </div>
             <div class='name'>{this.props.name}</div>
             <div class='titlePosition'>{this.props.titlePosition}</div>
@@ -20,8 +19,6 @@ class Author_Info extends Component {
               <span>{this.props.description}</span>
             </div>
           </div>
-
-
         </div>
     )
   }

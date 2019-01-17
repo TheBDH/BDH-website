@@ -12,6 +12,8 @@ import CommentsPolicyPage from './CommentsPolicyPage'
 import FindPaperPage from './FindPaperPage'
 import StaffListPage from './StaffListPage'
 
+import PreviewPage from './PreviewPage'
+
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
@@ -33,6 +35,7 @@ const PageContent = () => (
       <Route path='/staff-list' component={StaffListPage} />
 
       <Route path='/staff-list/:year/:semester' component={StaffListPage} />
+      //<Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} />
     </Switch>
   </main>
 )

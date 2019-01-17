@@ -283,11 +283,22 @@ from wagtail.search import index
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from modelcluster.fields import ParentalKey
 
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.models import Image
+
 class AuthorsPage(RoutablePageMixin, Page):
 
     name = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
     description = RichTextField(blank=True)
+
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     author_rank = (
         ('con', 'Contributing Writer'),
@@ -312,6 +323,7 @@ class AuthorsPage(RoutablePageMixin, Page):
         FieldPanel('description', classname='class'),
         FieldPanel('position', classname='class'),
         FieldPanel('year', classname='class'),
+        ImageChooserPanel('image', classname='image')
     ]
 
     api_fields = [
@@ -328,13 +340,11 @@ class ArticlePage(RoutablePageMixin, Page):
     content = RichTextField(blank=True)
     section_list = (
                 ('h', 'Home'),
-                ('n', 'News'),
+                ('news', 'News'),
                 ('ac', 'Arts & Culture'),
                 ('sr', 'Science & Research'),
-                ('sp', 'Sports'),
-                ('op', 'Opinion'),
-                ('pt', 'Post'),
-                ('blg', 'Blog'),
+                ('sports', 'Sports'),
+                ('opinion', 'Opinion'),
             )
 
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
@@ -365,7 +375,8 @@ class ArticlePage(RoutablePageMixin, Page):
         FieldPanel('featured_on_section', classname='class'),
         FieldPanel('featured_on_main', classname='class'),
         FieldPanel('tags', classname='full'),
-        InlinePanel('authors', heading='authors', help_text='Add contributing authors')
+        InlinePanel('authors', heading='authors', help_text='Add contributing authors'),
+        FieldPanel('content', classname='class')
     ]
 
     search_fields = Page.search_fields + [
