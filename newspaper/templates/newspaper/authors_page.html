@@ -1,13 +1,7 @@
 {% extends "base_generic.html" %}
 {% load render_bundle from webpack_loader %}
+{% load wagtailcore_tags %}
 
- {% block article %}
-
- {% load wagtailcore_tags %}
-
-{{ page.body|richtext }}
-	<div id='author-component'>
-	</div>
-		{% render_bundle 'main' %}
-
+{% block content %}
+	<div id='authorInfo'></div>
 {% endblock %}

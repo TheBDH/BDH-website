@@ -271,6 +271,8 @@ from django.shortcuts import get_object_or_404
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
+from wagtail.api import APIField
+from wagtail.api.v2.serializers import PageSerializer
 from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from django.forms import ModelForm
@@ -281,11 +283,22 @@ from wagtail.search import index
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from modelcluster.fields import ParentalKey
 
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.models import Image
+
 class AuthorsPage(RoutablePageMixin, Page):
 
-    name = models.CharField(max_length = 255)
-    lastName = models.CharField(max_length = 255)
+    name = models.CharField(max_length=255)
+    lastName = models.CharField(max_length=255)
     description = RichTextField(blank=True)
+
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     author_rank = (
         ('con', 'Contributing Writer'),
@@ -310,33 +323,31 @@ class AuthorsPage(RoutablePageMixin, Page):
         FieldPanel('description', classname='class'),
         FieldPanel('position', classname='class'),
         FieldPanel('year', classname='class'),
+        ImageChooserPanel('image', classname='image')
+    ]
+
+    api_fields = [
+        APIField('name'),
+        APIField('lastName'),
+        APIField('description'),
+        APIField('position'),
+        APIField('year'),
     ]
 
 class ArticlePage(RoutablePageMixin, Page):
 
-    summary = models.CharField(max_length = 1000)
+    summary = models.CharField(max_length=1000)
     content = RichTextField(blank=True)
-
-
     section_list = (
                 ('h', 'Home'),
-                ('n', 'News'),
+                ('news', 'News'),
                 ('ac', 'Arts & Culture'),
                 ('sr', 'Science & Research'),
-                ('sp', 'Sports'),
-                ('op', 'Opinion'),
-                ('pt', 'Post'),
-                ('blg', 'Blog'),
+                ('sports', 'Sports'),
+                ('opinion', 'Opinion'),
             )
 
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
-
-    # search_fields = Page.search_fields + (
-    #                     index.SearchField('section'),
-    #                     index.FilterField('section'),
-    #                 )
-
-    # summary = RichTextField(blank=True)
 
     yes_no = {
             ('y', 'Yes'),
@@ -346,17 +357,17 @@ class ArticlePage(RoutablePageMixin, Page):
     featured_on_section = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
     featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
 
-    # make sure it displays both the authors' names and their position
-    authors = models.ManyToManyField(AuthorsPage, help_text="Select author names")
+    tags = models.CharField(max_length=255, blank=True)
 
-    tags = models.CharField(max_length = 255, blank=True)
-
-    # search_fields = Page.search_fields + [
-    #     # Index the human-readable string for searching.
-    #     index.SearchField('authors'),
-
-    # ]
-
+    api_fields = [
+        APIField('summary'),
+        APIField('content'),
+        APIField('section'),
+        APIField('featured_on_section'),
+        APIField('featured_on_main'),
+        APIField('tags'),
+        APIField('authors'),
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel('section', classname='class'),
@@ -364,7 +375,8 @@ class ArticlePage(RoutablePageMixin, Page):
         FieldPanel('featured_on_section', classname='class'),
         FieldPanel('featured_on_main', classname='class'),
         FieldPanel('tags', classname='full'),
-        FieldPanel('authors', classname='class'),
+        InlinePanel('authors', heading='authors', help_text='Add contributing authors'),
+        FieldPanel('content', classname='class')
     ]
 
     search_fields = Page.search_fields + [
@@ -375,19 +387,34 @@ class ArticlePage(RoutablePageMixin, Page):
         index.SearchField('authors'),
     ]
 
-    @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
-    def dated_article_with_slug(self, request, year, month, day, slug):
-        pprint(vars(self))
-        post_page = self.get_posts().filter(slug=slug).first()
-        if not post_page:
-            raise Http404
-        return Page.serve(post_page, request, *args, **kwargs)
 
-    def post_by_date_slug(self, request, year, month, day, slug, *args, **kwargs):
-        post_page = self.get_posts().filter(slug=slug).first()
-        if not post_page:
-            raise Http404
-        return Page.serve(post_page, request, *args, **kwargs)
+class ArticleAuthorRelationship(models.Model):
+    """
+
+    Intermediate table supporting ManyToMany between Articles and Authors
+    (Wagtail does not by default support this)
+
+    i.e. an article with 3 authors will create 3 rows in this table
+    """
+
+    article = ParentalKey(
+        'ArticlePage',
+        related_name='authors'
+    )
+
+    author = models.ForeignKey(
+        'AuthorsPage',
+        related_name='articles',
+        on_delete=models.PROTECT
+    )
+
+    panels = [
+        FieldPanel('author')
+    ]
+
+    api_fields = [
+        APIField('author', serializer=PageSerializer)
+    ]
 
 
 class FormField(AbstractFormField):
@@ -410,3 +437,4 @@ class FormPage(AbstractEmailForm):
             FieldPanel('content'),
         ], "Email"),
     ]
+

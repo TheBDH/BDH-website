@@ -24,8 +24,8 @@ SITE_ID = 1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
+SITE_ID = 1
 
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 WAGTAIL_APPEND_SLASH = False
@@ -126,7 +126,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media-root')
 WEBPACK_LOADER = {
 	'DEFAULT': {
 		'BUNDLE_DIR_NAME': 'bundles/',
-		'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+		'STATS_FILE': os.path.join(BASE_DIR, '../webpack-stats.dev.json'),
 	}
 }
 
@@ -153,7 +153,7 @@ else:
     DATABASES = {"default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": "wp_bdh",
-            "USER": "bdh_developer",
+            "USER": "root",
             "PASSWORD": "Since1891",
             "HOST": "localhost",
             "PORT": "",
@@ -188,7 +188,6 @@ WAGTAILUSERS_PASSWORD_ENABLED = True
 #         }
 #     }
 # }
-
 
 LANGUAGES = WAGTAILADMIN_PERMITTED_LANGUAGES = [('en', 'English')]
 

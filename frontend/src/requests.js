@@ -1,33 +1,86 @@
 import Axios from 'axios';
 
-export const bdhRequester = {
+const bdhRequester = {
 
-    getArticle(slug) {
-        const params = {
-            params: {
-                type: 'newspaper.ArticlePage',
-                slug: slug,
-                fields: 'intro,body',
-            }
-        };
-
-        Axios.get('/api/v2/pages/', params)
-            .then(function (response) {
-                return response;
-            });
+    defaultArticleParams: {
+        type: 'newspaper.ArticlePage',
+        fields: 'content,section,summary,authors(author(name,lastName,description,position,year)),featured_on_section,featured_on_main,tags',
     },
 
-    getArticles() {
+    defaultAuthorParams: {
+        type: 'newspaper.AuthorsPage',
+        fields: 'name,lastName,description,position,year',
+    },
+
+    /**
+     * Builds a request for an individual article from wagtail API
+     * Uses the spread operator giving priority to...
+     * 1. params defined in function
+     * 2. params passed as argument to function
+     * 3. params property of bdhRequester
+     *
+     * @param customParams
+     */
+    async getArticle(customParams) {
         const params = {
-            params: {
-                type: 'newspaper.ArticlePage',
-                fields: 'intro',
-            }
+            limit: 1,
         };
 
-        Axios.get('/api/v2/pages/', params)
-            .then(function (response) {
-                return response;
-            });
-    }
+        const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
+
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        return await res;
+    },
+
+    /**
+     * Same functionality as getArticle without limit=1
+     *
+     * @param customParams
+     */
+    async getArticles(customParams) {
+        const params = {};
+
+        const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
+
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        return await res;
+    },
+
+    async getAuthor(customParams) {
+        const params = {
+            limit: 1,
+        };
+
+        const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
+
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        return await res;
+    },
+
+    async getAuthors(customParams) {
+        const params = {};
+
+        const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
+
+        const res = await Axios.get('/api/v2/pages/', {params: mergedParams})
+        return await res;
+    },
+
+    ////////////////////////
+    // Example Requests
+    ///////////////////////
+
+    getArticleBySlug(slug) {
+        return this.getArticle({slug: slug});
+    },
+
+    getNewArticles(limit) {
+        return this.getArticles({order: "-first_published_at", limit: limit});
+    },
+
+    getArticlesBySection(section) {
+        return this.getArticles({section: section})
+    },  
 };
+
+export default bdhRequester;

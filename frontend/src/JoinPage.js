@@ -1,8 +1,11 @@
-{% extends "base_generic.html" %}
-{% load render_bundle from webpack_loader %}
+import React from 'react';
+import Advertisement_728x90 from './Advertisement_728x90'
 
-{% block content %}
-<h1>Join The Herald</h1>
+
+const JoinPage = () => (
+	<div class='main-content'>
+    <Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
+	<h1>Join The Herald</h1>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gznX4Bx14eo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <h3>ABOUT THE HERALD</h3>
@@ -24,17 +27,17 @@ nonprofit sector.
 </div>
 
 <h3>WHAT YOU CAN DO</h3>
-<br>
+<br/>
 <div class="two-column-container">
     <div class="left-column-container">
         <h4>NEWS</h4>
-        <br>
+        <br/>
         <div class="text-block"><strong>Reporters</strong> pursue engaging stories about the
         University and campus life, Providence and Rhode Island, arts and culture, sports and
         science and research.</div>
         <div class="text-block"><strong>Blog writers</strong> over campus and popular and popular
         culture happenings with snark and humor.</div>
-        <div class="text-block"><strong>Data journalists</strong> and <strong>web producers</strong>
+        <div class="text-block"><strong>Data journalists</strong> and <strong>web producers</strong> 
         work together to provide journalism for the 21st century! They support stories by finding and visualizing
         data online.
         </div>
@@ -52,19 +55,19 @@ nonprofit sector.
 
     <div class="right-column-container">
         <h4>BUSINESS</h4>
-        <br>
+        <br/>
         <div class="text-block"><strong>Business associates</strong> pitch to local and university clients to sell
         advertising for print and online, manage The Herald's finances and generate new revenue streams.</div>
-        <br>
+        <br/>
         <h4>AUDIENCE DEVELOPMENT</h4>
-        <br>
+        <br/>
         <div class="text-block"><strong>Web staffers</strong> help build and improve The Herald's websites, which get
         hundreds of thousands of visitors each year.</div>
         <div class="text-block">Our <strong>social media team</strong> edits Facebook posts to boost our
         reach and develops our online audience.</div>
-        <br>
+        <br/>
         <h4>OPINIONS</h4>
-        <br>
+        <br/>
         <div class="text-block"><strong>Columnists</strong> share their ideas and opinions on topics that affect Brown
         and the surrounding community.</div>
         <div class="text-block"><strong>The Editorial Page Board</strong> writes editorials that represent the
@@ -81,8 +84,12 @@ nonprofit sector.
     Check out our <a href="http://www.browndailyherald.com/join/recruitment-video/">recruitment videos</a>
     to get a taste of life at The Herald!
     </div>
-    <br>
+    <br/>
     <h2>QUESTIONS</h2>
     <div class="text-block">Please email <a href="emailto:herald@browndailyherald.com">herald@browndailyherald.com</a> with
     specific questions or for more information. We hope to see you soon!</div>
-{% endblock %}
+    <Advertisement_728x90 adUnit="BDH_Footer_728x90" />
+    </div>
+);
+
+export default JoinPage;
