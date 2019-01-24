@@ -6,7 +6,6 @@ const JoinPage = () => (
 	<div class='main-content'>
     <Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 	<h1>Join The Herald</h1>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gznX4Bx14eo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <h3>ABOUT THE HERALD</h3>
 <div>

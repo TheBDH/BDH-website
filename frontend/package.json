@@ -45,10 +45,10 @@
     "react-dfp": "^0.7.5",
     "react-dom": "^16.5.2",
     "react-iframe": "^1.3.3",
-    "react-native-rss-parser": "^1.3.0",
     "react-router-dom": "^4.3.1",
     "react-xml-parser": "^1.0.8",
     "resolve": "1.6.0",
+    "rss-parser": "^3.6.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -59,8 +59,9 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "./node_modules/.bin/webpack",
-    "test": "node scripts/test.js --env=jsdom"
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --config ./config/webpack.config.prod.js",
+    "test": "node scripts/test.js --env=jsdom",
+    "dev": "NODE_ENV=development ./node_modules/.bin/webpack --config ./config/webpack.config.dev.js"
   },
   "jest": {
     "collectCoverageFrom": [
