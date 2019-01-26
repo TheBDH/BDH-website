@@ -11,6 +11,7 @@ import WebPolicyPage from './WebPolicyPage'
 import CommentsPolicyPage from './CommentsPolicyPage'
 import FindPaperPage from './FindPaperPage'
 import StaffListPage from './StaffListPage'
+import ArchivesPage from './ArchivesPage'
 
 import PreviewPage from './PreviewPage'
 
@@ -27,6 +28,7 @@ const PageContent = () => (
       <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
       <Route exact path='/author/:authName' component={AuthorPage} />
 
+      <Route path='/archives' component={ArchivesPage} />
       <Route path='/join' component={JoinPage}/>
       <Route path='/print-subscriptions' component={SubscriptionsPage} />
       <Route path='/web-policy' component={WebPolicyPage} />
