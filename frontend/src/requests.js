@@ -80,7 +80,11 @@ const bdhRequester = {
 
     getArticlesBySection(section) {
         return this.getArticles({section: section})
-    },  
+    },
+
+    getArticlesByAuthor(firstName, lastName) {
+        return this.getAuthor({name: firstName, lastName: lastName})
+    }
 };
 
 export default bdhRequester;
