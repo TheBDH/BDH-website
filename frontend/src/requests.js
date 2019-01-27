@@ -4,7 +4,7 @@ const bdhRequester = {
 
     defaultArticleParams: {
         type: 'newspaper.ArticlePage',
-        fields: 'content,section,summary,authors(author(name,lastName,description,position,year)),featured_on_section,featured_on_main,tags',
+        fields: 'content,section,summary,authors(author(name,lastName,description,position,year,image)),featured_on_section,featured_on_main,tags',
     },
 
     defaultAuthorParams: {

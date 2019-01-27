@@ -332,6 +332,7 @@ class AuthorsPage(RoutablePageMixin, Page):
         APIField('description'),
         APIField('position'),
         APIField('year'),
+        APIField('image'),
     ]
 
 class ArticlePage(RoutablePageMixin, Page):
