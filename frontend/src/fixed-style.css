@@ -318,8 +318,9 @@ header .has-dropdown:hover .nav-dropdown {
 	z-index: 999;
 }
 header .has-dropdown .nav-dropdown a {
-	border: none;
-	padding: 0;
+    margin: 10px 0 10px 0;
+    line-height: 15px;
+    border:none;
 }
 header .has-dropdown:hover .nav-dropdown a {
 	font-weight: normal;

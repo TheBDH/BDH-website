@@ -1,7 +1,9 @@
+/* global RSSParser */
+
 import React, { Component } from 'react';
 import Advertisement_300x250 from './Advertisement_300x250';
 import { DFPSlotsProvider } from 'react-dfp';
-import * as rssParser from 'react-native-rss-parser';
+import 'rss-parser/dist/rss-parser.min.js';
 
 const issuuStyle = {
   width:'100%', 
@@ -17,29 +19,17 @@ class Sidebar extends Component {
 
   componentDidMount() {
     var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    let parser = new RSSParser();
 
     //Below code gets content from the post- RSS feed and loads into state
     var postUrl = 'http://post.browndailyherald.com/feed/';
-    fetch(proxyUrl + postUrl)
-     .then((response) => response.text())
-     .then((responseData) => rssParser.parse(responseData))
-     .then((rss) => {
+
+    parser.parseURL(proxyUrl + postUrl, function(err, feed) {
       let postArticles = [];
       let postLinks = [];
-      rss.items.map(k => { postArticles.push(k.title); postLinks.push(k.id); });
+      feed.items.map(k => { postArticles.push(k.title); postLinks.push(k.guid); });
       this.setState( { postArticles, postLinks });
-    });
-
-    var blogUrl = 'http://blogdailyherald.com/feed/';
-    fetch(proxyUrl + blogUrl)
-      .then((response) => response.text())
-      .then((responseData) => rssParser.parse(responseData))
-      .then((rss) => {
-        let blogArticles = [];
-        let blogLinks = [];
-        rss.items.map(k => { blogArticles.push(k.title); blogLinks.push(k.links[0]); });
-        this.setState( { blogArticles, blogLinks })
-      });
+    }.bind(this));
   }
 
   render() {
