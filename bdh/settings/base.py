@@ -19,6 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
+SITE_ID = 1
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -152,12 +153,11 @@ else:
     DATABASES = {"default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": "wp_bdh",
-            "USER": "root",
+            "USER": "bdh_developer",
             "PASSWORD": "Since1891",
             "HOST": "localhost",
             "PORT": "",
         }
-        
     }
 
 GRAPHENE = {
