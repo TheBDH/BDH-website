@@ -1,6 +1,7 @@
 import React from 'react';
 import Advertisement_728x90 from './Advertisement_728x90'
 
+document.title='Join The Herald';
 
 const JoinPage = () => (
 	<div class='main-content'>

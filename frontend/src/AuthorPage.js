@@ -24,9 +24,11 @@ class AuthorPage extends React.Component {
 				console.log("API Data Fetched for Author");
 			}
 		);
+		console.log('we out here');
 	}
 
 	render() {
+		console.log(this.props);
 		if (this.state.fetchedApiData === null) { 
 			return null;
 		} else {
@@ -35,7 +37,7 @@ class AuthorPage extends React.Component {
 				<div className = 'main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 					<Author_Info 
-						name={authorData.name}
+						name={authorData.name + " " + authorData.lastName}
 						titlePosition = {authorData.position}
 						description = {authorData.description} />
 					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}

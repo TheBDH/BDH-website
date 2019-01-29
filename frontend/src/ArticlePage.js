@@ -38,6 +38,7 @@ class ArticlePage extends React.Component {
 				}
 			}
 		);
+		// document.title=this.state.fetche
 	}
 
 	render() {
@@ -65,7 +66,7 @@ class ArticlePage extends React.Component {
 			// 	}
 			// );
 
-
+			document.title=articleData.title;
 			return (
 				<div className = 'main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
