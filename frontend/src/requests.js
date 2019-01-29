@@ -4,12 +4,12 @@ const bdhRequester = {
 
     defaultArticleParams: {
         type: 'newspaper.ArticlePage',
-        fields: 'content,section,summary,authors(author(name,lastName,description,position,year)),featured_on_section,featured_on_main,tags',
+        fields: 'content,section,summary,authors(author(name,lastName,description,position,year,image)),featured_on_section,featured_on_main,tags',
     },
 
     defaultAuthorParams: {
         type: 'newspaper.AuthorsPage',
-        fields: 'name,lastName,description,position,year',
+        fields: 'name,lastName,description,position,year,articles',
     },
 
     /**
@@ -80,7 +80,11 @@ const bdhRequester = {
 
     getArticlesBySection(section) {
         return this.getArticles({section: section})
-    },  
+    },
+
+    getArticlesByAuthor(firstName, lastName) {
+        return this.getAuthor({name: firstName, lastName: lastName})
+    }
 };
 
 export default bdhRequester;
