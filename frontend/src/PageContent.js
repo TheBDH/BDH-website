@@ -4,6 +4,7 @@ import HomePage from './HomePage'
 import SectionPage from './SectionPage'
 import ArticlePage from './ArticlePage'
 import AuthorPage from './AuthorPage'
+import TopicPage from './TopicPage'
 
 import JoinPage from './JoinPage'
 import SubscriptionsPage from './SubscriptionsPage'
@@ -23,11 +24,14 @@ import PreviewPage from './PreviewPage'
 const PageContent = () => (
   <main>
     <Switch>
+      /* Dynamic pages that fetch from the API*/
       <Route exact path='/' component={HomePage}/>
       <Route exact path='/sections/:section' component={SectionPage}/>
       <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
       <Route exact path='/authors/:authName' component={AuthorPage} />
+      <Route exact path='/topics/:topicName' component={TopicPage} />
 
+      /* Static pages whose content doesn't change */
       <Route path='/archives' component={ArchivesPage} />
       <Route path='/join' component={JoinPage}/>
       <Route path='/print-subscriptions' component={SubscriptionsPage} />
@@ -36,6 +40,7 @@ const PageContent = () => (
       <Route path='/find-paper' component={FindPaperPage} />
       <Route path='/staff-list' component={StaffListPage} />
 
+      /* Staff list page and preview page */
       <Route path='/staff-list/:year/:semester' component={StaffListPage} />
       //<Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} />
     </Switch>

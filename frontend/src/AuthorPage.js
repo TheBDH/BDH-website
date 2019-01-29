@@ -21,6 +21,7 @@ class AuthorPage extends React.Component {
 			fetchedApiData => {
 				this._asyncRequest = null;
 				this.setState({fetchedApiData});
+				console.log(fetchedApiData);
 				console.log("API Data Fetched for Author");
 			}
 		);
@@ -39,7 +40,8 @@ class AuthorPage extends React.Component {
 					<Author_Info 
 						name={authorData.name + " " + authorData.lastName}
 						titlePosition = {authorData.position}
-						description = {authorData.description} />
+						description = {authorData.description}
+						image = {authorData.image.meta.download_url} />
 					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
 						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
 						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\

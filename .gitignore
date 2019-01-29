@@ -5,10 +5,9 @@ media-repo/
 .idea/*
 webpack-stats.dev.json
 bdh-env/
-
-
-
-
+bdh/media-root/
+*/__pycache__/*
+bdh/settings/__pycache__/*
 
 
 # Elastic Beanstalk Files

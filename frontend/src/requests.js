@@ -9,7 +9,7 @@ const bdhRequester = {
 
     defaultAuthorParams: {
         type: 'newspaper.AuthorsPage',
-        fields: 'name,lastName,description,position,year,articles',
+        fields: 'name,lastName,description,position,year,articles,image',
     },
 
     /**
