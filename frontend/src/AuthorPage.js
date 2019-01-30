@@ -25,7 +25,6 @@ class AuthorPage extends React.Component {
 				console.log("API Data Fetched for Author");
 			}
 		);
-		console.log('we out here');
 	}
 
 	render() {

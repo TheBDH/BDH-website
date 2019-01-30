@@ -84,6 +84,10 @@ const bdhRequester = {
 
     getArticlesByAuthor(firstName, lastName) {
         return this.getAuthor({name: firstName, lastName: lastName})
+    },
+
+    getFeaturedArticlesOnHomePage() {
+        return this.getArticles({featured_on_main: "y", limit: 5}) // can change this limit to 3 but it's good to have some buffer
     }
 };
 

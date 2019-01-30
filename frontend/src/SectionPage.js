@@ -54,7 +54,6 @@ const sportsList = [
 	{name: "Women's Water Polo", link: '/topics/w-water-polo'},
 	{name: "Wrestling", link: '/topics/wrestling'}]; 
 
-//props would go in the below - if it's sports, we need to add in that extra thing about sports below (in the space between Section_Features + Adv)
 class SectionPage extends React.Component {
 
 	constructor(props) {
@@ -64,10 +63,11 @@ class SectionPage extends React.Component {
 	state= {fetchedApiData : null}
 
 	componentDidMount() {
-		this._asyncRequest = bdhRequester.getAuthors({ }).then(
+		this._asyncRequest = bdhRequester.getArticlesBySection(this.props.match.params.section).then(
 			fetchedApiData => {
 				this._asyncRequest = null;
 				this.setState({fetchedApiData});
+				console.log(fetchedApiData);
 				console.log("API Data Fetched for Section");
 			}
 		);
