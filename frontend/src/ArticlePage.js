@@ -38,7 +38,6 @@ class ArticlePage extends React.Component {
 				}
 			}
 		);
-		// document.title=this.state.fetche
 	}
 
 	render() {
