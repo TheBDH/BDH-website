@@ -31,6 +31,7 @@ urlpatterns += [
     path('find-paper', views.static_page_template),
     path('join', views.static_page_template),
     path('tips', views.static_page_template),
+    path('questions', views.static_page_template),
 
     path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
     path('staff-list', views.static_page_template, name='current-staff-list'),
