@@ -347,6 +347,7 @@ class ArticlePage(RoutablePageMixin, Page):
                 ('sr', 'Science & Research'),
                 ('sports', 'Sports'),
                 ('opinion', 'Opinion'),
+                # add more to this list
             )
 
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
@@ -439,4 +440,3 @@ class FormPage(AbstractEmailForm):
             FieldPanel('content'),
         ], "Email"),
     ]
-
