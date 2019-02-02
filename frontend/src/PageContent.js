@@ -14,6 +14,8 @@ import StaffListPage from './StaffListPage'
 import ArchivesPage from './ArchivesPage'
 
 import PreviewPage from './PreviewPage'
+import Tips from './Tips'
+import Questions from './Questions'
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -37,6 +39,8 @@ const PageContent = () => (
       <Route path='/staff-list' component={StaffListPage} />
 
       <Route path='/staff-list/:year/:semester' component={StaffListPage} />
+      <Route path='/tips' component={Tips}/>
+      <Route path='/questions' component={Questions}/>
       //<Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} />
     </Switch>
   </main>
