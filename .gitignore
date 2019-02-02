@@ -5,7 +5,6 @@ media-repo/
 .idea/*
 webpack-stats.dev.json
 bdh-env/
-<<<<<<< HEAD
 bdh/media-root/
 */__pycache__/*
 bdh/settings/__pycache__/*
