@@ -204,7 +204,7 @@
 	.section-features .med-nav-title {
 		margin-top: 0;
 	}
-	.section-features:nth-child(1), 
+	.section-features:nth-child(1),
 	.section-features:nth-child(4) {
 		flex-basis: calc(33% - 35px);
 		padding-left: 0;
@@ -248,7 +248,7 @@
 	.section-features {
 		padding: 20px;
 	}
-	.section-features:nth-child(1), 
+	.section-features:nth-child(1),
 	.section-features:nth-child(4) {
 		flex-basis: calc(33% - 20px);
 	}
@@ -263,7 +263,7 @@
 			padding: 20px;
 			border-left: 1px solid #c4c4c4;
 		}
-		.section-features:nth-child(1), 
+		.section-features:nth-child(1),
 		.section-features:nth-child(3),
 		.section-features:nth-child(5) {
 			flex-basis: calc(50% - 20px);
@@ -396,6 +396,48 @@
 	line-height: 24px;
 	color: 414141;
 	font-weight: 300;
+}
+
+/*============================================================================
+  TIPS
+==============================================================================*/
+#container{
+	font-family: 'Avenir Medium', sans-serif;
+	width: 650px;
+}
+
+.header{
+	border-top: 4px solid #ececec;
+    border-bottom: 2px solid #ececec;
+	font-weight: bold;
+	color: #3f3d3d;
+	padding-bottom: 10px;
+	width: 1128px;
+}
+
+.title{
+	font-size: 22px;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+#right{
+	padding-left: 80px;
+}
+
+
+.form{
+	width: 350px;
+}
+
+.send{
+	background-color: black;
+	font-family: 'Avenir Medium', sans-serif;
+	color: white;
+	padding: 10px;
 }
 
 /*============================================================================
