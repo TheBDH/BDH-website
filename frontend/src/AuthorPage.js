@@ -17,7 +17,9 @@ class AuthorPage extends React.Component {
 	state = { fetchedApiData: null };
 
 	componentDidMount() {
-		this._asyncRequest = bdhRequester.getAuthors({ }).then(
+		let authorSlug = this.props.match.params.authName;
+		let firstName = authorSlug.split("-")[0];
+		this._asyncRequest = bdhRequester.getAuthor({name: firstName}).then(
 			fetchedApiData => {
 				this._asyncRequest = null;
 				this.setState({fetchedApiData});

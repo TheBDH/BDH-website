@@ -7,6 +7,8 @@ import SportsSection from './SportsSection';
 import './general-style.css';
 import './fixed-style.css';
 
+import { getFullSectionName } from './constants.js';
+
 import bdhRequester from './requests.js'
 
 var hero = {imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg",
@@ -63,14 +65,14 @@ class SectionPage extends React.Component {
 	state= {fetchedApiData : null}
 
 	componentDidMount() {
-		this._asyncRequest = bdhRequester.getArticlesBySection(this.props.match.params.section).then(
+		this._asyncRequest = bdhRequester.getArticlesBySection("sr" /*this.props.match.params.section*/).then( //add something in constants for this
 			fetchedApiData => {
 				this._asyncRequest = null;
 				this.setState({fetchedApiData});
 				console.log(fetchedApiData);
 				console.log("API Data Fetched for Section");
 			}
-		);
+		); // Add something in constants.js for special cases like News, Opinions
 	}
 
 	render(props) {
@@ -79,7 +81,7 @@ class SectionPage extends React.Component {
 			<div className = 'main-content'>
 				<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 				<br/>		
-				<h3 class='med-nav-title'>{section_name}</h3>
+				<h3 class='med-nav-title'>{getFullSectionName(section_name)}</h3>
 				{ section_name==='sports' ? (<SportsSection sports={sportsList} />) : null}
 				<Section_Features section={section} />
 

@@ -349,7 +349,7 @@ class ArticlePage(RoutablePageMixin, Page):
     content = RichTextField(blank=True)
     section_list = (
                 ('all', 'All'),
-                ('uninews', 'University News'),
+                ('unews', 'University News'),
                 ('metro', 'Metro'),
                 ('sr', 'Science & Research'),
                 ('ac', 'Arts & Culture'),
@@ -367,7 +367,8 @@ class ArticlePage(RoutablePageMixin, Page):
                 ('graph', 'Graphics'),
                 ('ill', 'Illustrations'),
                 ('op', 'Op-eds'),
-                ('data', 'Data Science')
+                ('data', 'Data Science'),
+                ('com', 'Comics'),
                 # add more to this list
             )
 
