@@ -65,8 +65,8 @@ class HeaderMainStatic extends Component {
             </a>
             <a className="has-dropdown" href="/contact">contact▾
               <div className="nav-dropdown">
-                <a href="#">Tips</a>
-                <a href="#">Questions</a>
+                <a href="/tips">Tips</a>
+                <a href="/questions">Questions</a>
                 <a href="/static/Reprint_Permissions_Request_Contract.pdf" target="_blank">Reprint and Permissions Requests</a>
               </div>
             </a>

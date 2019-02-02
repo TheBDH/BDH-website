@@ -76,8 +76,8 @@ class HeaderMainFixed extends Component {
             <a href="/">home</a>
             <a className="has-dropdown" href="/sections/news">news▾
               <div className="nav-dropdown">
-                <a href="#">University News</a>
-                <a href="#">Metro</a>
+                <a href="/sections/university-news">University News</a>
+                <a href="/sections/metro">Metro</a>
               </div>
             </a>
             <a href="/sections/arts-and-culture">arts and culture</a>
