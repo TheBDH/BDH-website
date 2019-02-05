@@ -9,7 +9,7 @@ const bdhRequester = {
 
     defaultAuthorParams: {
         type: 'newspaper.AuthorsPage',
-        fields: 'name,lastName,description,position,year,articles',
+        fields: 'name,lastName,description,position,year,articles,image',
     },
 
     /**
@@ -82,8 +82,24 @@ const bdhRequester = {
         return this.getArticles({section: section})
     },
 
+    getArticlesForWholeSection(sections) {
+        return sections.map(x => this.getArticles(x));
+    }, // To handle getting op-eds, etc. for all opinions articles - will be stored in constants.js
+
     getArticlesByAuthor(firstName, lastName) {
         return this.getAuthor({name: firstName, lastName: lastName})
+    },
+
+    getLatestArticlesBySection(section) {
+        return this.getArticles({section: section, order: "-first_published_at", limit: 5});
+    },
+
+    getFeaturedArticlesOnSection(section) {
+        return this.getArticles({section: section, featured_on_section: "y", limit: 5})
+    },
+
+    getFeaturedArticlesOnHomePage() {
+        return this.getArticles({featured_on_main: "y", limit: 5}) // can change this limit to 3 but it's good to have some buffer
     }
 };
 

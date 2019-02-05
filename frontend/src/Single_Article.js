@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css'
 import Related_Articles from "./Related_Articles"
+import { getFullSectionName } from './constants'
+
 class Single_Article extends Component {
 
     render() {
@@ -9,7 +11,7 @@ class Single_Article extends Component {
         return (
             <div className='single-article' >
                 <div className='single-article-header'>
-                    <a href={this.props.sectionHeader.url}>{this.props.sectionHeader.title}</a>
+                    <a href={this.props.sectionHeader.url}>{getFullSectionName(this.props.sectionHeader.title)}</a>
                 </div>
                 <div className="single-article-titles">
                     <h1>{this.props.articleTitle}</h1>

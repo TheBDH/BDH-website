@@ -4,7 +4,6 @@ class SportsSection extends Component {
   render() {
     return (
       <div className="sport-section">
-      	<h3 className="med-nav-title">Sports</h3>
         <ul>
         {
           this.props.sports.map((sports)=>
