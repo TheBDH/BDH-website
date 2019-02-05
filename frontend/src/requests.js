@@ -28,7 +28,14 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+
+        try {
+            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        } catch (error) {
+            window.location = "/401.html"
+            return await res;
+        }
+
         return await res;
     },
 
@@ -42,7 +49,13 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        try {
+            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        } catch (error) {
+            window.location = "/401.html"
+            return await res;
+        }
+
         return await res;
     },
 
@@ -53,7 +66,13 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        try {
+            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        } catch (error) {
+            window.location = "/401.html"
+            return await res;
+        }
+
         return await res;
     },
 
@@ -62,7 +81,13 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams})
+        try {
+            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        } catch (error) {
+            window.location = "/401.html"
+            return await res;
+        }
+
         return await res;
     },
 
