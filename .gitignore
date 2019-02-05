@@ -5,6 +5,7 @@ media-repo/
 .idea/*
 webpack-stats.dev.json
 bdh-env/
+mynewenv/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

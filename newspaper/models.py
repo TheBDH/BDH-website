@@ -301,9 +301,16 @@ class AuthorsPage(RoutablePageMixin, Page):
     )
 
     author_rank = (
-        ('con', 'Contributing Writer'),
-        ('ssw', 'Senior Staff Writer'),
-        ('stw', 'Staff Writer'),
+        ('con','Contributing Writer'),
+        ('staff', 'Staff Writer'),
+        ('snrStaff', 'Senior Staff Writer'),
+        ('snrRep', 'Senior Reporter'),
+        ('newsEd', 'News Editor'),
+        ('sc', 'Science & Research Editor'),
+        ('arts', 'Arts & Culture Editor'),
+        ('sp', 'Sports Editor'),
+        ('pageBoard', 'Editorial Page Board'),
+        ('board', 'Editorial Board'),
     )
 
     author_year = (
@@ -332,6 +339,8 @@ class AuthorsPage(RoutablePageMixin, Page):
         APIField('description'),
         APIField('position'),
         APIField('year'),
+        APIField('image'),
+        APIField('articles'),
     ]
 
 class ArticlePage(RoutablePageMixin, Page):
@@ -339,12 +348,27 @@ class ArticlePage(RoutablePageMixin, Page):
     summary = models.CharField(max_length=1000)
     content = RichTextField(blank=True)
     section_list = (
-                ('h', 'Home'),
-                ('news', 'News'),
-                ('ac', 'Arts & Culture'),
+                ('all', 'All'),
+                ('uninews', 'University News'),
+                ('metro', 'Metro'),
                 ('sr', 'Science & Research'),
+                ('ac', 'Arts & Culture'),
                 ('sports', 'Sports'),
                 ('opinion', 'Opinion'),
+                ('col', 'Columns'),
+                ('edit', 'Editorials'),
+                ('letter', 'Letters to the Editor'),
+                ('notes', "Editors' Note"),
+                ('mult', 'Multimedia'),
+                ('vid', 'Video'),
+                ('gal', 'Photo Gallery'),
+                ('igraph', 'Interactive Graphic'),
+                ('news', 'News'),
+                ('graph', 'Graphics'),
+                ('ill', 'Illustrations'),
+                ('op', 'Op-eds'),
+                ('data', 'Data Science')
+                # add more to this list
             )
 
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
@@ -437,4 +461,3 @@ class FormPage(AbstractEmailForm):
             FieldPanel('content'),
         ], "Email"),
     ]
-
