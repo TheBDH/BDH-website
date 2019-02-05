@@ -28,15 +28,14 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
-
+        let res;
         try {
-            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res;
         } catch (error) {
-            window.location = "/401.html"
+            window.location = "/404.html"
             return await res;
         }
-
-        return await res;
     },
 
     /**
@@ -49,14 +48,14 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
+        let res;
         try {
-            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res;
         } catch (error) {
             window.location = "/401.html"
             return await res;
         }
-
-        return await res;
     },
 
     async getAuthor(customParams) {
@@ -66,14 +65,14 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
+        let res;
         try {
-            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res;
         } catch (error) {
             window.location = "/401.html"
             return await res;
         }
-
-        return await res;
     },
 
     async getAuthors(customParams) {
@@ -81,14 +80,14 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
+        let res;
         try {
-            const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res;
         } catch (error) {
             window.location = "/401.html"
             return await res;
         }
-
-        return await res;
     },
 
     ////////////////////////
@@ -100,7 +99,7 @@ const bdhRequester = {
     },
 
     getNewArticles(limit) {
-        return this.getArticles({order: "-first_published_at", limit: limit});
+        return this.getArticles({order: "-first_published_a", limit: limit});
     },
 
     getArticlesBySection(section) {

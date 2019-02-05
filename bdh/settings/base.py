@@ -22,7 +22,7 @@ SECRET_KEY = 'ylvk@6u3zp)r50=4(yasbk2vyed05s)uazql%7%ito-*7y!t63'
 SITE_ID = 1
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
 SITE_ID = 1

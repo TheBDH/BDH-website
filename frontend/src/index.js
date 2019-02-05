@@ -5,9 +5,11 @@ import App from './App';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
+import bdhRequester from './requests'
 import Advertisement_728x90 from './Advertisement_728x90'
 import './index.css';
 import './App.css';
+
 
 render(<Header />, document.getElementById('headerNew'));
 render(<Sidebar />, document.getElementById('sidebar'));
@@ -18,3 +20,5 @@ render((
     <App />
   </BrowserRouter>
 ), document.getElementById('main-content'));
+
+// bdhRequester.getNewArticles(3);
