@@ -20,5 +20,3 @@ render((
     <App />
   </BrowserRouter>
 ), document.getElementById('main-content'));
-
-// bdhRequester.getNewArticles(3);

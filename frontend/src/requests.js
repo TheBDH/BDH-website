@@ -99,7 +99,7 @@ const bdhRequester = {
     },
 
     getNewArticles(limit) {
-        return this.getArticles({order: "-first_published_a", limit: limit});
+        return this.getArticles({order: "-first_published_at", limit: limit});
     },
 
     getArticlesBySection(section) {
