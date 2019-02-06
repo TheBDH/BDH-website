@@ -17,16 +17,20 @@ class AuthorPage extends React.Component {
 	state = { fetchedApiData: null };
 
 	componentDidMount() {
-		this._asyncRequest = bdhRequester.getAuthors({ }).then(
+		let authorSlug = this.props.match.params.authName;
+		let firstName = authorSlug.split("-")[0];
+		this._asyncRequest = bdhRequester.getAuthor({name: firstName}).then(
 			fetchedApiData => {
 				this._asyncRequest = null;
 				this.setState({fetchedApiData});
+				console.log(fetchedApiData);
 				console.log("API Data Fetched for Author");
 			}
 		);
 	}
 
 	render() {
+		console.log(this.props);
 		if (this.state.fetchedApiData === null) { 
 			return null;
 		} else {
@@ -35,9 +39,10 @@ class AuthorPage extends React.Component {
 				<div className = 'main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 					<Author_Info 
-						name={authorData.name}
+						name={authorData.name + " " + authorData.lastName}
 						titlePosition = {authorData.position}
-						description = {authorData.description} />
+						description = {authorData.description}
+						image = {authorData.image.meta.download_url} />
 					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
 						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
 						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\

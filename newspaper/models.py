@@ -343,13 +343,24 @@ class AuthorsPage(RoutablePageMixin, Page):
         APIField('articles'),
     ]
 
+from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+
+class ArticleTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'ArticlePage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
 class ArticlePage(RoutablePageMixin, Page):
 
     summary = models.CharField(max_length=1000)
     content = RichTextField(blank=True)
     section_list = (
                 ('all', 'All'),
-                ('uninews', 'University News'),
+                ('unews', 'University News'),
                 ('metro', 'Metro'),
                 ('sr', 'Science & Research'),
                 ('ac', 'Arts & Culture'),
@@ -367,10 +378,12 @@ class ArticlePage(RoutablePageMixin, Page):
                 ('graph', 'Graphics'),
                 ('ill', 'Illustrations'),
                 ('op', 'Op-eds'),
-                ('data', 'Data Science')
+                ('data', 'Data Science'),
+                ('com', 'Comics'),
                 # add more to this list
             )
 
+    tags = ClusterTaggableManager(through=ArticleTag, blank=True)
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
 
     yes_no = {
@@ -381,7 +394,7 @@ class ArticlePage(RoutablePageMixin, Page):
     featured_on_section = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
     featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
 
-    tags = models.CharField(max_length=255, blank=True)
+    #tags = models.CharField(max_length=255, blank=True)
 
     api_fields = [
         APIField('summary'),
@@ -398,7 +411,7 @@ class ArticlePage(RoutablePageMixin, Page):
         FieldPanel('summary', classname='class'),
         FieldPanel('featured_on_section', classname='class'),
         FieldPanel('featured_on_main', classname='class'),
-        FieldPanel('tags', classname='full'),
+        FieldPanel('tags'),
         InlinePanel('authors', heading='authors', help_text='Add contributing authors'),
         FieldPanel('content', classname='class')
     ]

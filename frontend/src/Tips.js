@@ -16,15 +16,15 @@ class Tips extends Component {
             </div>
 
             <div id="right" class="column">
-            <form action="herald@browndailyherald.com">
+            <form method="POST" action="https://formspree.io/herald@browndailyherald.com"> 
                 Message (*)<br/>
-                <textarea rows="7" cols="45"> </textarea>
+                <textarea name="message" rows="7" cols="45" required> </textarea>
                 Name<br/>
                 <input class="form" type="text" name="name"/><br/><br/>
                 Email Address<br/>
-                <input class="form" type="text" name="name"/><br/><br/>
+                <input class="form" type="email" name="email"/><br/><br/>
                 Phone Number<br/>
-                <input class="form" type="text" name="name"/><br/><br/>
+                <input class="form" type="phone" name="phone"/><br/><br/>
                 <input class="send" type="submit" value="Send"/>
             </form>
             </div>
