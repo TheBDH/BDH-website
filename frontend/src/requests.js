@@ -31,9 +31,9 @@ const bdhRequester = {
         let res;
         try {
             res = await Axios.get('/api/v2/pages/', {params: mergedParams});
-            return await res;
+            return await res
         } catch (error) {
-            window.location = "/404.html"
+            window.location = "/404.html";
             return await res;
         }
     },

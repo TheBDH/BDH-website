@@ -34,7 +34,7 @@ class ArticlePage extends React.Component {
 					this.setState({fetchedApiData});
 					console.log("API Data Fetched for Article");
 				} else {
-					console.log("No API data available");
+                	window.location = "/404.html";
 				}
 			}
 		);

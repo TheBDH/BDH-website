@@ -20,8 +20,12 @@ class AuthorPage extends React.Component {
 		this._asyncRequest = bdhRequester.getAuthors({ }).then(
 			fetchedApiData => {
 				this._asyncRequest = null;
-				this.setState({fetchedApiData});
-				console.log("API Data Fetched for Author");
+				if (fetchedApiData.data.items.length > 0) {
+					this.setState({fetchedApiData});
+					console.log("API Data Fetched for Author");
+				} else {
+                	window.location = "/404.html";
+				}
 			}
 		);
 	}
