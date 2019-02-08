@@ -1,8 +1,9 @@
 export const news_sections = ['unews', 'metro'];
 export const op_sections = ['col', 'edit', 'letter', 'notes', 'op'];
 export const multimedia_sections = ['vid', 'gal', 'igraph', 'graph', 'ill', 'com']
-
 export const all_sections = ['unews', 'metro', 'sr', 'ac', 'opinion', 'sports']
+
+//add in a sort function by date for articles received from api
 
 export const generateArticleLink = (article) => {
 	const divider = '/';
@@ -12,6 +13,34 @@ export const generateArticleLink = (article) => {
 	return divider + publishDate.getFullYear() + divider 
 			+ (publishDate.getMonth() + 1) + divider + publishDate.getDate() + divider + article.meta.slug;
 };
+
+//inverse function for the below one
+export const getBackendSectionName = (section) => {
+	switch (section) {
+		case 'science-research':
+			return 'sr';
+		case 'metro':
+			return 'metro';
+		case 'arts-culture':
+			return 'ac';
+		case 'university-news':
+			return 'unews';
+	}
+}
+
+export const getSectionUrl = (section) => {
+	switch (section) {
+		case 'sr':
+			return '/sections/science-research';
+		case 'metro': 
+			return '/sections/metro';
+		case 'ac':
+			return '/sections/arts-culture';
+		case 'unews':
+			return '/sections/university-news';
+		//add in others
+	}
+}
 
 export const getFullSectionName = (section) => {
 	switch (section) {
