@@ -4,7 +4,7 @@ const bdhRequester = {
 
     defaultArticleParams: {
         type: 'newspaper.ArticlePage',
-        fields: 'content,section,summary,authors(author(name,lastName,description,position,year,image)),featured_on_section,featured_on_main,tags',
+        fields: 'content,section,summary,authors(author(name,lastName,description,position,year,image)),featured_on_section,featured_on_main,featured_image,tags',
     },
 
     defaultAuthorParams: {
@@ -69,6 +69,10 @@ const bdhRequester = {
     ////////////////////////
     // Example Requests
     ///////////////////////
+
+    getArticlesByTag(tag) {
+        return this.getArticles({tag__name: tag});
+    },
 
     getArticleBySlug(slug) {
         return this.getArticle({slug: slug});
