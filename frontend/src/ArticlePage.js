@@ -11,37 +11,55 @@ class ArticlePage extends React.Component {
 
 	constructor(props) {
 		super(props);
-		
+
 		let sectMap = {
 			'sr': 'Science and Research',
 			'ac': 'Arts and Culture',
-			'n': 'News', 
+			'n': 'News',
 			'sports': 'Sports',
 			'opinion': 'Opinion',
+		};
+		this.state = {
+			fetchedApiData: null,
+			relatedArticles: []
 		};
 
 	}
 
-	state = { fetchedApiData: null, relatedArticles: null };
+	async componentDidMount() {
 
-	componentDidMount() {
+		// const artSlug = this.props.match.params.slug
+		// const fetchedApiData = await bdhRequester.getArticleBySlug(artSlug)
+		// console.log(fetchedApiData)
+
 		console.log(this.props.match.params.slug);
 		var artSlug = this.props.match.params.slug;
 		this._asyncRequest = bdhRequester.getArticleBySlug(artSlug).then(
 			fetchedApiData => {
 				this._asyncRequest = null;
 				if (fetchedApiData.data.items.length > 0) {
-					this.setState({fetchedApiData});
+					this.setState({ fetchedApiData });
 					console.log("API Data Fetched for Article");
+					// const relatedArticles = await bdhRequester.getArticlesBySection(this.state.fetchedApiData.data.items[0].section)
+					// this.setState({ relatedArticles })
+
+					//CHANGING URL IF DATE IS INCORRECT
+					// if (window.location.href != "") {
+					// 	window.history.pushState("object or string", "Title", "/new-url");
+					// }
+
 				} else {
 					console.log("No API data available");
 				}
 			}
 		);
+
+
+
 	}
 
 	render() {
-		if (this.state.fetchedApiData === null) { 
+		if (this.state.fetchedApiData === null) {
 			return (<div className='main-content'>no content</div>); //Throw a 404 here
 		} else {
 			console.log(this.state.fetchedApiData);
@@ -67,20 +85,20 @@ class ArticlePage extends React.Component {
 
 
 			return (
-				<div className = 'main-content'>
+				<div className='main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
-					<Single_Article sectionHeader = {{url: sectionUrl, title: articleData.section}}
-						articleTitle = {articleData.title}
-						articleSubTitle = {articleData.summary}
+					<Single_Article sectionHeader={{ url: sectionUrl, title: articleData.section }}
+						articleTitle={articleData.title}
+						articleSubTitle={articleData.summary}
 
-						authorName = {{url: '#', name: 'Jane Doe'}}
-						authorPosition = 'Senior Staff Writer'
+						authorName={{ url: '#', name: 'Jane Doe' }}
+						authorPosition='Senior Staff Writer'
 
-						publishDate = {publishedOn.toDateString()} // Need to add in a 'Last updated' field as well
-						articleBody = {articleData.content}
+						publishDate={publishedOn.toDateString()} // Need to add in a 'Last updated' field as well
+						articleBody={articleData.content}
 
-						topics = {topics}
-						relatedArticles = {[]}/>
+						topics={topics}
+						relatedArticles={this.state.relatedArticles} />
 					<Advertisement_728x90 adUnit="BDH_Footer_728x90" />
 				</div>
 			);
