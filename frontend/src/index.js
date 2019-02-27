@@ -5,10 +5,10 @@ import App from './App';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
+import bdhRequester from './requests'
 import Advertisement_728x90 from './Advertisement_728x90'
 import './index.css';
 import './App.css';
-
 import HomePage from './HomePage'
 import SectionPage from './SectionPage'
 import ArticlePage from './ArticlePage'
@@ -24,7 +24,6 @@ import ArchivesPage from './ArchivesPage'
 import AboutPage from "./AboutPage"
 import ContactPage from "./ContactPage"
 import SeriesPage from "./SeriesPage"
-
 
 render(<Header />, document.getElementById('headerNew'));
 render(<Sidebar />, document.getElementById('sidebar'));

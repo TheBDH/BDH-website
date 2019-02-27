@@ -49,7 +49,7 @@ class ArticlePage extends React.Component {
 					// }
 
 				} else {
-					console.log("No API data available");
+                	window.location = "/404.html";
 				}
 			}
 		);
