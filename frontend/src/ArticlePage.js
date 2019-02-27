@@ -28,12 +28,6 @@ class ArticlePage extends React.Component {
 	}
 
 	async componentDidMount() {
-
-		// const artSlug = this.props.match.params.slug
-		// const fetchedApiData = await bdhRequester.getArticleBySlug(artSlug)
-		// console.log(fetchedApiData)
-
-		console.log(this.props.match.params.slug);
 		var artSlug = this.props.match.params.slug;
 		this._asyncRequest = bdhRequester.getArticleBySlug(artSlug).then(
 			fetchedApiData => {
@@ -41,23 +35,21 @@ class ArticlePage extends React.Component {
 				if (fetchedApiData.data.items.length > 0) {
 					this.setState({ fetchedApiData });
 					console.log("API Data Fetched for Article");
-					// const relatedArticles = await bdhRequester.getArticlesBySection(this.state.fetchedApiData.data.items[0].section)
-					// this.setState({ relatedArticles })
-
-					//CHANGING URL IF DATE IS INCORRECT
-					// if (window.location.href != "") {
-					// 	window.history.pushState("object or string", "Title", "/new-url");
-					// }
-
 				} else {
-					console.log(fetchedApiData);
 					console.log("No API data available");
 				}
 			}
 		);
 
-
-
+		if (this.state.fetchedApiData) {
+			this._relArtRequest = bdhRequester.getLatestArticlesBySection(this.state.fetchedApiData.data.items[0].section).then(
+				relatedArticles => {
+					this._relArtRequest = null;
+					this.setState({ relatedArticles });
+					console.log("rel Art");
+				}
+			);
+		}
 	}
 
 	generateImagesObject() {
@@ -77,6 +69,7 @@ class ArticlePage extends React.Component {
 			return (<div className='main-content'>no content</div>); //Throw a 404 here
 		} else {
 			console.log(this.state.fetchedApiData);
+			//var relArts = null;
 
 			var gallery = this.generateImagesObject();
 			var hasGallery = !!gallery;
@@ -86,18 +79,9 @@ class ArticlePage extends React.Component {
 			var sect = articleData.section;
 			var img = articleData.featured_image.meta.download_url;
 			var sectionUrl = '/' + articleData.section;
-			var topics = articleData.tags; //.split(",");
-
-			// this._asyncRelatedArticlesRequest = bdhRequester.getArticlesBySection(this.state.fetchedApiData.data.items[0].section).then(
-			// 	relatedArticles => {
-			// 		this._asyncRelatedArticlesRequest = null;
-			// 		this.setState({relatedArticles});
-			// 		console.log('Related Articles Fetched');
-			// 		console.log(this.state);
-			// 	}
-			// );
-
+			var topics = articleData.tags;
 			document.title=articleData.title;
+
 			return (
 				<div className='main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
