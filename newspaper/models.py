@@ -136,19 +136,19 @@ class Tag(models.Model):
     #    db_table = 'Topic'
 
 
-# class Article(models.Model):
-#     #id = models.IntegerField(primary_key=True)
-#     body = models.TextField(default = "")
-#     title = models.CharField(max_length=100)
-#     #posted_date = models.DateField(auto_now=True)
-#     #modified_date = models.DateField(auto_now_add=True)
-#     posted_date = models.DateField()
-#     modified_date = models.DateField()
-#     authors = models.ManyToManyField(Author)
-#     image_url = models.ManyToManyField(Image)
-#     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-#     topic = models.ManyToManyField(Tag)
-#     maybewrong = models.BooleanField(default = False)
+class Article(models.Model):
+    #id = models.IntegerField(primary_key=True)
+    body = models.TextField(default = "")
+    title = models.CharField(max_length=100)
+    #posted_date = models.DateField(auto_now=True)
+    #modified_date = models.DateField(auto_now_add=True)
+    posted_date = models.DateField()
+    modified_date = models.DateField()
+    authors = models.ManyToManyField(Author)
+    image_url = models.ManyToManyField(Image)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    topic = models.ManyToManyField(Tag)
+    maybewrong = models.BooleanField(default = False)
 
 
 '''class AuthGroup(models.Model):
@@ -270,7 +270,7 @@ class DjangoSession(models.Model):
 #END OF NEW MODELS
 from django.shortcuts import get_object_or_404
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
 from wagtail.api import APIField
 from wagtail.api.v2.serializers import PageSerializer
@@ -287,6 +287,9 @@ from modelcluster.fields import ParentalKey
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import Image
 
+
+import datetime
+
 class AuthorsPage(RoutablePageMixin, Page):
 
     name = models.CharField(max_length=255)
@@ -294,8 +297,8 @@ class AuthorsPage(RoutablePageMixin, Page):
     description = RichTextField(blank=True)
     pathtopicture = models.CharField(max_length=100, blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
-    since = models.DateField()
-    valid = models.BooleanField()
+    since = models.DateField(default = datetime.datetime.now())
+    valid = models.BooleanField(default = True)
     maybewrong = models.BooleanField(default = False)
 
     image = models.ForeignKey(
@@ -308,19 +311,21 @@ class AuthorsPage(RoutablePageMixin, Page):
 
     author_rank = (
         ('con','Contributing Writer'),
-        ('staff', 'Staff Writer'),
-        ('snrStaff', 'Senior Staff Writer'),
-        ('snrRep', 'Senior Reporter'),
-        ('newsEd', 'News Editor'),
-        ('sc', 'Science & Research Editor'),
-        ('arts', 'Arts & Culture Editor'),
-        ('sp', 'Sports Editor'),
-        ('pageBoard', 'Editorial Page Board'),
-        ('board', 'Editorial Board'),
+        ('sw', 'Staff Writer'),
+        ('ssw', 'Senior Staff Writer'),
+        ('sre', 'Senior Reporter'),
+        ('ned', 'News Editor'),
+        ('sre', 'Science & Research Editor'),
+        ('ace', 'Arts & Culture Editor'),
+        ('spe', 'Sports Editor'),
+        ('epb', 'Editorial Page Board'),
+        ('eb', 'Editorial Board'),
+        ('sc' , 'Staff Columnist'),
+        ('oc', 'Op-Ed Contributor'),
     )
 
     author_year = (
-        ('fr', 'Freshman'),
+        ('fr', 'First-Year'),
         ('so', 'Sophomore'),
         ('ju', 'Junior'),
         ('se', 'Senior'),
@@ -362,15 +367,23 @@ class ArticleTag(TaggedItemBase):
 
 class ArticlePage(RoutablePageMixin, Page):
 
-    summary = models.CharField(max_length=1000)
+    sum_deck = models.CharField(max_length=1000)
     content = RichTextField(blank=True)
+
+    yes_no = {
+            ('y', 'Yes'),
+            ('n', 'No'),
+        }
+
+    draft = models.CharField(max_length=2, choices=yes_no, blank=True, default='n')
+
     section_list = (
-                ('all', 'All'),
                 ('unews', 'University News'),
                 ('metro', 'Metro'),
                 ('sr', 'Science & Research'),
                 ('ac', 'Arts & Culture'),
                 ('sports', 'Sports'),
+                ('sportscol', 'Sports Columns'),
                 ('opinion', 'Opinion'),
                 ('col', 'Columns'),
                 ('edit', 'Editorials'),
@@ -400,44 +413,63 @@ class ArticlePage(RoutablePageMixin, Page):
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
 
-    yes_no = {
-            ('y', 'Yes'),
-            ('n', 'No'),
-        }
+    nums = {
+        ('1', 'Primary'),
+        ('2', 'Secondary'),
+        ('3', 'Tertiary'),
+    }
 
-    featured_on_section = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
-    featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
-
-    #tags = models.CharField(max_length=255, blank=True)
+    featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='n')
+    position_on_main = models.CharField(max_length=1, choices=nums, blank=True)
 
     api_fields = [
-        APIField('summary'),
+        APIField('sum_deck'),
         APIField('content'),
+        APIField('draft'),
         APIField('section'),
-        APIField('featured_on_section'),
         APIField('featured_on_main'),
+        APIField('position_on_main'),
         APIField('tags'),
         APIField('authors'),
         APIField('featured_image'),
+        APIField('gallery_images')
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel('section', classname='class'),
-        FieldPanel('summary', classname='class'),
-        FieldPanel('featured_on_section', classname='class'),
+        FieldPanel('sum_deck', classname='class'),
+        FieldPanel('draft', classname='class'),
         FieldPanel('featured_on_main', classname='class'),
+        FieldPanel('position_on_main', classname='class'),
         FieldPanel('tags'),
         InlinePanel('authors', heading='authors', help_text='Add contributing authors'),
         FieldPanel('content', classname='class'),
-        ImageChooserPanel('featured_image', classname='image')
+        ImageChooserPanel('featured_image', classname='image'),
+        InlinePanel('gallery_images', label="Photo Gallery Images"),
     ]
 
     search_fields = Page.search_fields + [
         index.SearchField('content'),
         index.SearchField('section'),
-        index.SearchField('summary'),
+        index.SearchField('sum_deck'),
         index.SearchField('tags'),
         index.SearchField('authors'),
+    ]
+
+class ArticlePageGalleryImage(Orderable):
+    page = ParentalKey(ArticlePage, related_name='gallery_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
+    )
+    caption = models.CharField(blank=True, max_length=250)
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('caption'),
+    ]
+
+    api_fields = [
+        APIField('image', serializer=PageSerializer)
     ]
 
 

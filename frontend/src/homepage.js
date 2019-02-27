@@ -3,7 +3,7 @@ import Index_Featured_Article_Grid from './Index_Featured_Article_Grid';
 import Advertisement_728x90 from './Advertisement_728x90';
 import Index_Sections_Grid from './Index_Sections_Grid';
 import bdhRequester from './requests';
-import { generateArticleLink, getFullSectionName, all_sections, getSectionUrl } from './constants';
+import { generateArticleLink, generateAuthorLink, getFullSectionName, all_sections, getSectionUrl, sortArticlesByDate } from './constants';
 
 class HomePage extends React.Component {
 
@@ -21,14 +21,15 @@ class HomePage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.generatePreview = this.generatePreview.bind(this);
-		//this.generateSectionObject = this.generateSectionObject.bind(this);
+		this.generateSectionObject = this.generateSectionObject.bind(this);
 		this.state = { fetchedApiData: null, 
 			  unews: {},
 			  opinions: {},
-			  sr: this.sample_section,
-			  ac: this.sample_section,
+			  sr: {},
+			  ac: {},
 			  sports: {},
-			  metro: {} };
+			  metro: {} 
+		};
 	}
 
 	componentDidMount() {
@@ -52,7 +53,6 @@ class HomePage extends React.Component {
 
 		this._acAsyncRequest = bdhRequester.getLatestArticlesBySection("ac").then(
 			ac => {
-				console.log(ac);
 				this._acAsyncRequest = null;
 				this.setState({ac});
 			}
@@ -60,7 +60,6 @@ class HomePage extends React.Component {
 
 		this._metroAsyncRequest = bdhRequester.getLatestArticlesBySection("metro").then(
 			metro => {
-				console.log(metro);
 				this._metroAsyncRequest = null;
 				this.setState({metro});
 			}
@@ -73,15 +72,12 @@ class HomePage extends React.Component {
 			}
 		);
 
-		// this._spAsyncRequest = bdhRequester.getLatestArticlesBySection("sports").then(
+		//this._spAsyncRequest = bdhRequester.getArticlesForWholeSection(["sports", "sportscol"]).then(
 		// 	sports => {
 		// 		this._spAsyncRequest = null;
 		// 		this.setState({sports});
 		// 	}
 		// ); 
-
-
-		///next up : metro!!!!
 	}
 
 		// Opinions - deal with the multiple possible backend sections.
@@ -92,9 +88,8 @@ class HomePage extends React.Component {
 
 	//Generates a section object to pass into the relevant props.
 	generateSectionObject(section) {
-		var featuredArticles = [{}, {}, {}, {}]
-		console.log(this.state[section]);
-		for (var i = 0; i < 4; i++) {
+		var featuredArticles = [{}, {}, {}]
+		for (var i = 0; i < 3; i++) {
 			if (this.state[section].data) {
 				var curr_article = this.state[section].data.items[i];
 				console.log(curr_article);
@@ -103,7 +98,7 @@ class HomePage extends React.Component {
 					url: generateArticleLink(curr_article),
 					imgUrl: i === 0 ? curr_article.featured_image.meta.download_url : null,
 					imgAlt: i === 0 ? "an image" : null,
-					author:{name:curr_article.authors[0].author.name ,url:"#"},
+					author:{name:curr_article.authors[0].author.title ,url:generateAuthorLink(curr_article.authors[0])},
 					date: new Date(curr_article.meta.first_published_at).toDateString(),
 				};
 			} else {
@@ -111,7 +106,6 @@ class HomePage extends React.Component {
 			}
 		}
 
-		console.log(section);
 		return {
 			title: getFullSectionName(section),
 			url: getSectionUrl(section),
@@ -136,31 +130,36 @@ class HomePage extends React.Component {
 		 	var metro = this.generateSectionObject("metro");
 		 	var unews = this.generateSectionObject("unews");
 		 	//university news
-		 	var sect_list = [unews, sci_res, metro, arts_cult, arts_cult, arts_cult];
+		 	var sect_list = [unews, metro, sci_res, arts_cult, unews, unews]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
+
+		 	console.log(sect_list);
 
 		 	var hero = {
-		 		imgUrl: "/media/original_images/BBOsMih.jpeg",
+		 		imgUrl: mainFeature.featured_image.meta.download_url,
 		 	 	imgAlt: "featured home page image",
-		 	 	section: {name: getFullSectionName(mainFeature.section), url: "#"}, //do URL properly later.
+		 	 	section: {name: getFullSectionName(mainFeature.section), url: getSectionUrl(mainFeature.section)}, //do URL properly later.
 		 	 	url: generateArticleLink(mainFeature),
 		 	 	title: mainFeature.title,
-		 	 	author: {name: mainFeature.authors[0].author.name + " " + mainFeature.authors[0].author.lastName, url: "#"}, //traverse array of authors, gen URL
+		 	 	author: {name: mainFeature.authors[0].author.name + " " + mainFeature.authors[0].author.lastName, 
+		 	 			url: generateAuthorLink(mainFeature.authors[0])}, //traverse array of authors, gen URL
 		 	 	date: new Date(mainFeature.meta.first_published_at).toDateString(),
 		 	 	excerpt: featuredExcerpt,
 		 	};
 
 		 	var belowFeatures = [{
-				section:{name: getFullSectionName(secondFeature.section), url:"#"},
+				section:{name: getFullSectionName(secondFeature.section), url: getSectionUrl(mainFeature.section)},
 				url: generateArticleLink(secondFeature),
 				title:secondFeature.title,
-				author:{name: secondFeature.authors[0].author.name + " " + secondFeature.authors[0].author.lastName, url: "#"},
+				author:{name: secondFeature.authors[0].author.name + " " + secondFeature.authors[0].author.lastName, 
+						url: generateAuthorLink(secondFeature.authors[0])},
 				date: new Date(secondFeature.meta.first_published_at).toDateString(),
 				excerpt: secondExcerpt,
 			}, {
-				section:{name: getFullSectionName(thirdFeature.section), url:"#"},
+				section:{name: getFullSectionName(thirdFeature.section), url: getSectionUrl(mainFeature.section)},
 				url: generateArticleLink(thirdFeature),
 				title:thirdFeature.title,
-				author:{name: thirdFeature.authors[0].author.name + " " + thirdFeature.authors[0].author.lastName, url: "#"},
+				author:{name: thirdFeature.authors[0].author.name + " " + thirdFeature.authors[0].author.lastName,
+						url: generateAuthorLink(thirdFeature.authors[0])},
 				date: new Date(thirdFeature.meta.first_published_at).toDateString(),
 				excerpt: thirdExcerpt,
 			}];

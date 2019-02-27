@@ -11,6 +11,7 @@ class ArticlePage extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.generateImagesObject = this.generateImagesObject.bind(this);
 		
 		let sectMap = {
 			'sr': 'Science and Research',
@@ -34,27 +35,40 @@ class ArticlePage extends React.Component {
 					this.setState({fetchedApiData});
 					console.log("API Data Fetched for Article");
 				} else {
+					console.log(fetchedApiData);
 					console.log("No API data available");
 				}
 			}
 		);
 	}
 
+	generateImagesObject() {
+		if (this.state.fetchedApiData.data.items[0].gallery_images.length != 0) {
+			var imgs = this.state.fetchedApiData.data.items[0].gallery_images;
+			var imgArr = []
+			for (var i = 0; i < imgs.length; i++) {
+				var imgUrl = imgs[i].image.meta.download_url;
+				imgArr.push({"original": imgUrl, "thumbnail": imgUrl})
+			}
+			return imgArr;
+		} else return null;
+	}
+
 	render() {
 		if (this.state.fetchedApiData === null) { 
-			return (<div className='main-content'>no content</div>); //Throw a 404 here
+			return (<div className='main-content'>no content</div>);
 		} else {
 			console.log(this.state.fetchedApiData);
+
+			var gallery = this.generateImagesObject();
+			var hasGallery = !!gallery;
+
 			var articleData = this.state.fetchedApiData.data.items[0];
-
 			var publishedOn = new Date(articleData.meta.first_published_at);
-
 			var sect = articleData.section;
-			//var fullSect = this.sectMap[sect];
-
+			var img = articleData.featured_image.meta.download_url;
 			var sectionUrl = '/' + articleData.section;
-			var topics = articleData.tags.split(",");
-			console.log(topics);
+			var topics = articleData.tags; //.split(",");
 
 			// this._asyncRelatedArticlesRequest = bdhRequester.getArticlesBySection(this.state.fetchedApiData.data.items[0].section).then(
 			// 	relatedArticles => {
@@ -72,10 +86,11 @@ class ArticlePage extends React.Component {
 					<Single_Article sectionHeader = {{url: sectionUrl, title: articleData.section}}
 						articleTitle = {articleData.title}
 						articleSubTitle = {articleData.summary}
-
+						gallery = {hasGallery}
+						galleryImgs = {gallery}
 						authorName = {{url: '#', name: 'Jane Doe'}}
 						authorPosition = 'Senior Staff Writer'
-
+						featuredImg = {img}
 						publishDate = {publishedOn.toDateString()} // Need to add in a 'Last updated' field as well
 						articleBody = {articleData.content}
 

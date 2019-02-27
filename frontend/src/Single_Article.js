@@ -3,6 +3,9 @@ import './App.css'
 import Related_Articles from "./Related_Articles"
 import { getFullSectionName } from './constants'
 
+import ImageGallery from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css";
+
 class Single_Article extends Component {
 
     render() {
@@ -23,7 +26,10 @@ class Single_Article extends Component {
                         <p>First published {this.props.publishDate} | Last updated {this.props.updateDate}</p>
                     </div>
                 </div>
-                <img className="single-article-image" src="http://www.browndailyherald.com/wp-content/uploads/2018/10/goldberg-3-1024x576.jpg" />
+                {this.props.gallery ? 
+                    (<div> <br/> <ImageGallery items={this.props.galleryImgs} /></div>):
+                    (<img className="single-article-image" src={this.props.featuredImg} />)
+                }
                 <div className='single-article-body' dangerouslySetInnerHTML={{__html: this.props.articleBody}}>
                     
                 </div>
