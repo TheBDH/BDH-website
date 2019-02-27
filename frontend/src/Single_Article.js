@@ -1,53 +1,61 @@
 import React, { Component } from 'react';
 import './App.css'
 import Related_Articles from "./Related_Articles"
+
 import { getFullSectionName } from './constants'
 
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 
 class Single_Article extends Component {
-
     render() {
-        var fbShareLink = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
-        var twShareLink = 'https://twitter.com/home?status=' + window.location.href;
+        const fbShareLink = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+        const twShareLink = `https://twitter.com/home?status=${window.location.href}`;
+        const { relatedArticles, sectionHeader, articleTitle, articleSubTitle, authorName, authorPosition, publishDate, updateDate, articleBody, topics } = this.props
         return (
             <div className='single-article' >
                 <div className='single-article-header'>
-                    <a href={this.props.sectionHeader.url}>{getFullSectionName(this.props.sectionHeader.title)}</a>
+                    <a href={sectionHeader.url}>{getFullSectionName(sectionHeader.title)}</a>
                 </div>
                 <div className="single-article-titles">
-                    <h1>{this.props.articleTitle}</h1>
-                    <h3>{this.props.articleSubTitle}</h3>
+                    <h1>{articleTitle}</h1>
+                    <h3>{articleSubTitle}</h3>
                 </div>
                 <div className='single-article-info-bars' >
                     <div className='author-info'>
-                        <div><a href={this.props.authorName.url}>{this.props.authorName.name}</a>  |  {this.props.authorPosition}</div>
-                        <p>First published {this.props.publishDate} | Last updated {this.props.updateDate}</p>
+                        <div><a href={authorName.url}>{authorName.name}</a>  |  {authorPosition}</div>
+                        <p>First published {publishDate} | Last updated {updateDate}</p>
                     </div>
                 </div>
+
                 {this.props.gallery ? 
                     (<div> <br/> <ImageGallery items={this.props.galleryImgs} /></div>):
                     (<img className="single-article-image" src={this.props.featuredImg} />)
                 }
-                <div className='single-article-body' dangerouslySetInnerHTML={{__html: this.props.articleBody}}>
-                    
+
+                <div className='single-article-body' dangerouslySetInnerHTML={{ __html: articleBody }}>
+
                 </div>
                 <div className="single-article-topics" >
-                    <p>TOPICS: {this.props.topics.join()}</p>
+                    {/* <p>TOPICS: {this.props.topics.join()}</p> */}
+                    <p>TOPICS: {topics.map(topic => <a href={topic.url}>{topic}</a>)}</p>
+                    {/* //map through topics array
+                    //create separate <a></a> for every topics
+                    //assign individual topic's href programatically */}
                 </div>
                 <div className='single-article-share' >
                     <p >SHARE THIS ARTICLE</p> &nbsp; &nbsp;
-                    <a href= {{ fbShareLink }}><img src="/static/images/fb-logo.png" style={{ width: 28, height: 28 }} /></a> &nbsp; &nbsp;
-                    <a href= {{ twShareLink }}><img src="/static/images/twitter-logo.png" style={{ width: 28, height: 28 }} /> </a>
+                    <a href={fbShareLink}><img src="/static/images/fb-logo.png" style={{ width: 28, height: 28 }} /></a> &nbsp; &nbsp;
+                    <a href={twShareLink}><img src="/static/images/twitter-logo.png" style={{ width: 28, height: 28 }} /> </a>
                 </div>
                 <div className="single-article-related-articles" >
                     <a >RELATED ARTICLES</a>
-                    <Related_Articles articles={this.props.relatedArticles} />
+                    <Related_Articles articles={relatedArticles} />
                 </div>
                 <div className="single-article-comments" >
                     <p className="single-article-comments-text" >COMMENTS</p>
-                    <div id="disqus_thread"></div>
+                    <div id="disqus_thread">
+                    </div>
                 </div>
             </div >
         );
