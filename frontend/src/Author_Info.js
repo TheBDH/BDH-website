@@ -15,9 +15,7 @@ class Author_Info extends Component {
             <div class='titlePosition'>{this.props.titlePosition}</div>
           </div>
           <div class='profile-description'>
-            <div class='description'>
-              <span>{this.props.description}</span>
-            </div>
+            <div dangerouslySetInnerHTML={{__html: this.props.description}} />
           </div>
         </div>
     )

@@ -124,6 +124,7 @@ class Image(models.Model):
 class Category(models.Model):
     parent = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
+    visible = models.BooleanField(default = True)
 
 
 
@@ -135,19 +136,19 @@ class Tag(models.Model):
     #    db_table = 'Topic'
 
 
-class Article(models.Model):
-    #id = models.IntegerField(primary_key=True)
-    body = models.TextField(default = "")
-    title = models.CharField(max_length=100)
-    #posted_date = models.DateField(auto_now=True)
-    #modified_date = models.DateField(auto_now_add=True)
-    posted_date = models.DateField()
-    modified_date = models.DateField()
-    authors = models.ManyToManyField(Author)
-    image_url = models.ManyToManyField(Image)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    topic = models.ManyToManyField(Tag)
-    maybewrong = models.BooleanField(default = False)
+# class Article(models.Model):
+#     #id = models.IntegerField(primary_key=True)
+#     body = models.TextField(default = "")
+#     title = models.CharField(max_length=100)
+#     #posted_date = models.DateField(auto_now=True)
+#     #modified_date = models.DateField(auto_now_add=True)
+#     posted_date = models.DateField()
+#     modified_date = models.DateField()
+#     authors = models.ManyToManyField(Author)
+#     image_url = models.ManyToManyField(Image)
+#     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+#     topic = models.ManyToManyField(Tag)
+#     maybewrong = models.BooleanField(default = False)
 
 
 '''class AuthGroup(models.Model):
@@ -291,6 +292,11 @@ class AuthorsPage(RoutablePageMixin, Page):
     name = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
     description = RichTextField(blank=True)
+    pathtopicture = models.CharField(max_length=100, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    since = models.DateField()
+    valid = models.BooleanField()
+    maybewrong = models.BooleanField(default = False)
 
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -301,9 +307,16 @@ class AuthorsPage(RoutablePageMixin, Page):
     )
 
     author_rank = (
-        ('con', 'Contributing Writer'),
-        ('ssw', 'Senior Staff Writer'),
-        ('stw', 'Staff Writer'),
+        ('con','Contributing Writer'),
+        ('staff', 'Staff Writer'),
+        ('snrStaff', 'Senior Staff Writer'),
+        ('snrRep', 'Senior Reporter'),
+        ('newsEd', 'News Editor'),
+        ('sc', 'Science & Research Editor'),
+        ('arts', 'Arts & Culture Editor'),
+        ('sp', 'Sports Editor'),
+        ('pageBoard', 'Editorial Page Board'),
+        ('board', 'Editorial Board'),
     )
 
     author_year = (
@@ -336,19 +349,55 @@ class AuthorsPage(RoutablePageMixin, Page):
         APIField('articles'),
     ]
 
+from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+
+class ArticleTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'ArticlePage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
 class ArticlePage(RoutablePageMixin, Page):
 
     summary = models.CharField(max_length=1000)
     content = RichTextField(blank=True)
     section_list = (
-                ('h', 'Home'),
-                ('news', 'News'),
-                ('ac', 'Arts & Culture'),
+                ('all', 'All'),
+                ('unews', 'University News'),
+                ('metro', 'Metro'),
                 ('sr', 'Science & Research'),
+                ('ac', 'Arts & Culture'),
                 ('sports', 'Sports'),
                 ('opinion', 'Opinion'),
+                ('col', 'Columns'),
+                ('edit', 'Editorials'),
+                ('letter', 'Letters to the Editor'),
+                ('notes', "Editors' Note"),
+                ('mult', 'Multimedia'),
+                ('vid', 'Video'),
+                ('gal', 'Photo Gallery'),
+                ('igraph', 'Interactive Graphic'),
+                ('news', 'News'),
+                ('graph', 'Graphics'),
+                ('ill', 'Illustrations'),
+                ('op', 'Op-eds'),
+                ('data', 'Data Science'),
+                ('com', 'Comics'),
+                # add more to this list
             )
 
+    featured_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    tags = ClusterTaggableManager(through=ArticleTag, blank=True)
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
 
     yes_no = {
@@ -359,7 +408,7 @@ class ArticlePage(RoutablePageMixin, Page):
     featured_on_section = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
     featured_on_main = models.CharField(max_length=2, choices=yes_no, blank=True, default='y')
 
-    tags = models.CharField(max_length=255, blank=True)
+    #tags = models.CharField(max_length=255, blank=True)
 
     api_fields = [
         APIField('summary'),
@@ -369,6 +418,7 @@ class ArticlePage(RoutablePageMixin, Page):
         APIField('featured_on_main'),
         APIField('tags'),
         APIField('authors'),
+        APIField('featured_image'),
     ]
 
     content_panels = Page.content_panels + [
@@ -376,9 +426,10 @@ class ArticlePage(RoutablePageMixin, Page):
         FieldPanel('summary', classname='class'),
         FieldPanel('featured_on_section', classname='class'),
         FieldPanel('featured_on_main', classname='class'),
-        FieldPanel('tags', classname='full'),
+        FieldPanel('tags'),
         InlinePanel('authors', heading='authors', help_text='Add contributing authors'),
-        FieldPanel('content', classname='class')
+        FieldPanel('content', classname='class'),
+        ImageChooserPanel('featured_image', classname='image')
     ]
 
     search_fields = Page.search_fields + [
@@ -439,4 +490,3 @@ class FormPage(AbstractEmailForm):
             FieldPanel('content'),
         ], "Email"),
     ]
-

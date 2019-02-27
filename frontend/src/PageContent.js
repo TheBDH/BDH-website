@@ -1,6 +1,11 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
+import TopicPage from './TopicPage'
+import PreviewPage from './PreviewPage'
+import Tips from './Tips'
+import Questions from './Questions'
+
 import { HomePage, SectionPage, ArticlePage, AuthorPage, JoinPage, SubscriptionsPage, WebPolicyPage, CommentsPolicyPage, FindPaperPage, StaffListPage, ArchivesPage, AboutPage, ContactPage, SeriesPage } from "./index"
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -10,11 +15,15 @@ import { HomePage, SectionPage, ArticlePage, AuthorPage, JoinPage, Subscriptions
 const PageContent = () => (
   <main>
     <Switch>
-      <Route exact path='/' component={HomePage} />
-      <Route exact path='/sections/:section' component={SectionPage} />
-      <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
-      <Route exact path='/author/:authName' component={AuthorPage} />
+      /* Dynamic pages that fetch from the API*/
+      <Route exact path='/' component={HomePage}/>
+      <Route exact path='/sections/:section' component={SectionPage}/>
 
+      <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
+      <Route exact path='/authors/:authName' component={AuthorPage} />
+      <Route exact path='/topics/:topicName' component={TopicPage} />
+
+      /* Static pages whose content doesn't change */
       <Route path='/archives' component={ArchivesPage} />
 
 
@@ -30,8 +39,13 @@ const PageContent = () => (
       <Route path='/find-paper' component={FindPaperPage} />
       <Route path='/staff-list' component={StaffListPage} />
 
+      /* Staff list page and preview page */
       <Route path='/staff-list/:year/:semester' component={StaffListPage} />
-      {/* //<Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} /> */}
+
+      <Route path='/tips' component={Tips}/>
+      <Route path='/questions' component={Questions}/>
+      //<Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} />
+
     </Switch>
   </main>
 )

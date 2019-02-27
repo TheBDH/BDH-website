@@ -65,8 +65,8 @@ class HeaderMainStatic extends Component {
             </a>
             <a className="has-dropdown" href="/contact">contact▾
               <div className="nav-dropdown">
-                <a href="#">Tips</a>
-                <a href="#">Questions</a>
+                <a href="/tips">Tips</a>
+                <a href="/questions">Questions</a>
                 <a href="/static/Reprint_Permissions_Request_Contract.pdf" target="_blank">Reprint and Permissions Requests</a>
               </div>
             </a>
@@ -101,7 +101,16 @@ class HeaderMainStatic extends Component {
             </a>
             <a href="/sections/arts-culture">arts and culture</a>
             <a href="/sections/science-research">science and research</a>
-            <a href="/sections/sports">sports</a>
+            <a className="has-dropdown" href="/sections/sports">sports▾
+              <div className="nav-dropdown">
+                <a href="/sections/sports">fall</a>
+                <a href="/sections/sports">winter</a>
+                <a href="/sections/sports">spring</a>
+                <a href="/topics/sports-column">columns</a>
+                <a href="/topics/athlete-of-the-week">athlete of the week</a>
+                <a href="/topics/athletics">athletics</a>
+              </div>
+            </a>
             <a className="has-dropdown" href="/sections/opinion">opinion▾
               <div className="nav-dropdown">
                 <a href="/sections/columns">columns</a>

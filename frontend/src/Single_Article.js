@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css'
 import Related_Articles from "./Related_Articles"
 
+import { getFullSectionName } from './constants'
+
 class Single_Article extends Component {
     render() {
         const fbShareLink = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
@@ -10,7 +12,7 @@ class Single_Article extends Component {
         return (
             <div className='single-article' >
                 <div className='single-article-header'>
-                    <a href={sectionHeader.url}>{sectionHeader.title}</a>
+                    <a href={sectionHeader.url}>{getFullSectionName(sectionHeader.title)}</a>
                 </div>
                 <div className="single-article-titles">
                     <h1>{articleTitle}</h1>
