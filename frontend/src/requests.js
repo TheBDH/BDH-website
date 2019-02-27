@@ -30,8 +30,14 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
-        return await res;
+        let res;
+        try {
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res
+        } catch (error) {
+            window.location = "/404.html";
+            return await res;
+        }
     },
 
     /**
@@ -44,8 +50,14 @@ const bdhRequester = {
 
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
-        return await res;
+        let res;
+        try {
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res;
+        } catch (error) {
+            window.location = "/401.html"
+            return await res;
+        }
     },
 
     async getAuthor(customParams) {
@@ -53,15 +65,29 @@ const bdhRequester = {
             limit: 1,
         };
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
-        return await res;
+
+        let res;
+        try {
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res;
+        } catch (error) {
+            window.location = "/401.html"
+            return await res;
+        }
     },
 
     async getAuthors(customParams) {
         const params = {};
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
-        const res = await Axios.get('/api/v2/pages/', {params: mergedParams})
-        return await res;
+
+        let res;
+        try {
+            res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+            return await res;
+        } catch (error) {
+            window.location = "/401.html"
+            return await res;
+        }
     },
 
     ////////////////////////
