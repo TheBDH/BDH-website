@@ -4,4 +4,7 @@
 
 {% block content %}
 	<div id='authorInfo'></div>
+{% if request.is_preview %}
+    hi this is
+{% endif %}
 {% endblock %}

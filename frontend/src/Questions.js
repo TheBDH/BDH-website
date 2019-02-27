@@ -16,19 +16,19 @@ class Questions extends Component {
             </div>
 
             <div id="right" class="column">
-            <form action="herald@browndailyherald.com">
+            <form method="POST" action="https://formspree.io/herald@browndailyherald.com">
                 Name<br/>
                 <input class="form" type="text" name="name"/><br/><br/>
                 Title/Position<br/>
-                <input class="form" type="text" name="name"/><br/><br/>
+                <input class="form" type="text" name="title"/><br/><br/>
                 Subject<br/>
-                <input class="form" type="text" name="name"/><br/><br/>
+                <input class="form" type="text" name="subject"/><br/><br/>
                 Question (*)<br/>
-                <textarea rows="7" cols="45"> </textarea> <br/>
+                <textarea name="Question" rows="7" cols="45" required> </textarea> <br/>
                 Email Address<br/>
-                <input class="form" type="text" name="name"/><br/><br/>
+                <input class="form" type="email" name="email"/><br/><br/>
                 Phone Number<br/>
-                <input class="form" type="text" name="name"/><br/><br/>
+                <input class="form" type="phone" name="phone"/><br/><br/>
                 <input class="send" type="submit" value="Send"/>
             </form>
             </div>
