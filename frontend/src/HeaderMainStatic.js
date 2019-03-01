@@ -103,9 +103,9 @@ class HeaderMainStatic extends Component {
 
             <input className="header-search" type="text" value={this.state.searchInput} onKeyDown={this.keyPress} onChange={this.handleChange} placeholder="SEARCH"/>
 
-            <a className="header-icon" href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a>
-            <a className="header-icon" href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter-logo-gray.png" alt="twitter"/></a>
-            <a className="header-icon" href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig-logo-gray.png" alt="instagram"/></a>
+            <a className="header-icon" target="_blank" href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a>
+            <a className="header-icon" target="_blank" href="https://www.twitter.com/the_herald/"><img src="/static/images/twitter-logo-gray.png" alt="twitter"/></a>
+            <a className="header-icon" target="_blank" href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig-logo-gray.png" alt="instagram"/></a>
           </div>
         </div>
         <div className="header-flag">
