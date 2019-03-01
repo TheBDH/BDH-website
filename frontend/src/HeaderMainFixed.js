@@ -80,8 +80,8 @@ class HeaderMainFixed extends Component {
                 <a href="/sections/metro">Metro</a>
               </div>
             </a>
-            <a href="/sections/arts-and-culture">arts and culture</a>
-            <a href="/sections/science-research">science and research</a>
+            <a href="/sections/arts-and-culture">arts & culture</a>
+            <a href="/sections/science-research">science & research</a>
             <a href="/sections/sports">sports</a>
             <a className="has-dropdown" href="/sections/opinion">opinion▾
               <div className="nav-dropdown">

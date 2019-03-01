@@ -2,8 +2,13 @@ export const news_sections = ['unews', 'metro'];
 export const op_sections = ['col', 'edit', 'letter', 'notes', 'op'];
 export const multimedia_sections = ['vid', 'gal', 'igraph', 'graph', 'ill', 'com']
 export const all_sections = ['unews', 'metro', 'sr', 'ac', 'opinion', 'sports']
+export const sports_section = ['sports', 'sportscol']
 
-//add in a sort function by date for articles received from api
+export const sortArticlesByDate = (articleList) => {
+	return articleList.sort(function(a,b) {
+		return new Date(b.meta.first_published_at) - new Date(a.meta.first_published_at);
+	});
+}
 
 export const generateArticleLink = (article) => {
 	const divider = '/';
@@ -13,6 +18,12 @@ export const generateArticleLink = (article) => {
 	return divider + publishDate.getFullYear() + divider 
 			+ (publishDate.getMonth() + 1) + divider + publishDate.getDate() + divider + article.meta.slug;
 };
+
+export const generateAuthorLink = (author) => {
+	const divider = '/';
+	console.log(author);
+	return '/authors' + divider + author.author.name + '-' + author.author.lastName;
+}
 
 //inverse function for the below one
 export const getBackendSectionName = (section) => {

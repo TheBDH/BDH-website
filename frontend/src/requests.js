@@ -1,10 +1,12 @@
 import Axios from 'axios';
+import { op_sections, news_sections, multimedia_sections } from './constants';
+
 
 const bdhRequester = {
 
     defaultArticleParams: {
         type: 'newspaper.ArticlePage',
-        fields: 'content,section,summary,authors(author(name,lastName,description,position,year,image)),featured_on_section,featured_on_main,featured_image,tags',
+        fields: 'content,section,sum_deck,draft,authors(author(name,lastName,description,position,year,image)),position_on_main,featured_on_main,featured_image,gallery_images,tags',
     },
 
     defaultAuthorParams: {
@@ -62,7 +64,6 @@ const bdhRequester = {
         const params = {
             limit: 1,
         };
-
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
         let res;
@@ -77,7 +78,6 @@ const bdhRequester = {
 
     async getAuthors(customParams) {
         const params = {};
-
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
 
         let res;
@@ -94,40 +94,46 @@ const bdhRequester = {
     // Example Requests
     ///////////////////////
 
+    getArticleById(id) {
+        return this.getArticle({id: id}) //for the draft, we can just add a flag that marks it as a DRAFT in the CMS and then have them disable and re-publish.
+    },
+
     getArticlesByTag(tag) {
-        return this.getArticles({tag__name: tag});
+        return this.getArticles({tag__name: tag, draft: "n"});
     },
 
     getArticleBySlug(slug) {
-        return this.getArticle({slug: slug});
+        return this.getArticle({slug: slug, draft: "n"});
     },
 
     getNewArticles(limit) {
-        return this.getArticles({order: "-first_published_at", limit: limit});
+        return this.getArticles({order: "-first_published_at", limit: limit, draft: "n"});
     },
 
     getArticlesBySection(section) {
-        return this.getArticles({section: section})
+        return this.getArticles({section: section, draft: "n"})
     },
 
     getArticlesForWholeSection(sections) {
         return sections.map(x => this.getArticles(x));
     }, // To handle getting op-eds, etc. for all opinions articles - will be stored in constants.js
 
+    //The above method should merge the article arrays of the json data, everything else is irrelevant
+
     getArticlesByAuthor(firstName, lastName) {
-        return this.getAuthor({name: firstName, lastName: lastName})
+        return this.getAuthor({name: firstName, lastName: lastName, draft: "n"})
     },
 
     getLatestArticlesBySection(section) {
-        return this.getArticles({section: section, order: "-first_published_at", limit: 5});
+        return this.getArticles({section: section, order: "-first_published_at", limit: 5, draft: "n"});
     },
 
     getFeaturedArticlesOnSection(section) {
-        return this.getArticles({section: section, featured_on_section: "y", limit: 5})
+        return this.getArticles({section: section, featured_on_section: "y", limit: 5, draft: "n"})
     },
 
     getFeaturedArticlesOnHomePage() {
-        return this.getArticles({featured_on_main: "y", limit: 5}) // can change this limit to 3 but it's good to have some buffer
+        return this.getArticles({featured_on_main: "y", order: "-first_published_at", limit: 5, draft: "n"}) // can change this limit to 3 but it's good to have some buffer
     }
 };
 

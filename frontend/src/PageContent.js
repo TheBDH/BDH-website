@@ -44,8 +44,7 @@ const PageContent = () => (
 
       <Route path='/tips' component={Tips}/>
       <Route path='/questions' component={Questions}/>
-      //<Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} />
-
+      <Route path='/cms/pages/:id/edit/preview/' component={PreviewPage} />
     </Switch>
   </main>
 )
