@@ -32,6 +32,9 @@ urlpatterns += [
     path('join', views.static_page_template),
     path('tips', views.static_page_template),
     path('questions', views.static_page_template),
+    path('about', views.static_page_template),
+    path('contact', views.static_page_template),
+    path('series', views.static_page_template),
 
     path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
     path('staff-list', views.static_page_template, name='current-staff-list'),
