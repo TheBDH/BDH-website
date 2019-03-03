@@ -151,8 +151,8 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     DATABASES = {"default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": "wp_bdh",
-            "USER": "bdh_developer",
+            "NAME": "wp_bdh"
+            "USER": "root",
             "PASSWORD": "Since1891",
             "HOST": "localhost",
             "PORT": "",
