@@ -5,9 +5,7 @@ import Index_Sections_Grid from './Index_Sections_Grid';
 import bdhRequester from './requests';
 import { generateArticleLink, generateAuthorLink, getFullSectionName, all_sections, getSectionUrl, sortArticlesByDate } from './constants';
 
-class HomePage extends React.Component {
-
-	sample_section = {
+var sample_section = {
 		title:"University News",
 		url:"#",
 		featured_articles:[
@@ -17,6 +15,8 @@ class HomePage extends React.Component {
 			{title:"Lorem ipsum dolor",url:"#",imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg",imgAlt:"img alt",author:{name:"John Doe",url:"#"},date:"May 10, 2010"}
 		]
 	};
+
+class HomePage extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -72,12 +72,12 @@ class HomePage extends React.Component {
 			}
 		);
 
-		//this._spAsyncRequest = bdhRequester.getArticlesForWholeSection(["sports", "sportscol"]).then(
-		// 	sports => {
-		// 		this._spAsyncRequest = null;
-		// 		this.setState({sports});
-		// 	}
-		// ); 
+		this._spAsyncRequest = bdhRequester.getArticlesForWholeSection(["sports", "sportscol"]).then(
+			sports => {
+				this._spAsyncRequest = null;
+				this.setState({sports});
+			}
+		); 
 	}
 
 		// Opinions - deal with the multiple possible backend sections.
@@ -114,7 +114,7 @@ class HomePage extends React.Component {
 	}
 
  	render() {
- 		if (this.state.fetchedApiData === null) { 
+ 		if (false) { 
 			return null;
 		} else {
 		 	var mainFeature = this.state.fetchedApiData.data.items[0];
@@ -125,10 +125,10 @@ class HomePage extends React.Component {
 		 	var secondExcerpt = this.generatePreview(secondFeature.content);
 		 	var thirdExcerpt = this.generatePreview(thirdFeature.content);
 
-		 	var arts_cult = this.generateSectionObject("ac");
-		 	var sci_res = this.generateSectionObject("sr");
-		 	var metro = this.generateSectionObject("metro");
-		 	var unews = this.generateSectionObject("unews");
+		 	// var arts_cult = this.generateSectionObject("ac");
+		 	// var sci_res = this.generateSectionObject("sr");
+		 	// var metro = this.generateSectionObject("metro");
+		 	// var unews = this.generateSectionObject("unews");
 		 	//university news
 		 	var sect_list = [unews, metro, sci_res, arts_cult, unews, unews]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
 

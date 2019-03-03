@@ -2,7 +2,7 @@ import React from 'react';
 import Index_Featured_Article_Grid from './Index_Featured_Article_Grid';
 import Advertisement_728x90 from './Advertisement_728x90';
 import NonSports from './NonSports';
-import Section_Features from './Section_Features';
+import Section_Featured_Articles from './Section_Featured_Articles';
 import SportsSection from './SportsSection';
 import './general-style.css';
 import './fixed-style.css';
@@ -20,9 +20,11 @@ var hero = {imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/20
 			 dolor sit amet, consectetuer [...]"}
 var section = {name:"University News", url:"#", 
 	featured_articles:[{imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg", 
-	imgAlt:"bear", url: "#", title:"Sample 1", author: {name: "JD", url:"#"}, date: "today"},
-	{url:"#", title:"Sample 2", author: {name: "JD", url:"#"}, date:"today"},
-	{url:"#", title:"Sample 2", author: {name: "JD", url:"#"}, date:"today"}]};
+	imgAlt:"bear", url: "#", title:"Sample 2", author: {name: "JD", url:"#"}, date: "today"}, {
+	imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg", 
+	imgAlt:"bear", url: "#", title:"Sample 3", author: {name: "JD", url:"#"}, date: "today"},
+	{imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg", 
+	imgAlt:"bear", url: "#", title:"Sample 4", author: {name: "JD", url:"#"}, date: "today"}]};
 
 const sportsList = [
 	{name: 'Athlete of the Week', link: '/topics/athlete-of-the-week'},
