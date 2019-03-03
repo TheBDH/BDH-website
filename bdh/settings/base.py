@@ -24,7 +24,7 @@ SITE_ID = 1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
 SITE_ID = 1
 
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
@@ -80,7 +80,6 @@ INSTALLED_APPS = [
 
 	'taggit',
 	'modelcluster',
-
 ]
 
 DISQUS_API_KEY = 'uPP1mWOtXuKJ11NajNcYIHIbbYRlG94yggaUgI1Z8UWjRN7NLPD6d16FT33zzPiD'
