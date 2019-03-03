@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import xml.etree.ElementTree as etree
-tree = etree.parse('sample-article-collection.xml')
+#tree = etree.parse('sample-article-collection.xml')
 from datetime import datetime
 from pprint import pprint #debugging
 

@@ -7,24 +7,44 @@ import gql from 'graphql-tag'
 
 import { Link } from 'react-router-dom'
 
-const query = gql`
-    query GetArticles($searchQuery: String) {
-      articles(content_Icontains: $searchQuery) {
+const getAllArticles = gql`
+  query {
+      articles {
         id
         title
         content
         summary
-        tags
-      }
-    }`
+    }
+  }`
 
+const finalQuery = gql`
+query FeedSearchQuery($filter: String!) {
+    articles(filter: $filter) {
+      id
+      title
+      content
+      summary
+      tags
+    }
+  }`
+
+const query = gql`
+  query($searchInput: String) {
+    articles(filter: $searchInput) {
+      id
+      title
+      content
+      summary
+      tags
+    }
+  }`
 
 class HeaderMainStatic extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      searchInput: '',
+      filter: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,8 +61,9 @@ class HeaderMainStatic extends Component {
 
   //add authors to query later
   keyPress(event) {
+    const { filter } = this.state;
     if(event.keyCode==13){
-      this.client.query({ query })
+      this.client.query({ query: finalQuery, variables: { filter } })
       .then(data => console.log(data))
       .catch(error => console.error(error));
     }
@@ -82,9 +103,9 @@ class HeaderMainStatic extends Component {
 
             <input className="header-search" type="text" value={this.state.searchInput} onKeyDown={this.keyPress} onChange={this.handleChange} placeholder="SEARCH"/>
 
-            <a className="header-icon" href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a>
-            <a className="header-icon" href="https://www.twitter.com/browndailyherald/"><img src="/static/images/twitter-logo-gray.png" alt="twitter"/></a>
-            <a className="header-icon" href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig-logo-gray.png" alt="instagram"/></a>
+            <a className="header-icon" target="_blank" href="https://www.facebook.com/browndailyherald/"><img src="/static/images/fb-logo-gray.png" alt="facebook"/></a>
+            <a className="header-icon" target="_blank" href="https://www.twitter.com/the_herald/"><img src="/static/images/twitter-logo-gray.png" alt="twitter"/></a>
+            <a className="header-icon" target="_blank" href="https://www.instagram.com/browndailyherald/"><img src="/static/images/ig-logo-gray.png" alt="instagram"/></a>
           </div>
         </div>
         <div className="header-flag">
@@ -99,8 +120,8 @@ class HeaderMainStatic extends Component {
                 <a href="/sections/metro">Metro</a>
               </div>
             </a>
-            <a href="/sections/arts-culture">arts and culture</a>
-            <a href="/sections/science-research">science and research</a>
+            <a href="/sections/arts-culture">arts & culture</a>
+            <a href="/sections/science-research">science & research</a>
             <a className="has-dropdown" href="/sections/sports">sports▾
               <div className="nav-dropdown">
                 <a href="/sections/sports">fall</a>

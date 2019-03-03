@@ -19,29 +19,33 @@ class AuthorPage extends React.Component {
 	componentDidMount() {
 		let authorSlug = this.props.match.params.authName;
 		let firstName = authorSlug.split("-")[0];
-		this._asyncRequest = bdhRequester.getAuthor({name: firstName}).then(
+		this._asyncRequest = bdhRequester.getAuthors(/*{name: firstName}*/).then(
 			fetchedApiData => {
 				this._asyncRequest = null;
-				this.setState({fetchedApiData});
-				console.log(fetchedApiData);
-				console.log("API Data Fetched for Author");
+				if (fetchedApiData.data.items.length > 0) {
+					this.setState({fetchedApiData});
+					console.log("API Data Fetched for Author");
+				} else {
+                	window.location = "/404.html";
+				}
 			}
 		);
 	}
 
 	render() {
-		console.log(this.props);
+		console.log(this.state);
 		if (this.state.fetchedApiData === null) { 
 			return null;
 		} else {
 			var authorData = this.state.fetchedApiData.data.items[0];
+			var desc = authorData.description !== "<p></p>" ? authorData.description : "No description available.";
 			return (
 				<div className = 'main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 					<Author_Info 
 						name={authorData.name + " " + authorData.lastName}
 						titlePosition = {authorData.position}
-						description = {authorData.description}
+						description = {desc}
 						image = {authorData.image.meta.download_url} />
 					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
 						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
