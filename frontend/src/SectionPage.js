@@ -2,7 +2,7 @@ import React from 'react';
 import Index_Featured_Article_Grid from './Index_Featured_Article_Grid';
 import Advertisement_728x90 from './Advertisement_728x90';
 import NonSports from './NonSports';
-import Section_Features from './Section_Features';
+import Section_Featured_Articles from './Section_Featured_Articles';
 import SportsSection from './SportsSection';
 import './general-style.css';
 import './fixed-style.css';
@@ -18,9 +18,11 @@ var hero = {imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/20
 			 dolor sit amet, consectetuer [...]"}
 var section = {name:"University News", url:"#", 
 	featured_articles:[{imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg", 
-	imgAlt:"bear", url: "#", title:"Sample 1", author: {name: "JD", url:"#"}, date: "today"},
-	{url:"#", title:"Sample 2", author: {name: "JD", url:"#"}, date:"today"},
-	{url:"#", title:"Sample 2", author: {name: "JD", url:"#"}, date:"today"}]};
+	imgAlt:"bear", url: "#", title:"Sample 2", author: {name: "JD", url:"#"}, date: "today"}, {
+	imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg", 
+	imgAlt:"bear", url: "#", title:"Sample 3", author: {name: "JD", url:"#"}, date: "today"},
+	{imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg", 
+	imgAlt:"bear", url: "#", title:"Sample 4", author: {name: "JD", url:"#"}, date: "today"}]};
 
 const sportsList = [
 	{name: 'Athlete of the Week', link: '/topics/athlete-of-the-week'},
@@ -65,7 +67,15 @@ class SectionPage extends React.Component {
 	state= {fetchedApiData : null}
 
 	componentDidMount() {
-		this._asyncRequest = bdhRequester.getArticlesBySection("sr" /*this.props.match.params.section*/).then( //add something in constants for this
+		this._asyncRequest = bdhRequester.getFeaturedArticlesOnSection(this.props.match.params.section).then( //add something in constants for this
+			fetchedApiData => {
+				this._asyncRequest = null;
+				this.setState({fetchedApiData});
+				console.log(fetchedApiData);
+				console.log("API Data Fetched for Features");
+			}
+		); 
+		this._asyncRequest = bdhRequester.getArticlesBySection(this.props.match.params.section).then( //add something in constants for this
 			fetchedApiData => {
 				this._asyncRequest = null;
 				this.setState({fetchedApiData});
@@ -83,7 +93,7 @@ class SectionPage extends React.Component {
 				<br/>		
 				<h3 class='med-nav-title'>{getFullSectionName(section_name)}</h3>
 				{ section_name==='sports' ? (<SportsSection sports={sportsList} />) : null}
-				<Section_Features section={section} />
+				<Section_Featured_Articles section={section} />
 
 				<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 				<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}

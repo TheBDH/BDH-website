@@ -6,7 +6,7 @@ from pprint import pprint #debugging
 
 # Create your views here.
 
-from .models import Article, Author
+#from .models import Article, Author
 
 def index(request):
     """

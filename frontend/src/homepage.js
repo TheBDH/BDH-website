@@ -5,9 +5,7 @@ import Index_Sections_Grid from './Index_Sections_Grid';
 import bdhRequester from './requests';
 import { generateArticleLink, getFullSectionName, all_sections, getSectionUrl } from './constants';
 
-class HomePage extends React.Component {
-
-	sample_section = {
+var sample_section = {
 		title:"University News",
 		url:"#",
 		featured_articles:[
@@ -17,6 +15,8 @@ class HomePage extends React.Component {
 			{title:"Lorem ipsum dolor",url:"#",imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg",imgAlt:"img alt",author:{name:"John Doe",url:"#"},date:"May 10, 2010"}
 		]
 	};
+
+class HomePage extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -41,37 +41,37 @@ class HomePage extends React.Component {
 			}
 		);
 
-		let sects = ["sr", "ac", "news", "opinions", "sports", "metro"];
+		// let sects = ["sr", "ac", "news", "opinions", "sports", "metro"];
 
-		this._srAsyncRequest = bdhRequester.getLatestArticlesBySection("sr").then(
-			sr => {
-				this._srAsyncRequest = null;
-				this.setState({sr});
-			}
-		); 
+		// this._srAsyncRequest = bdhRequester.getLatestArticlesBySection("sr").then(
+		// 	sr => {
+		// 		this._srAsyncRequest = null;
+		// 		this.setState({sr});
+		// 	}
+		// ); 
 
-		this._acAsyncRequest = bdhRequester.getLatestArticlesBySection("ac").then(
-			ac => {
-				console.log(ac);
-				this._acAsyncRequest = null;
-				this.setState({ac});
-			}
-		); 
+		// this._acAsyncRequest = bdhRequester.getLatestArticlesBySection("ac").then(
+		// 	ac => {
+		// 		console.log(ac);
+		// 		this._acAsyncRequest = null;
+		// 		this.setState({ac});
+		// 	}
+		// ); 
 
-		this._metroAsyncRequest = bdhRequester.getLatestArticlesBySection("metro").then(
-			metro => {
-				console.log(metro);
-				this._metroAsyncRequest = null;
-				this.setState({metro});
-			}
-		);
+		// this._metroAsyncRequest = bdhRequester.getLatestArticlesBySection("metro").then(
+		// 	metro => {
+		// 		console.log(metro);
+		// 		this._metroAsyncRequest = null;
+		// 		this.setState({metro});
+		// 	}
+		// );
 
-		this._unewsAsyncRequest = bdhRequester.getLatestArticlesBySection("unews").then(
-			unews => {
-				this._unewsAsyncRequest = null;
-				this.setState({unews});
-			}
-		);
+		// this._unewsAsyncRequest = bdhRequester.getLatestArticlesBySection("unews").then(
+		// 	unews => {
+		// 		this._unewsAsyncRequest = null;
+		// 		this.setState({unews});
+		// 	}
+		// );
 
 		// this._spAsyncRequest = bdhRequester.getLatestArticlesBySection("sports").then(
 		// 	sports => {
@@ -120,7 +120,7 @@ class HomePage extends React.Component {
 	}
 
  	render() {
- 		if (this.state.fetchedApiData === null) { 
+ 		if (false) { 
 			return null;
 		} else {
 		 	var mainFeature = this.state.fetchedApiData.data.items[0];
@@ -131,12 +131,12 @@ class HomePage extends React.Component {
 		 	var secondExcerpt = this.generatePreview(secondFeature.content);
 		 	var thirdExcerpt = this.generatePreview(thirdFeature.content);
 
-		 	var arts_cult = this.generateSectionObject("ac");
-		 	var sci_res = this.generateSectionObject("sr");
-		 	var metro = this.generateSectionObject("metro");
-		 	var unews = this.generateSectionObject("unews");
+		 	// var arts_cult = this.generateSectionObject("ac");
+		 	// var sci_res = this.generateSectionObject("sr");
+		 	// var metro = this.generateSectionObject("metro");
+		 	// var unews = this.generateSectionObject("unews");
 		 	//university news
-		 	var sect_list = [unews, sci_res, metro, arts_cult, arts_cult, arts_cult];
+		 	var sect_list = [sample_section, sample_section, sample_section,sample_section,sample_section,sample_section];
 
 		 	var hero = {
 		 		imgUrl: "/media/original_images/BBOsMih.jpeg",

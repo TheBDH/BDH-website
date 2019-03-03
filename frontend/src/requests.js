@@ -29,6 +29,7 @@ const bdhRequester = {
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
         const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        // const res = await Axios.get('http://localhost:8000/cms/', {params: mergedParams});
         return await res;
     },
 
@@ -43,6 +44,8 @@ const bdhRequester = {
         const mergedParams = {...this.defaultArticleParams, ...customParams, ...params};
 
         const res = await Axios.get('/api/v2/pages/', {params: mergedParams});
+        // const res = await Axios.get('http://localhost:8000/sections/arts-culture', {params: mergedParams});
+
         return await res;
     },
 

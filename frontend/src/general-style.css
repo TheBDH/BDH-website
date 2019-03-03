@@ -213,6 +213,7 @@
 	.section-features:nth-child(-n + 3) {
 		border-bottom: 1px solid #c4c4c4;
 	}
+
 	.section-features .section-featured-articles .section-article-excerpt-img {
 		width: 100%;
 		height: 0;
@@ -238,10 +239,130 @@
 		border-bottom: 1px solid #dddddd;
 		padding: 5px 0;
 	}
+
 	.section-features .section-featured-articles > div:last-child {
 		border-bottom: none;
 	}
 }
+
+
+@media screen and (min-width: 768px) {
+	*,
+	*:before,
+	*:after {
+	  box-sizing: border-box;
+	}
+
+	body {
+	  margin: 40px;
+	  font-family: 'Open Sans', 'sans-serif';
+	  background-color: #fff;
+	  color: #444;
+	}
+
+	h1,
+	p {
+	  margin: 0 0 1em 0;
+	}
+
+	.wrapper {
+	  max-width: 940px;
+	  margin: 0 20px;
+	 /* display: grid;*/
+	  grid-gap: 0px;
+	}
+
+
+	/* no grid support? */
+
+	.wrapper {
+	  display: flex;
+	  flex-wrap: wrap;
+	  clear:both;
+	}
+
+	.wrapper {
+	  display: grid;
+	  margin: 0 auto;
+	  grid-template-columns: 3fr 2fr;
+	  grid-auto-rows: minmax(250px, auto);
+	}
+
+	/* Bottom right text */
+	.text-block {
+	  position: absolute;
+	  bottom: 20px;
+	  left: 0px;
+	  padding-left: 20px;
+	  padding-right: 20px;
+	}
+
+	.fill {
+	    display: flex;
+	    justify-content: center;
+	    position: relative;
+	    align-items: center;
+	    overflow: hidden
+	}
+	.fill img {
+	    flex-shrink: 0;
+	    min-width: 100%;
+	    height: 450px;
+	    object-fit: cover;
+	}
+
+	.section-panel {
+	  margin-left: 5px;
+	  margin-right: 10px;
+	  flex: 1 1 200px;
+	  border-bottom: 1px solid #c4c4c4;
+	  display: flex;
+	}
+
+	.section-panel .section-panel-img {
+		max-width:160px;
+		max-height:240px;
+		width: auto;
+		height: auto;
+	}
+
+	.section-panel .section-panel-img img {
+		object-fit: cover;
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	.section-panel-text {
+		float: right;
+		margin-left: 20px;
+	}
+
+	.section-tall-panel {
+		border-right: 1px solid #c4c4c4;
+		border-bottom: 1px solid #c4c4c4;
+		grid-row-end: span 2;
+		margin-right: 8px;
+	}
+
+
+	.wrapper > * {
+		padding: 20px;
+		font-size: 150%;
+		margin-bottom: 10px;
+	}
+
+
+	/* We need to set the margin used on flex items to 0 as we have gaps in grid.  */
+
+	@supports (display: grid) {
+	  .wrapper > * {
+	    margin: 0;
+	  }
+	}
+
+}
+
+
 
 /*tablet*/
 @media screen and (max-width: 1170px) and (min-width: 768px) {
