@@ -42,14 +42,14 @@ class HomePage extends React.Component {
 			}
 		);
 
-		// let sects = ["sr", "ac", "news", "opinions", "sports", "metro"];
+		let sects = ["sr", "ac", "news", "opinions", "sports", "metro"];
 
-		// this._srAsyncRequest = bdhRequester.getLatestArticlesBySection("sr").then(
-		// 	sr => {
-		// 		this._srAsyncRequest = null;
-		// 		this.setState({sr});
-		// 	}
-		// ); 
+		this._srAsyncRequest = bdhRequester.getLatestArticlesBySection("sr").then(
+			sr => {
+				this._srAsyncRequest = null;
+				this.setState({sr});
+			}
+		); 
 
 		this._acAsyncRequest = bdhRequester.getLatestArticlesBySection("ac").then(
 			ac => {
@@ -65,19 +65,19 @@ class HomePage extends React.Component {
 			}
 		);
 
-		// this._unewsAsyncRequest = bdhRequester.getLatestArticlesBySection("unews").then(
-		// 	unews => {
-		// 		this._unewsAsyncRequest = null;
-		// 		this.setState({unews});
-		// 	}
-		// );
+		this._unewsAsyncRequest = bdhRequester.getLatestArticlesBySection("unews").then(
+			unews => {
+				this._unewsAsyncRequest = null;
+				this.setState({unews});
+			}
+		);
 
-		//this._spAsyncRequest = bdhRequester.getArticlesForWholeSection(["sports", "sportscol"]).then(
-		// 	sports => {
-		// 		this._spAsyncRequest = null;
-		// 		this.setState({sports});
-		// 	}
-		// ); 
+		this._spAsyncRequest = bdhRequester.getArticlesForWholeSection(["sports", "sportscol"]).then(
+			sports => {
+				this._spAsyncRequest = null;
+				this.setState({sports});
+			}
+		); 
 	}
 
 		// Opinions - deal with the multiple possible backend sections.
