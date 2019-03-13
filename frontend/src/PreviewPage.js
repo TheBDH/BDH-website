@@ -43,15 +43,6 @@ class PreviewPage extends React.Component {
 			var sectionUrl = '/' + articleData.section;
 			var topics = articleData.tags; //.split(",");
 
-			// this._asyncRelatedArticlesRequest = bdhRequester.getArticlesBySection(this.state.fetchedApiData.data.items[0].section).then(
-			// 	relatedArticles => {
-			// 		this._asyncRelatedArticlesRequest = null;
-			// 		this.setState({relatedArticles});
-			// 		console.log('Related Articles Fetched');
-			// 		console.log(this.state);
-			// 	}
-			// );
-
 			document.title=articleData.title;
 			return (
 				<div className = 'main-content'>

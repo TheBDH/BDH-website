@@ -81,15 +81,6 @@ class HomePage extends React.Component {
 			}
 		);
 
-
-		this._spAsyncRequest = bdhRequester.getArticlesForWholeSection(["sports", "sportscol"]).then(
-			sports => {
-				this._spAsyncRequest = null;
-				this.setState({sports});
-			}
-		); 
-	}
-
 		this._spAsyncRequest = bdhRequester.getLatestArticlesBySection("sports").then(
 			sports => {
 				this._spAsyncRequest = null;
@@ -184,7 +175,7 @@ class HomePage extends React.Component {
 					date: new Date(curr_article.meta.first_published_at).toDateString(),
 				};
 			} else {
-				featuredArticles[i] = this.sample_section.featured_articles[i];
+				featuredArticles[i] = sample_section.featured_articles[i];
 			}
 		}
 		return {
@@ -219,7 +210,7 @@ class HomePage extends React.Component {
 	}
 
  	render() {
- 		if (false) { 
+ 		if (this.state.fetchedApiData === null) { 
 			return null;
 		} else {
 		 	var mainFeature = this.state.fetchedApiData.data.items[0];
@@ -230,10 +221,10 @@ class HomePage extends React.Component {
 		 	var secondExcerpt = this.generatePreview(secondFeature.content);
 		 	var thirdExcerpt = this.generatePreview(thirdFeature.content);
 
-		 	// var arts_cult = this.generateSectionObject("ac");
-		 	// var sci_res = this.generateSectionObject("sr");
-		 	// var metro = this.generateSectionObject("metro");
-		 	// var unews = this.generateSectionObject("unews");
+		 	var arts_cult = this.generateSectionObject("ac");
+		 	var sci_res = this.generateSectionObject("sr");
+		 	var metro = this.generateSectionObject("metro");
+		 	var unews = this.generateSectionObject("unews");
 		 	//university news
 		 	var sect_list = [unews, metro, sci_res, arts_cult, unews, unews]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
 
