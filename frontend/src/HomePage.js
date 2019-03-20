@@ -125,12 +125,12 @@ class HomePage extends React.Component {
 		 	var secondExcerpt = this.generatePreview(secondFeature.content);
 		 	var thirdExcerpt = this.generatePreview(thirdFeature.content);
 
-		 	// var arts_cult = this.generateSectionObject("ac");
-		 	// var sci_res = this.generateSectionObject("sr");
-		 	// var metro = this.generateSectionObject("metro");
-		 	// var unews = this.generateSectionObject("unews");
+		 	var arts_cult = this.generateSectionObject("ac");
+		 	var sci_res = this.generateSectionObject("sr");
+		 	var metro = this.generateSectionObject("metro");
+		 	var unews = this.generateSectionObject("unews");
 		 	//university news
-		 	var sect_list = [unews, metro, sci_res, arts_cult, unews, unews]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
+		 	var sect_list = [unews, metro, sci_res, arts_cult,]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
 
 		 	console.log(sect_list);
 
