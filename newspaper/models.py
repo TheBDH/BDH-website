@@ -1,102 +1,8 @@
 from django.db import models
 from django.apps import AppConfig
 
-# Create your models here.
-
-'''class Article(models.Model):
-    title = models.TextField(help_text="Enter Article Title")
-    article_slug = models.TextField(help_text="Enter Article Slug Here", default="")
-    authors = models.ManyToManyField('Author', help_text="Select Author Names") # dropdown for authors - could get unwieldy? evaluate later ... searchable?
-    tags = models.ManyToManyField('Tags', help_text="Tags for this Article")
-    sections = models.ManyToManyField("Sections", help_text="Article Sections")
-    pubdate = models.DateField(auto_now=True) #use for last-modified time stamps
-
-    metadata_article = models.DateField(auto_now = True)
-
-    #comments and images as a ForeignKeyField ?
-    text = models.TextField(help_text="Article Text Goes Here", default="la la la") #django is unhappy if we don't define max length
-    article_id = models.AutoField(primary_key=True) # automatically generate a unique Article ID, increments
-
-    PUB_STATUS = (
-        ('d', 'Draft'),
-        ('p', 'Published'),
-    )
-
-    status = models.CharField(max_length=1, choices=PUB_STATUS, blank=True, default='d', help_text='Publication Status')
-
-    # Metadata
-    class Meta:
-        ordering = ["-pubdate"]
-
-    # Methods
-    def get_absolute_url(self):
-        #Returns the url to access a particular instance of MyModelName.
-        return reverse('article-detail', args=[str(self.id)])
-
-    def __str__(self):
-        return self.title
-
-    def disp_authors(self):
-        return ', '.join([ author.first_name + " " + author.last_name for author in self.authors.all()[:3] ])
-    disp_authors.short_description = 'Authors'
-
-class Tags(models.Model):
-    tag_value = models.CharField(max_length=1000)
-    number_of_contents_with_tag = models.IntegerField()
-
-class Sections(models.Model):
-    name = models.CharField(help_text="Section Name", max_length=100)
-
-class Author(models.Model):
-    """
-    Model representing an author.
-    """
-    first_name = models.CharField(max_length=1000)
-    last_name = models.CharField(max_length=1000)
-    #description = models.CharField(max_length=1000)
-    #articles = models.ManyToManyField(Article)
-
-    AUTHOR_RANK = (
-        ('con', 'Contributing Writer'),
-        ('ssw', 'Senior Staff Writer'),
-        ('stw', 'Staff Writer'),
-    )
-
-    articles = models.ManyToManyField('Article', help_text="Select Articles Names") # dropdown for authors - could get unwieldy? evaluate later ... searchable?
-    rank = models.CharField(max_length=3, choices=AUTHOR_RANK, blank=True, default='con', help_text='Author Rank')
-
-    AUTHOR_YEAR = (
-        ('fr', 'Freshman'),
-        ('so', 'Sophomore'),
-        ('ju', 'Junior'),
-        ('se', 'Senior'),
-        ('gs', 'Graduate Student'),
-    )
-
-    #year = models.CharField(max_length=2, choices=AUTHOR_YEAR, blank=True, default='', help_text='Author Year')
-
-    class Meta:
-        ordering = ["last_name","first_name"]
-
-    def get_absolute_url(self):
-        """
-        Returns the url to access a particular author instance.
-        """
-        return reverse('author-detail', args=[str(self.id)])
-
-
-    def __str__(self):
-        """
-        String for representing the Model object.
-        """
-        return '{0} {1}, {2}'.format(self.first_name,self.last_name,self.year)
-'''
-###add in utility methods to get stuff from the database - for testing, instantiate the local db
-
-
 #START OF NEW MODELS
-#NOTE: This is not 100% finalized
-
+#NOTE: This is not 100% finalizeds
 
 class Author(models.Model):
     #id = models.IntegerField(primary_key=True)
@@ -150,124 +56,6 @@ class Article(models.Model):
     topic = models.ManyToManyField(Tag)
     maybewrong = models.BooleanField(default = False)
 
-
-'''class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=80)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
-'''
-
-
-'''class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)'''
-
-
-'''class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-'''
-
-
-'''
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
-
-
-class AuthUserGroups(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
-
-
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
-
-'''
-
-
-
-#END OF NEW MODELS
 from django.shortcuts import get_object_or_404
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.core.models import Page, Orderable
@@ -393,7 +181,6 @@ class ArticlePage(RoutablePageMixin, Page):
                 ('vid', 'Video'),
                 ('gal', 'Photo Gallery'),
                 ('igraph', 'Interactive Graphic'),
-                ('news', 'News'),
                 ('graph', 'Graphics'),
                 ('ill', 'Illustrations'),
                 ('op', 'Op-eds'),
@@ -410,7 +197,7 @@ class ArticlePage(RoutablePageMixin, Page):
         related_name='+'
     )
 
-    tags = ClusterTaggableManager(through=ArticleTag, blank=True)
+    tags = ClusterTaggableManager(through=ArticleTag)
     section = models.CharField(max_length=8, choices=section_list, blank=True, default='h')
 
     nums = {

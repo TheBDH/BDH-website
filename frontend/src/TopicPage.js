@@ -13,7 +13,7 @@ class TopicPage extends React.Component {
 	state= {fetchedApiData : null}
 
 	componentDidMount() {
-		this._asyncRequest = bdhRequester.getArticlesByTopic('dog').then(
+		this._asyncRequest = bdhRequester.getArticlesByTag('dog').then(
 			fetchedApiData => {
 				this._asyncRequest = null;
 				this.setState({fetchedApiData});

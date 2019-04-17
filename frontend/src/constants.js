@@ -36,6 +36,8 @@ export const getBackendSectionName = (section) => {
 			return 'ac';
 		case 'university-news':
 			return 'unews';
+		case 'opinions':
+			return 'opinion';
 	}
 }
 

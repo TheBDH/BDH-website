@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import './App.css'
 import Related_Articles from "./Related_Articles"
-
 import { getFullSectionName } from './constants'
+import bdhRequester from './requests'
 
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 
 class Single_Article extends Component {
+
+    constructor(props) {
+        super(props);
+        //this.generateAuthorElement = this.generateAuthorElement.bind(this);
+    }
+
+    // generateAuthorElement(authors) {
+    //     return authors.map(x => )
+
+    // }
+
     render() {
         const fbShareLink = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
         const twShareLink = `https://twitter.com/home?status=${window.location.href}`;
@@ -37,16 +48,15 @@ class Single_Article extends Component {
 
                 </div>
                 <div className="single-article-topics" >
-                    {/* <p>TOPICS: {this.props.topics.join()}</p> */}
-                    <p>TOPICS: {topics.map(topic => <a href={topic.url}>{topic}</a>)}</p>
-                    {/* //map through topics array
-                    //create separate <a></a> for every topics
-                    //assign individual topic's href programatically */}
+                    <p>TOPICS: {topics.map(
+                        function(item, index) {
+                            return (<a href={item.url}>{ ((index >= 0 && index < topics.length) ? item + ', ' : '')}</a>);
+                        })}</p>
                 </div>
                 <div className='single-article-share' >
                     <p >SHARE THIS ARTICLE</p> &nbsp; &nbsp;
-                    <a href={fbShareLink}><img src="/static/images/fb-logo.png" style={{ width: 28, height: 28 }} /></a> &nbsp; &nbsp;
-                    <a href={twShareLink}><img src="/static/images/twitter-logo.png" style={{ width: 28, height: 28 }} /> </a>
+                    <a href={fbShareLink} target="_blank"><img src="/static/images/fb-logo.png" style={{ width: 28, height: 28 }} /></a> &nbsp; &nbsp;
+                    <a href={twShareLink} target="_blank"><img src="/static/images/twitter-logo.png" style={{ width: 28, height: 28 }} /> </a>
                 </div>
                 <div className="single-article-related-articles" >
                     <a >RELATED ARTICLES</a>

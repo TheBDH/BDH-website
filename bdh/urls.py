@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from newspaper import views
 
+handler404 = 'views.error_404'
+handler500 = 'views.error_500'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
 from django.conf.urls import include, handler404, handler500
-from django.urls import path
+from django.urls import path, Resolver404
 
 urlpatterns += [
     path('print-subscriptions', views.static_page_template),
@@ -35,6 +38,7 @@ urlpatterns += [
     path('about', views.static_page_template),
     path('contact', views.static_page_template),
     path('series', views.static_page_template),
+    path('submit', views.static_page_template),
 
     path('staff-list/<int:year>/<str:semester>', views.staff_list, name='staff-list'),
     path('staff-list', views.static_page_template, name='current-staff-list'),
@@ -46,6 +50,7 @@ urlpatterns += [
     path('<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
     path('authors/<author>', views.author),
     path('sections/<section>', views.section),
+    path('topics/<section>', views.section),
 ]
 
 from django.conf import settings
@@ -71,6 +76,3 @@ urlpatterns += [
     re_path(r'^articles/', include(wagtaildocs_urls)),
     re_path(r'^', include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-handler404 = views.error_404
-handler500 = views.error_500

@@ -6,11 +6,8 @@ import Section_Featured_Articles from './Section_Featured_Articles';
 import SportsSection from './SportsSection';
 import './general-style.css';
 import './fixed-style.css';
-
 import Pagination from './Pagination';
-
 import {getBackendSectionName, getFullSectionName, generateArticleLink} from './constants.js';
-
 import bdhRequester from './requests.js'
 
 var hero = {imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg",
@@ -68,7 +65,7 @@ class SectionPage extends React.Component {
 		this.generatePreview = this.generatePreview.bind(this);
 		this.generateAllArticlePreviewComponents = this.generateAllArticlePreviewComponents.bind(this);
 		this.state = {
-			allOtherArticles: null,
+			allArticles: null,
 			currentlyVisibleArticles: null,
 			currentPage: null,
 			totalPages: null,
@@ -79,10 +76,10 @@ class SectionPage extends React.Component {
 		let sect_name = getBackendSectionName(this.props.match.params.section);
 
 		this._allArticleRequest = bdhRequester.getArticlesBySection(sect_name).then(
-			allOtherArticles => {
+			allArticles => {
 				this._allArticleRequest = null;
-				this.setState({allOtherArticles});
-				var currentlyVisibleArticles = allOtherArticles.data.items.slice(0,10);
+				this.setState({allArticles});
+				var currentlyVisibleArticles = allArticles.data.items.slice(0,10);
 				this.setState({currentlyVisibleArticles})
 				console.log("API Data Fetched for All Articles in Section");
 			}
@@ -104,8 +101,8 @@ class SectionPage extends React.Component {
 	generateFeaturedArticles() {
 		var featuredArticles = [{}, {}, {}];
 		for (var i = 0; i < 3; i++) {
-			if (this.state.allOtherArticles) {
-				var curr_article = this.state.allOtherArticles.data.items[i];
+			if (this.state.allArticles) {
+				var curr_article = this.state.allArticles.data.items[i];
 				featuredArticles[i] = {
 					url: generateArticleLink(curr_article),
 					title: curr_article.title,
@@ -114,14 +111,11 @@ class SectionPage extends React.Component {
 					author:{name:curr_article.authors[0].author.name , 
 							lastName: curr_article.authors[0].author.lastName, url:"#"},
 					date: new Date(curr_article.meta.first_published_at).toDateString(),
+					previewText: this.generatePreview(curr_article.content),
 				}
 			}
 		}
 		return featuredArticles;
-	}
-
-	generatePreview(content) {
-		return (new DOMParser).parseFromString(content, "text/html").getElementsByTagName("p")[0].innerText;
 	}
 
 	generateArticlePreviewComponent(article) {
@@ -141,21 +135,21 @@ class SectionPage extends React.Component {
 	}
 
 	//for loop for each article, how does that work with paginatioN? look at the e.g. online
+	generatePreview(content) {
+		return (new DOMParser).parseFromString(content, "text/html").getElementsByTagName("p")[0].innerText;
+	}
 
 	render() {
 		var section_name = this.props.match.params.section;
 		console.log(this.state);
 
-		if (this.state.allOtherArticles) {
-			console.log(this.state.allOtherArticles.data.items);
+		if (this.state.allArticles) {
 			var feat = this.generateFeaturedArticles();
-			console.log(feat);
-
 			var others;
 
-			if (this.state.allOtherArticles.request) {
+			if (this.state.allArticles.request) {
 				console.log(feat);
-				others = this.generateAllArticlePreviewComponents(this.state.allOtherArticles.data.items)
+				others = this.generateAllArticlePreviewComponents(this.state.allArticles.data.items.slice(3))
 			} else {others = null; }
 		//load featured articles into the section object, and the rest into the NonSports component - all of this on SUNDAY
 			return (
