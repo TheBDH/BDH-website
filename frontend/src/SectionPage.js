@@ -164,7 +164,7 @@ class SectionPage extends React.Component {
 					<br/>		
 					<h3 class='med-nav-title'>{getFullSectionName(section_name)}</h3>
 					{ section_name==='sports' ? (<SportsSection sports={sportsList} />) : null}
-					<Section_Features section={{featured_articles: feat}} />
+					<Section_Featured_Articles section={{featured_articles: feat}} />
 
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 
