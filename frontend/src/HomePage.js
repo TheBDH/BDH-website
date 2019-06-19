@@ -130,9 +130,9 @@ class HomePage extends React.Component {
 		 	// var metro = this.generateSectionObject("metro");
 		 	// var unews = this.generateSectionObject("unews");
 		 	//university news
-		 	var sect_list = [unews, metro, sci_res, arts_cult, unews, unews]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
+		 	var sect_list = []//[unews, metro, sci_res, arts_cult, unews, unews]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
 
-		 	console.log(sect_list);
+		 	//console.log(sect_list);
 
 		 	var hero = {
 		 		imgUrl: mainFeature.featured_image.meta.download_url,

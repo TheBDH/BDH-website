@@ -151,12 +151,12 @@ if 'RDS_HOSTNAME' in os.environ:
     }
 else:
     DATABASES = {"default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": "db.sqlite3",
-            # "USER": "bdh_developer",
-            # "PASSWORD": "Since1891",
-            # "HOST": "localhost",
-            # "PORT": "",
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "wp_bdh",
+            "USER": "root",
+            "PASSWORD": "password",
+            "HOST": "localhost",
+            "PORT": "",
         }
     }
 
