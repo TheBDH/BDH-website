@@ -46,6 +46,7 @@ urlpatterns += [
     path('<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
     path('authors/<author>', views.author),
     path('sections/<section>', views.section),
+    path('topics/<section>', views.section),
 ]
 
 from django.conf import settings

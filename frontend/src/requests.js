@@ -99,7 +99,7 @@ const bdhRequester = {
     },
 
     getArticlesByTag(tag) {
-        return this.getArticles({tag__name: tag, draft: "n"});
+        return this.getArticles({tags: tag, draft: "n"});
     },
 
     getArticleBySlug(slug) {
