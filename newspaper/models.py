@@ -98,12 +98,13 @@ class AuthorsPage(RoutablePageMixin, Page):
     )
 
     author_rank = (
+        ('', ''),
         ('con','Contributing Writer'),
         ('sw', 'Staff Writer'),
         ('ssw', 'Senior Staff Writer'),
         ('sre', 'Senior Reporter'),
         ('ned', 'News Editor'),
-        ('sre', 'Science & Research Editor'),
+        ('sred', 'Science & Research Editor'),
         ('ace', 'Arts & Culture Editor'),
         ('spe', 'Sports Editor'),
         ('epb', 'Editorial Page Board'),
@@ -270,7 +271,7 @@ class ArticleAuthorRelationship(models.Model):
     """
 
     article = ParentalKey(
-        'ArticlePage',
+        ArticlePage,
         related_name='authors'
     )
 

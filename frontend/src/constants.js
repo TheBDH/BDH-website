@@ -41,6 +41,37 @@ export const getBackendSectionName = (section) => {
 	}
 }
 
+export const getFrontendRole = (role) => {
+	switch (role) {
+		case '':
+			return '';
+		case 'con':
+			return 'Contributing Writer';
+		case 'sw':
+			return 'Staff Writer';
+		case 'ssw':
+			return 'Senior Staff Writer';
+		case 'sre':
+			return 'Senior Reporter';
+		case 'ned':
+			return 'News Editor';
+		case 'sred':
+			return 'Science & Research Editor';
+		case 'ace':
+			return 'Arts & Culture Editor';
+		case 'spe':
+			return 'Sports Editor';
+		case 'epb':
+			return 'Editorial Page Board';
+		case 'eb':
+			return 'Editorial Board';
+		case 'sc':
+			return 'Staff Columnist';
+		case 'oc':
+			return 'Op-Ed Contributor';
+	}
+}
+
 export const getSectionUrl = (section) => {
 	switch (section) {
 		case 'sr':

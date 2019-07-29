@@ -7,6 +7,7 @@ import Author_Info from './Author_Info';
 import './general-style.css';
 
 import bdhRequester from './requests.js'
+import { getFrontendRole } from './constants'
 
 class AuthorPage extends React.Component {
 
@@ -19,7 +20,7 @@ class AuthorPage extends React.Component {
 	componentDidMount() {
 		let authorSlug = this.props.match.params.authName;
 		let firstName = authorSlug.split("-")[0];
-		this._asyncRequest = bdhRequester.getAuthors(/*{name: firstName}*/).then(
+		this._asyncRequest = bdhRequester.getAuthor({slug: authorSlug}).then(
 			fetchedApiData => {
 				this._asyncRequest = null;
 				if (fetchedApiData.data.items.length > 0) {
@@ -39,14 +40,15 @@ class AuthorPage extends React.Component {
 		} else {
 			var authorData = this.state.fetchedApiData.data.items[0];
 			var desc = authorData.description !== "<p></p>" ? authorData.description : "No description available.";
+			var imgURL = authorData.image ? authorData.image.meta.download_url : 'https://35ht6t2ynx0p1ztf961h81r1-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/generic-avatar.jpg' ;
 			return (
 				<div className = 'main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
 					<Author_Info 
 						name={authorData.name + " " + authorData.lastName}
-						titlePosition = {authorData.position}
+						titlePosition = {getFrontendRole(authorData.position)}
 						description = {desc}
-						image = {authorData.image.meta.download_url} />
+						image = {imgURL} />
 					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
 						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
 						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\

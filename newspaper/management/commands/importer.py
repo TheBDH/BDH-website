@@ -6,6 +6,8 @@ from django.contrib.contenttypes.models import ContentType
 import pymysql
 import pprint  # debugging
 import traceback  # debugging
+import re
+import pickle
 
 
 class Command(BaseCommand):
@@ -21,8 +23,8 @@ class Command(BaseCommand):
             importer = Importer(3306)
             importer.load_categories()
             importer.instantiate_django_categories()
-            importer.construct_author_models()
-            #importer.construct_post_models()
+            #importer.construct_author_models()
+            importer.construct_post_models()
             self.stdout.write(self.style.SUCCESS('Successfully imported database to new models!'))
         else:
             self.stdout.write('Sorry, you cannot execute that command. Perhaps you meant to do something else?')
@@ -211,6 +213,7 @@ class Importer():
         try:
             self.new_connection.cursor().execute("delete  from updated_wp_bdh.newspaper_authorspage where page_ptr_id < 300000;")
             self.new_connection.cursor().execute("alter TABLE updated_wp_bdh.newspaper_authorspage auto_increment = 1;")
+            id_mapping = {}
             with self.connection.cursor() as cursor:
                 AuthorsPage.objects.all().delete()
 
@@ -235,39 +238,43 @@ class Importer():
                             last = namearr[1]
                         if len(namearr) >= 3 or len(namearr) == 1:
                             maybewrong = True
-                    print(first, " ", last)
+                    print(first, last)
                     if(first is None or first == "" or last is None or last == ""):
                         maybewrong = True
                         first = "ERROR"
                         last = "ERROR"
-                    author = AuthorsPage(path = str(res[0]), page_ptr_id=res[0], name=first, lastName=last, description=res[3],
-                                           pathtopicture=res[4], email=res[6], maybewrong = maybewrong, since=res[7],
-                                         valid = True, title = first + ' ' + last, slug = res[0], depth = 3)
+                    author = AuthorsPage(path = '00010001'+ str(res[0]).zfill(4), owner_id = 1, name=first, 
+                        lastName=last, description=res[3], pathtopicture=res[4], email=res[6], maybewrong = maybewrong, 
+                        since=res[7], valid = True, title = first + ' ' + last,
+                        slug = re.sub(r'\W+', '', first.replace(" ","")) + '-' + re.sub(r'\W+','',last.replace(" ", "")), depth = 3)
                     try:
-
                         author.save()
+                        print(author.page_ptr_id, str(res[0])) # we want the slug to be first - last but if it's there, then add a number!!!
+                        id_mapping[res[0]] = author.page_ptr_id
 
                     except ConnectionRefusedError:
-
                         print("happened with ", first)
-
-
-
-
         finally:
             self.connection.close()
+            output = open('id_map.pkl', 'wb')
+            pickle.dump(id_mapping, output)
+            output.close()
 
     def construct_post_models(self):
         try:
             with self.connection.cursor() as cursor:
                 ArticlePage.objects.all().delete()
 
-                sql = "SELECT p1.ID, p1.post_title, p1.post_excerpt, p1.post_content, p1.post_date_gmt, p1.post_modified_gmt, p1.post_author, p2.guid FROM wp_bdh.wp_posts as p1,  wp_bdh.wp_posts as p2 where p2.post_type = 'attachment' and p2.post_parent = p1.ID;"
+                sql = "SELECT p1.ID, p1.post_title, p1.post_excerpt, p1.post_content, p1.post_date_gmt, p1.post_modified_gmt, p1.post_author, p2.guid, p1.post_name FROM wp_bdh.wp_posts as p1,  wp_bdh.wp_posts as p2 where p2.post_type = 'attachment' and p2.post_parent = p1.ID;"
                 cursor.execute(sql)
                 myresult = cursor.fetchall()
                 # ID, post_title, excerpt, post_content,  post_date_gmt, post_modified_gmt, post_author, guid
                 tag_count = 1
                 seen_ids = set()
+
+                pkl_file = open('id_map.pkl', 'rb')
+                id_mappings = pickle.load(pkl_file)
+                pkl_file.close()
 
                 for res in myresult:
                     temp = str(res[0])
@@ -293,14 +300,12 @@ class Importer():
 
                     tags = self.id_to_tags[temp]
 
-                    b = AuthorsPage.objects.get(page_ptr_id = author_id)
+                    b = AuthorsPage.objects.get(page_ptr_id = id_mappings[author_id])
 
-                    article = ArticlePage(page_ptr_id= id, path = id, slug=id, depth= 3,
-                                         sum_deck = summary, title = post_title, 
+                    article = ArticlePage(path = '00010001'+ str(res[0] % 10000.).zfill(4), slug=res[8], depth= 3,
+                                         sum_deck = summary, title = post_title, owner_id = 1,
                                          content = body, first_published_at = post_date_modified, 
-                                         section = "unews") #featured_image = guid
-
-            
+                                         section = "unews", featured_image = guid) #featured_image = guid, post_name is slug
 
                     for tag in tags:
 
@@ -311,14 +316,11 @@ class Importer():
                         tag_count+=1'''
                         article.tags.add(tag)
                         article.save()
-                    a = ArticlePage.objects.get(page_ptr_id = id)
+                    #a = ArticlePage.objects.get(page_ptr_id = id)
 
-                    relation = ArticleAuthorRelationship(article = a, author = b)
+                    relation = ArticleAuthorRelationship(article = article, author = b)
 
-                    relation.save()
-
-
-                    
+                    relation.save()      
 
         finally:
             self.connection.close()

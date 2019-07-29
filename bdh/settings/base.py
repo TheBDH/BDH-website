@@ -30,9 +30,16 @@ SITE_ID = 1
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 WAGTAIL_APPEND_SLASH = False
 
+# WAGTAILSEARCH_BACKENDS = {
+#     'default': {
+#         'BACKEND': 'wagtail.search.backends.elasticsearch6',
+#         'INDEX': 'myapp'
+#     }
+# }
+
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch2',
+        'BACKEND': 'wagtail.search.backends.db',
         'INDEX': 'myapp'
     }
 }
@@ -151,7 +158,7 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     DATABASES = {"default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": "wp_bdh",
+            "NAME": "updated_wp_bdh",
             "USER": "root",
             "PASSWORD": "Since1891",
             "HOST": "localhost",
@@ -163,13 +170,6 @@ GRAPHENE = {
     'SCHEMA': 'api.schema.schema',
 }
 
-
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch2',
-        'INDEX': 'myapp'
-    }
-}
 WAGTAILSEARCH_RESULTS_TEMPLATE = 'bdh/search_results.html'
 WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'bdh/includes/search_listing.html'
 

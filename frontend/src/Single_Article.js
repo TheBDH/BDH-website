@@ -22,7 +22,9 @@ class Single_Article extends Component {
     render() {
         const fbShareLink = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
         const twShareLink = `https://twitter.com/home?status=${window.location.href}`;
-        const { relatedArticles, sectionHeader, articleTitle, articleSubTitle, authorName, authorPosition, publishDate, updateDate, articleBody, topics } = this.props
+        console.log(this.props);
+        const { sectionHeader, articleTitle, articleSubTitle, gallery, galleryImgs,
+            authorName, authorPosition, featuredImg, publishDate, updateDate, articleBody, topics, relatedArticles } = this.props
         return (
             <div className='single-article' >
                 <div className='single-article-header'>

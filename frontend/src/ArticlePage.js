@@ -70,7 +70,6 @@ class ArticlePage extends React.Component {
 		} else {
 			console.log(this.state.fetchedApiData);
 			
-
 			var gallery = this.generateImagesObject();
 			var hasGallery = !!gallery;
 
@@ -85,7 +84,8 @@ class ArticlePage extends React.Component {
 			return (
 				<div className='main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
-					<Single_Article sectionHeader = {{url: sectionUrl, title: articleData.section}}
+					<Single_Article 
+						sectionHeader = {{url: sectionUrl, title: articleData.section}}
 						articleTitle = {articleData.title}
 						articleSubTitle = {articleData.summary}
 						gallery = {hasGallery}
@@ -94,6 +94,7 @@ class ArticlePage extends React.Component {
 						authorPosition = 'Senior Staff Writer'
 						featuredImg = {img}
 						publishDate = {publishedOn.toDateString()} // Need to add in a 'Last updated' field as well
+						updateDate = {publishedOn.toDateString()}
 						articleBody = {articleData.content}
 						topics={topics}
 						relatedArticles={this.state.relatedArticles} />
