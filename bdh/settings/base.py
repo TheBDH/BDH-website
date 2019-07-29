@@ -24,15 +24,22 @@ SITE_ID = 1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bdh-deploy-env.7p3q2inmh2.us-east-1.elasticbeanstalk.com']
 SITE_ID = 1
 
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 WAGTAIL_APPEND_SLASH = False
 
+# WAGTAILSEARCH_BACKENDS = {
+#     'default': {
+#         'BACKEND': 'wagtail.search.backends.elasticsearch6',
+#         'INDEX': 'myapp'
+#     }
+# }
+
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch2',
+        'BACKEND': 'wagtail.search.backends.db',
         'INDEX': 'myapp'
     }
 }
@@ -80,7 +87,6 @@ INSTALLED_APPS = [
 
 	'taggit',
 	'modelcluster',
-
 ]
 
 DISQUS_API_KEY = 'uPP1mWOtXuKJ11NajNcYIHIbbYRlG94yggaUgI1Z8UWjRN7NLPD6d16FT33zzPiD'
@@ -152,8 +158,8 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     DATABASES = {"default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": "wp_bdh",
-            "USER": "bdh_developer",
+            "NAME": "updated_wp_bdh",
+            "USER": "root",
             "PASSWORD": "Since1891",
             "HOST": "localhost",
             "PORT": "",
@@ -164,13 +170,6 @@ GRAPHENE = {
     'SCHEMA': 'api.schema.schema',
 }
 
-
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch2',
-        'INDEX': 'myapp'
-    }
-}
 WAGTAILSEARCH_RESULTS_TEMPLATE = 'bdh/search_results.html'
 WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'bdh/includes/search_listing.html'
 

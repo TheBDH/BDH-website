@@ -29,12 +29,26 @@ class PreviewPage extends React.Component {
 		);
 	}
 
+	generateImagesObject() {
+		if (this.state.previewedArticle.data.items[0].gallery_images.length != 0) {
+			var imgs = this.state.previewedArticle.data.items[0].gallery_images;
+			var imgArr = []
+			for (var i = 0; i < imgs.length; i++) {
+				var imgUrl = imgs[i].image.meta.download_url;
+				imgArr.push({"original": imgUrl, "thumbnail": imgUrl})
+			}
+			return imgArr;
+		} else return null;
+	}
+
 	render() {
 		if (this.state.previewedArticle === null) { 
 			return (<div className='main-content'>Loading...</div>);
 		} else {
 			console.log(this.state.previewedArticle);
 			var articleData = this.state.previewedArticle.data.items[0];
+			var gallery = this.generateImagesObject();
+			var hasGallery = !!gallery;
 
 			var publishedOn = new Date(articleData.meta.first_published_at);
 
@@ -42,24 +56,19 @@ class PreviewPage extends React.Component {
 
 			var sectionUrl = '/' + articleData.section;
 			var topics = articleData.tags; //.split(",");
-
-			// this._asyncRelatedArticlesRequest = bdhRequester.getArticlesBySection(this.state.fetchedApiData.data.items[0].section).then(
-			// 	relatedArticles => {
-			// 		this._asyncRelatedArticlesRequest = null;
-			// 		this.setState({relatedArticles});
-			// 		console.log('Related Articles Fetched');
-			// 		console.log(this.state);
-			// 	}
-			// );
+			var img = articleData.featured_image.meta.download_url;
 
 			document.title=articleData.title;
 			return (
 				<div className = 'main-content'>
 					<center><h1> Advertisement Here </h1></center>
-					<Single_Article sectionHeader = {{url: sectionUrl, title: articleData.section}}
+					<Single_Article 
+						sectionHeader = {{url: sectionUrl, title: articleData.section}}
 						articleTitle = {articleData.title}
 						articleSubTitle = {articleData.summary}
-
+						gallery = {hasGallery}
+						galleryImgs = {gallery}
+						featuredImg = {img}
 						authorName = {{url: '#', name: 'Jane Doe'}}
 						authorPosition = 'Senior Staff Writer'
 
@@ -75,4 +84,4 @@ class PreviewPage extends React.Component {
 	}
 }
 
-export default PreviewPage;
+export default PreviewPage;<center><h1> Advertisement Here </h1></center>

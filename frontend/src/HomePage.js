@@ -22,13 +22,22 @@ class HomePage extends React.Component {
 		super(props);
 		this.generatePreview = this.generatePreview.bind(this);
 		this.generateSectionObject = this.generateSectionObject.bind(this);
+		this.mergeSections = this.mergeSections.bind(this);
+
 		this.state = { fetchedApiData: null, 
 			  unews: {},
-			  opinions: {},
+			  metro: {},
 			  sr: {},
 			  ac: {},
+
 			  sports: {},
-			  metro: {} 
+			  sportscol: {},
+
+			  op: null,
+			  col: null,
+			  ed: null,
+			  lett: null,
+			  ednot: null,
 		};
 	}
 
@@ -72,15 +81,77 @@ class HomePage extends React.Component {
 			}
 		);
 
-		this._spAsyncRequest = bdhRequester.getArticlesForWholeSection(["sports", "sportscol"]).then(
+		this._spAsyncRequest = bdhRequester.getLatestArticlesBySection("sports").then(
 			sports => {
 				this._spAsyncRequest = null;
 				this.setState({sports});
 			}
-		); 
-	}
+		);
 
-		// Opinions - deal with the multiple possible backend sections.
+		this._spColAsyncRequest = bdhRequester.getLatestArticlesBySection("sportscol").then(
+			sportscol => {
+				this._spColAsyncRequest = null;
+				this.setState({sportscol});
+			}
+		);
+
+		/************OPINIONS CALLS********************/
+
+		this._opAsyncRequest = bdhRequester.getLatestArticlesBySection("opinion").then(
+			op => {
+				this._opAsyncRequest = null;
+				this.setState({op});
+			}
+		);
+
+		this._colAsyncRequest = bdhRequester.getLatestArticlesBySection("col").then(
+			col => {
+				this._colAsyncRequest = null;
+				this.setState({col});
+			}
+		);
+
+		this._editAsyncRequest = bdhRequester.getLatestArticlesBySection("edit").then(
+			ed => {
+				this._editAsyncRequest = null;
+				this.setState({ed});
+			}
+		);
+
+		this._letAsyncRequest = bdhRequester.getLatestArticlesBySection("letter").then( 
+			lett => {
+				this._letAsyncRequest = null;
+				this.setState({lett});
+			}
+		);
+
+		this._notAsyncRequest = bdhRequester.getLatestArticlesBySection("notes").then(
+			ednot => {
+				this._notAsyncRequest = null;
+				this.setState({ednot});
+			}
+		);
+	} 
+
+	mergeSections(arrayOfSects) {
+		let fullArr = [];
+		console.log(arrayOfSects);
+		for (var i = 0; i < arrayOfSects.length; i++) {
+			console.log(arrayOfSects)
+			if (arrayOfSects[i].data) {
+				var currArts = arrayOfSects[i].data.items;
+				currArts.map(x => fullArr.push(x));
+				console.log(fullArr);
+			}
+		}
+		fullArr.sort(
+			function(a, b) {
+				return b.id - a.id;
+			}
+		);
+		console.log(fullArr);
+		return fullArr;
+	}
 
 	generatePreview(content) {
 		return (new DOMParser).parseFromString(content, "text/html").getElementsByTagName("p")[0].innerText;
@@ -92,20 +163,21 @@ class HomePage extends React.Component {
 		for (var i = 0; i < 3; i++) {
 			if (this.state[section].data) {
 				var curr_article = this.state[section].data.items[i];
-				console.log(curr_article);
 				featuredArticles[i] = {
 					title: curr_article.title,
 					url: generateArticleLink(curr_article),
 					imgUrl: i === 0 ? curr_article.featured_image.meta.download_url : null,
 					imgAlt: i === 0 ? "an image" : null,
-					author:{name:curr_article.authors[0].author.title ,url:generateAuthorLink(curr_article.authors[0])},
+					author:{
+						name: curr_article.authors[0].author.title,
+						url: generateAuthorLink(curr_article.authors[0])
+					},
 					date: new Date(curr_article.meta.first_published_at).toDateString(),
 				};
 			} else {
-				featuredArticles[i] = this.sample_section.featured_articles[i];
+				featuredArticles[i] = sample_section.featured_articles[i];
 			}
 		}
-
 		return {
 			title: getFullSectionName(section),
 			url: getSectionUrl(section),
@@ -113,8 +185,32 @@ class HomePage extends React.Component {
 		};
 	}
 
+	generateSectionObjectForMerged(section, secName) {
+		var featuredArticles = [{}, {}, {}]
+		for (var i = 0; i < 3; i++) {
+			console.log(section);
+			var curr_article = section[i];
+			featuredArticles[i] = {
+				title: curr_article.title,
+				url: generateArticleLink(curr_article),
+				imgUrl: i === 0 ? curr_article.featured_image.meta.download_url : null,
+				imgAlt: i === 0 ? "an image" : null,
+				author:{
+					name: curr_article.authors[0].author.title,
+					url: generateAuthorLink(curr_article.authors[0])
+				},
+				date: new Date(curr_article.meta.first_published_at).toDateString(),
+			};
+		}
+		return {
+			title: secName,
+			url: getSectionUrl(section),
+			featured_articles: featuredArticles,
+		};
+	}
+
  	render() {
- 		if (false) { 
+ 		if (this.state.fetchedApiData === null) { 
 			return null;
 		} else {
 		 	var mainFeature = this.state.fetchedApiData.data.items[0];
@@ -132,8 +228,12 @@ class HomePage extends React.Component {
 		 	//university news
 		 	var sect_list = //[unews, metro, sci_res, arts_cult, unews, unews]; //sci_res, metro, arts_cult, arts_cult, arts_cult];
 
-
-		 	//console.log(sect_list);
+		 	if (this.state.op && this.state.col && this.state.ed && this.state.lett && this.state.ednot) {
+		 		console.log(this.state);
+		 		var merged = this.mergeSections([this.state.op, this.state.col, this.state.ed, this.state.lett, this.state.ednot]);
+		 		var ops = this.generateSectionObjectForMerged(merged, "opinions");
+		 		var sect_list = [unews, metro, sci_res, arts_cult, ops, unews];
+		 	}
 
 		 	var hero = {
 		 		imgUrl: mainFeature.featured_image.meta.download_url,

@@ -7,7 +7,6 @@ class Index_Featured_Article_Grid extends Component {
   render() {
     return (
       <div>
-        <div className="med-nav-title">Featured</div>
         <div className="index-featured">
           <Featured_Hero_Article_Text_Overlay hero={this.props.hero}/>
           <div className="divider"></div>

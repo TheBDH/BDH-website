@@ -20,10 +20,11 @@ import CommentsPolicyPage from './CommentsPolicyPage'
 import FindPaperPage from './FindPaperPage'
 import StaffListPage from './StaffListPage'
 import ArchivesPage from './ArchivesPage'
-// import PreviewPage from './PreviewPage'
+import PreviewPage from './PreviewPage'
 import AboutPage from "./AboutPage"
 import ContactPage from "./ContactPage"
 import SeriesPage from "./SeriesPage"
+import SubmitPage from './SubmitPage'
 
 render(<Header />, document.getElementById('headerNew'));
 render(<Sidebar />, document.getElementById('sidebar'));
@@ -36,4 +37,4 @@ render((
 ), document.getElementById('main-content'));
 
 
-export { HomePage, SectionPage, ArticlePage, AuthorPage, JoinPage, SubscriptionsPage, WebPolicyPage, CommentsPolicyPage, FindPaperPage, StaffListPage, ArchivesPage, AboutPage, ContactPage, SeriesPage } 
+export { HomePage, SectionPage, ArticlePage, AuthorPage, JoinPage, SubscriptionsPage, WebPolicyPage, CommentsPolicyPage, FindPaperPage, StaffListPage, ArchivesPage, AboutPage, ContactPage, SeriesPage, PreviewPage, SubmitPage } 

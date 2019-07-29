@@ -4,6 +4,7 @@ import Advertisement_728x90 from './Advertisement_728x90';
 import NonSports from './NonSports';
 import './general-style.css';
 import Single_Article from './Single_Article';
+import deepEqual from 'deep-equal';
 
 import bdhRequester from './requests.js'
 
@@ -24,7 +25,6 @@ class ArticlePage extends React.Component {
 			fetchedApiData: null,
 			relatedArticles: []
 		};
-
 	}
 
 	async componentDidMount() {
@@ -34,22 +34,22 @@ class ArticlePage extends React.Component {
 				this._asyncRequest = null;
 				if (fetchedApiData.data.items.length > 0) {
 					this.setState({ fetchedApiData });
-					console.log("API Data Fetched for Article");
 				} else {
                 	window.location = "/404.html";
 				}
 			}
-		);
-
-		if (this.state.fetchedApiData) {
-			this._relArtRequest = bdhRequester.getLatestArticlesBySection(this.state.fetchedApiData.data.items[0].section).then(
-				relatedArticles => {
-					this._relArtRequest = null;
-					this.setState({ relatedArticles });
-					console.log("rel Art");
+		).then(
+			() => { 
+				if (this.state.fetchedApiData) {
+					this._relArtRequest = bdhRequester.getLatestArticlesBySection(this.state.fetchedApiData.data.items[0].section).then(
+						relatedArticles => {
+							this._relArtRequest = null;
+							this.setState({ relatedArticles: relatedArticles.data.items });
+						}
+					);
 				}
-			);
-		}
+			}
+		);
 	}
 
 	generateImagesObject() {
@@ -69,8 +69,7 @@ class ArticlePage extends React.Component {
 			return (<div className='main-content'>no content</div>); //Throw a 404 here
 		} else {
 			console.log(this.state.fetchedApiData);
-			//var relArts = null;
-
+			
 			var gallery = this.generateImagesObject();
 			var hasGallery = !!gallery;
 
@@ -85,7 +84,8 @@ class ArticlePage extends React.Component {
 			return (
 				<div className='main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
-					<Single_Article sectionHeader = {{url: sectionUrl, title: articleData.section}}
+					<Single_Article 
+						sectionHeader = {{url: sectionUrl, title: articleData.section}}
 						articleTitle = {articleData.title}
 						articleSubTitle = {articleData.summary}
 						gallery = {hasGallery}
@@ -94,6 +94,7 @@ class ArticlePage extends React.Component {
 						authorPosition = 'Senior Staff Writer'
 						featuredImg = {img}
 						publishDate = {publishedOn.toDateString()} // Need to add in a 'Last updated' field as well
+						updateDate = {publishedOn.toDateString()}
 						articleBody = {articleData.content}
 						topics={topics}
 						relatedArticles={this.state.relatedArticles} />
@@ -105,9 +106,3 @@ class ArticlePage extends React.Component {
 }
 
 export default ArticlePage;
-
-
-
-
-
-

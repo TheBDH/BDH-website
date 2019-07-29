@@ -6,7 +6,7 @@ import PreviewPage from './PreviewPage'
 import Tips from './Tips'
 import Questions from './Questions'
 
-import { HomePage, SectionPage, ArticlePage, AuthorPage, JoinPage, SubscriptionsPage, WebPolicyPage, CommentsPolicyPage, FindPaperPage, StaffListPage, ArchivesPage, AboutPage, ContactPage, SeriesPage } from "./index"
+import { HomePage, SectionPage, ArticlePage, AuthorPage, JoinPage, SubscriptionsPage, WebPolicyPage, CommentsPolicyPage, FindPaperPage, StaffListPage, ArchivesPage, AboutPage, ContactPage, SeriesPage, SubmitPage } from "./index"
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
@@ -31,7 +31,7 @@ const PageContent = () => (
       <Route path='/about' component={AboutPage} />
       <Route path='/contact' component={ContactPage} />
       <Route path='/series' component={SeriesPage} />
-
+      <Route path='/submit' component={SubmitPage} />
 
       <Route path='/print-subscriptions' component={SubscriptionsPage} />
       <Route path='/web-policy' component={WebPolicyPage} />

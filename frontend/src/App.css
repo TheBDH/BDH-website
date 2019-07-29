@@ -146,7 +146,7 @@ single_article default styles
 .single-article-topics p, .single-article-topics a {
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Avenir', sans-serif;
   color: black
 }
 
@@ -177,9 +177,9 @@ single_article default styles
   margin-top: 30px;
 }
 .single-article-related-articles a {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Avenir', sans-serif;
   color: black;
 }
 
@@ -231,7 +231,6 @@ single_article iPhone styles
 }
 .individual-related-article {
   font-size: 30px;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center
@@ -239,6 +238,7 @@ single_article iPhone styles
 
 .related-article-image-container {
   display: flex;
+  width: full;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -246,7 +246,6 @@ single_article iPhone styles
 }
 
 .related-article-image {
-  width: 33%;
   height: 100px
 }
 
@@ -274,7 +273,8 @@ single_article iPhone styles
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    width: 95%;
   }
   
   .related-article-image-container {
@@ -346,7 +346,6 @@ single_article iPhone styles
   }
   
   /*sidebar responsive styling*/
-
 
 @media only screen and (device-width : 375px) {
 #sidebar {

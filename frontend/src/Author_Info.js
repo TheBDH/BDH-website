@@ -12,7 +12,6 @@ class Author_Info extends Component {
               <img src={this.props.image} alt='Avatar' />
             </div>
             <div class='name'>{this.props.name}</div>
-            <div class='titlePosition'>{this.props.titlePosition}</div>
           </div>
           <div class='profile-description'>
             <div dangerouslySetInnerHTML={{__html: this.props.description}} />

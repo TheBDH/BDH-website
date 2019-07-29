@@ -56,9 +56,6 @@ def static_page_template(request):
     """
     return render(request, 'static_template.html', {})
 
-
-
-
 def staff_list(request, year, semester):
     """
     View function to return current staff list

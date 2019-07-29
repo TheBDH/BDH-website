@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Section_Features extends Component {
   render() {
-    console.log(this.props);
     var first_article = this.props.section.featured_articles[0];
     var articles = this.props.section.featured_articles;
     return (
