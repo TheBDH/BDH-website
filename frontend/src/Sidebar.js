@@ -5,6 +5,9 @@ import Advertisement_300x250 from './Advertisement_300x250';
 import { DFPSlotsProvider } from 'react-dfp';
 import 'rss-parser/dist/rss-parser.min.js';
 
+import MailchimpSubscribe from "react-mailchimp-subscribe"
+
+
 const issuuStyle = {
   width:'100%', 
   height:'406px',
@@ -14,7 +17,9 @@ class Sidebar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      emailValue: '',
+    };
   }
 
   componentDidMount() {
@@ -41,10 +46,17 @@ class Sidebar extends Component {
       }
     }
 
+    var mailchimpUrl = "https://browndailyherald.us1.list-manage.com/subscribe/post?u=373505593bc39c5fd8ea5d5a8&amp;id=9a2e83adcb"
+
     return (
       <DFPSlotsProvider dfpNetworkId='1149905'>
       <div className="sidebar">
         <Advertisement_300x250 adUnit='BDH_RightSidebar_300x250'/>
+         <div className="footer-subscribe">
+         <div className="med-nav-title">get daily headlines:</div>
+            <MailchimpSubscribe url = {mailchimpUrl} />
+              </div>
+            
         <div className="sidebar-post">
           <a href="http://post.browndailyherald.com/">
             <img src="/static/images/post-logo.png" alt="Post--Online" width="250"/>

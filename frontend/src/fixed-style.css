@@ -632,7 +632,6 @@ header .has-dropdown .nav-dropdown a:hover  {
 	text-transform: uppercase;
 }
 .footer-subscribe input {
-	width: 100%;
 	height: 30px;
 	border: none;
 	padding: 10px;
@@ -785,6 +784,7 @@ header .has-dropdown .nav-dropdown a:hover  {
 .sidebar-articles a {
 	border-bottom: 1px solid #dddddd;
 	padding: 5px 0;
+	width:250px;
 }
 .sidebar-articles a:last-child {
 	border-bottom: none;
@@ -807,7 +807,7 @@ header .has-dropdown .nav-dropdown a:hover  {
 	}
 	.sidebar > div {
 		border-bottom: 1px solid #c4c4c4;
-		padding: 35px 0 35px 35px;
+		padding: 20px 0 20px 20px;
 		width: 100%;
 	}
 	.sidebar .advertisement {

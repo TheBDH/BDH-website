@@ -286,7 +286,8 @@ class ArticleAuthorRelationship(models.Model):
     ]
 
     api_fields = [
-        APIField('author', serializer=PageSerializer)
+        APIField('author', serializer=PageSerializer),
+        APIField('article', serializer=PageSerializer)
     ]
 
 
