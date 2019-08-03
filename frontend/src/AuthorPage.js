@@ -4,6 +4,7 @@ import Advertisement_728x90 from './Advertisement_728x90';
 import NonSports from './NonSports';
 import Section_Features from './Section_Features';
 import Author_Info from './Author_Info';
+import Pagination from './Pagination';
 import './general-style.css';
 
 import bdhRequester from './requests.js'
@@ -13,9 +14,8 @@ class AuthorPage extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = { fetchedApiData: null, articles: null, pageOfItems: [] };
 	}
-
-	state = { fetchedApiData: null };
 
 	componentDidMount() {
 		let authorSlug = this.props.match.params.authName;
@@ -24,7 +24,7 @@ class AuthorPage extends React.Component {
 			fetchedApiData => {
 				this._asyncRequest = null;
 				if (fetchedApiData.data.items.length > 0) {
-					this.setState({fetchedApiData});
+					this.setState({fetchedApiData: fetchedApiData, articles: fetchedApiData.data.items[0].articles.map(x => x.article)});
 					console.log("API Data Fetched for Author");
 				} else {
                 	window.location = "/404.html";
@@ -42,9 +42,11 @@ class AuthorPage extends React.Component {
 		else return '';
 	}
 
+	onChangePage(pageOfItems) {
+		this.setState({ pageOfItems: pageOfItems });
+	}
 
 	generateArticlePreviewComponent(article) {
-		console.log(article);
 		return (
 			<NonSports title = {article.title}
 					   date = {new Date(article.meta.first_published_at).toDateString()}
@@ -56,12 +58,6 @@ class AuthorPage extends React.Component {
 					   description = {this.generatePreview(article.content)} />)
 	}
 
-	generateAllArticlePreviewComponents(article_meta_info_list) {
-		var article_list = article_meta_info_list.map(x => x.article);
-		console.log(article_list);
-		return article_list.map(x => this.generateArticlePreviewComponent(x));
-	}
-
 	render() {
 		console.log(this.state);
 		if (this.state.fetchedApiData === null) { 
@@ -70,7 +66,6 @@ class AuthorPage extends React.Component {
 			var authorData = this.state.fetchedApiData.data.items[0];
 			var desc = authorData.description !== "<p></p>" ? authorData.description : "No description available.";
 			var imgURL = authorData.image ? authorData.image.meta.download_url : 'https://35ht6t2ynx0p1ztf961h81r1-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/generic-avatar.jpg' ;
-			var writtenArticles = this.generateAllArticlePreviewComponents(authorData.articles);
 			return (
 				<div className = 'main-content'>
 					<Advertisement_728x90 adUnit="BDH_ATF_Article_728x90" />
@@ -79,8 +74,8 @@ class AuthorPage extends React.Component {
 						titlePosition = {getFrontendRole(authorData.position)}
 						description = {desc}
 						image = {imgURL} />
-					{writtenArticles}
-
+					{this.state.pageOfItems.map(item => this.generateArticlePreviewComponent(item))}
+                    <center><Pagination items={this.state.articles} onChangePage={this.onChangePage.bind(this)} /></center>
 					<Advertisement_728x90 adUnit="BDH_Footer_728x90" />
 				</div>
 			);
@@ -89,9 +84,3 @@ class AuthorPage extends React.Component {
 }
 
 export default AuthorPage;
-
-
-
-
-
-

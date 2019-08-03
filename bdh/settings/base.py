@@ -127,7 +127,7 @@ WSGI_APPLICATION = 'bdh.wsgi.application'
 WAGTAIL_SITE_NAME = 'The Brown Daily Herald'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media-root/images')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media-root/images/original_images')
 
 WEBPACK_LOADER = {
 	'DEFAULT': {

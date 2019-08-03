@@ -2,12 +2,16 @@ from django.core.management.base import BaseCommand, CommandError
 from newspaper.models import *
 from django.contrib.contenttypes.models import ContentType
 
-
+import requests
 import pymysql
 import pprint  # debugging
 import traceback  # debugging
 import re
 import pickle
+
+from io import BytesIO
+from django.core.files.images import ImageFile
+from wagtail.images.models import Image
 
 
 class Command(BaseCommand):
@@ -23,7 +27,7 @@ class Command(BaseCommand):
             importer = Importer(3306)
             importer.load_categories()
             importer.instantiate_django_categories()
-            #importer.construct_author_models()
+            importer.construct_author_models()
             importer.construct_post_models()
             self.stdout.write(self.style.SUCCESS('Successfully imported database to new models!'))
         else:
@@ -255,7 +259,6 @@ class Importer():
                     except ConnectionRefusedError:
                         print("happened with ", first)
         finally:
-            self.connection.close()
             output = open('id_map.pkl', 'wb')
             pickle.dump(id_mapping, output)
             output.close()
@@ -297,15 +300,20 @@ class Importer():
 
                     author_id = res[6]
                     guid = res[7]
+                    post_name = res[8]
 
                     tags = self.id_to_tags[temp]
 
                     b = AuthorsPage.objects.get(page_ptr_id = id_mappings[author_id])
 
+                    response = requests.get(guid, headers={'User-agent': 'Mozilla/5.0'})
+                    image = Image(title=post_title, file=ImageFile(BytesIO(response.content), name=post_title + '.jpg'))
+                    image.save()
+
                     article = ArticlePage(path = '00010001'+ str(res[0] % 10000.).zfill(4), slug=res[8], depth= 3,
                                          sum_deck = summary, title = post_title, owner_id = 1,
                                          content = body, first_published_at = post_date_modified, 
-                                         section = "unews", featured_image = guid) #featured_image = guid, post_name is slug
+                                         section = "unews", featured_image = image) #featured_image = guid, post_name is slug
 
                     for tag in tags:
 

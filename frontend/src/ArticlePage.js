@@ -66,7 +66,7 @@ class ArticlePage extends React.Component {
 
 	render() {
 		if (this.state.fetchedApiData === null) {
-			return (<div className='main-content'>no content</div>); //Throw a 404 here
+			return (<div className='main-content'>Loading...</div>);
 		} else {
 			console.log(this.state.fetchedApiData);
 			
