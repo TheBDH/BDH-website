@@ -10,11 +10,12 @@ export const sortArticlesByDate = (articleList) => {
 	});
 }
 
+//add in generatePreview method
+
 export const generateArticleLink = (article) => {
 	const divider = '/';
 	let date = article.meta.first_published_at;
 	let publishDate = new Date(date);
-	console.log(publishDate);
 	return divider + publishDate.getFullYear() + divider 
 			+ (publishDate.getMonth() + 1) + divider + publishDate.getDate() + divider + article.meta.slug;
 };

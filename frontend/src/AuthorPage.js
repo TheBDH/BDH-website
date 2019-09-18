@@ -4,18 +4,18 @@ import Advertisement_728x90 from './Advertisement_728x90';
 import NonSports from './NonSports';
 import Section_Features from './Section_Features';
 import Author_Info from './Author_Info';
+import Pagination from './Pagination';
 import './general-style.css';
 
 import bdhRequester from './requests.js'
-import { getFrontendRole } from './constants'
+import { getFrontendRole, generateArticleLink, generateAuthorLink } from './constants'
 
 class AuthorPage extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = { fetchedApiData: null, articles: null, pageOfItems: [] };
 	}
-
-	state = { fetchedApiData: null };
 
 	componentDidMount() {
 		let authorSlug = this.props.match.params.authName;
@@ -24,13 +24,38 @@ class AuthorPage extends React.Component {
 			fetchedApiData => {
 				this._asyncRequest = null;
 				if (fetchedApiData.data.items.length > 0) {
-					this.setState({fetchedApiData});
+					this.setState({fetchedApiData: fetchedApiData, articles: fetchedApiData.data.items[0].articles.map(x => x.article)});
 					console.log("API Data Fetched for Author");
 				} else {
                 	window.location = "/404.html";
 				}
 			}
 		);
+	}
+
+	generatePreview(content) {
+		var parElems = (new DOMParser).parseFromString(content, "text/html").getElementsByTagName("p");
+		if (parElems[0]) {
+			if (parElems[0].innerText === '') return parElems[1].innerText;
+			return parElems[0].innerText
+		}
+		else return '';
+	}
+
+	onChangePage(pageOfItems) {
+		this.setState({ pageOfItems: pageOfItems });
+	}
+
+	generateArticlePreviewComponent(article) {
+		return (
+			<NonSports title = {article.title}
+					   date = {new Date(article.meta.first_published_at).toDateString()}
+					   authorLink = {"#"}
+					   //author = {generateAuthorLink(article.authors[0].author.name)}
+					   articleLink = {generateArticleLink(article)}
+					   imageLink = {generateArticleLink(article)}
+					   image = {article.featured_image ? article.featured_image.meta.download_url : null}
+					   description = {this.generatePreview(article.content)} />)
 	}
 
 	render() {
@@ -49,50 +74,8 @@ class AuthorPage extends React.Component {
 						titlePosition = {getFrontendRole(authorData.position)}
 						description = {desc}
 						image = {imgURL} />
-					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
-						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
-						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
-						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
-						massa. Fusce luctus vestibulum augue ut aliquet."}
-						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
-					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
-						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
-						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
-						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
-						massa. Fusce luctus vestibulum augue ut aliquet."}
-						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
-					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
-						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
-						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
-						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
-						massa. Fusce luctus vestibulum augue ut aliquet."}
-						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
-					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
-						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
-						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
-						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
-						massa. Fusce luctus vestibulum augue ut aliquet."}
-						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
-					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
-						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
-						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
-						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
-						massa. Fusce luctus vestibulum augue ut aliquet."}
-						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
-					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
-						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
-						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
-						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
-						massa. Fusce luctus vestibulum augue ut aliquet."}
-						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
-					<NonSports sectionHeader={"University News"} title={"Medium title for home"} author={"Author Name"} date={"Oct 3 2018"}
-						authorLink={"#"} articleLink={'#'} imageLink={'#'} 
-						description={"Lorem ipsum dolor sit amet,consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi\
-						lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae\
-						massa. Fusce luctus vestibulum augue ut aliquet."}
-						image={"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2010-brown-bear.jpg/200px-2010-brown-bear.jpg"}/>
-
-
+					{this.state.pageOfItems.map(item => this.generateArticlePreviewComponent(item))}
+                    <center><Pagination items={this.state.articles} onChangePage={this.onChangePage.bind(this)} /></center>
 					<Advertisement_728x90 adUnit="BDH_Footer_728x90" />
 				</div>
 			);
@@ -101,9 +84,3 @@ class AuthorPage extends React.Component {
 }
 
 export default AuthorPage;
-
-
-
-
-
-

@@ -11,7 +11,18 @@ const bdhRequester = {
 
     defaultAuthorParams: {
         type: 'newspaper.AuthorsPage',
-        fields: 'name,lastName,description,position,year,articles,image',
+        fields: 'name,lastName,description,position,year,articles(article(content,section,sum_deck,featured_image,authors(author(name,lastName)),slug,first_published_at)),image',
+    },
+
+    async performSearch(searchQuery) {
+        let res;
+        try {
+            res = await Axios.get('/api/v2/pages/', {params: {search: searchQuery, fields: '*'}});
+            return await res;
+        } catch (error) {
+            window.location = "/404.html";
+            return await res;
+        }
     },
 
     /**
@@ -33,7 +44,7 @@ const bdhRequester = {
         let res;
         try {
             res = await Axios.get('/api/v2/pages/', {params: mergedParams});
-            return await res
+            return await res;
         } catch (error) {
             window.location = "/404.html";
             return await res;
@@ -65,7 +76,6 @@ const bdhRequester = {
             limit: 1,
         };
         const mergedParams = {...this.defaultAuthorParams, ...customParams, ...params};
-
         let res;
         try {
             res = await Axios.get('/api/v2/pages/', {params: mergedParams});

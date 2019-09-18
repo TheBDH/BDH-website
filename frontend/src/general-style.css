@@ -489,7 +489,7 @@
 
 .nonsports-column .content .title{
 	font-weight: 700;
-	font-size: 30px;
+	font-size: 18px;
 	margin-bottom: 10px;
 	line-height: 1.25em;
 }
@@ -506,7 +506,7 @@
 }
 
 .nonsports-column .image img {
-	/* width: 100%; */
+	width: 230px;
 	height: 160px;
 	object-fit: cover;
 	object-position: absolute;
