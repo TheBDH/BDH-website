@@ -49,8 +49,12 @@ urlpatterns += [
     path('', views.index, name='index'),
     path('<int:year>/<int:month>/<int:day>/<slug:slug>', views.articles, name='articles'),
     path('authors/<author>', views.author),
+
+    #all of the below are 'section' even though they refer to different types of pages 
+    #in order to allow for code commonalities/reuse in views.py and templates
     path('sections/<section>', views.section),
     path('topics/<section>', views.section),
+    path('search/<section>', views.section), 
 ]
 
 from django.conf import settings

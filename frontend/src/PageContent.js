@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import TopicPage from './TopicPage'
 import PreviewPage from './PreviewPage'
+import SearchPage from './SearchPage'
 import Tips from './Tips'
 import Questions from './Questions'
 
@@ -18,7 +19,7 @@ const PageContent = () => (
       /* Dynamic pages that fetch from the API*/
       <Route exact path='/' component={HomePage}/>
       <Route exact path='/sections/:section' component={SectionPage}/>
-
+      <Route exact path='/search/:query' component={SearchPage} />
       <Route exact path='/:year/:month/:day/:slug' component={ArticlePage} />
       <Route exact path='/authors/:authName' component={AuthorPage} />
       <Route exact path='/topics/:topicName' component={TopicPage} />
