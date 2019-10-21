@@ -1,44 +1,7 @@
 import React, { Component } from 'react';
 import bdhRequester from './requests.js';
 
-// import { ApolloClient } from 'apollo-client'
-// import { HttpLink } from 'apollo-link-http'
-// import { InMemoryCache } from 'apollo-cache-inmemory'
-// import gql from 'graphql-tag'
-
-// import { Link } from 'react-router-dom'
-
-// const getAllArticles = gql`
-//   query {
-//       articles {
-//         id
-//         title
-//         content
-//         summary
-//     }
-//   }`
-
-// const finalQuery = gql`
-// query FeedSearchQuery($filter: String!) {
-//     articles(filter: $filter) {
-//       id
-//       title
-//       content
-//       summary
-//       tags
-//     }
-//   }`
-
-// const query = gql`
-//   query($searchInput: String) {
-//     articles(filter: $searchInput) {
-//       id
-//       title
-//       content
-//       summary
-//       tags
-//     }
-//   }`
+/* If needed, we can implement GraphQL later in the process - to allow for more streamlined/general searches.*/
 
 class HeaderMainStatic extends Component {
 
