@@ -1,43 +1,7 @@
 import React, { Component } from 'react';
+import bdhRequester from './requests.js';
 
-import { ApolloClient } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import gql from 'graphql-tag'
-
-import { Link } from 'react-router-dom'
-
-const getAllArticles = gql`
-  query {
-      articles {
-        id
-        title
-        content
-        summary
-    }
-  }`
-
-const finalQuery = gql`
-query FeedSearchQuery($filter: String!) {
-    articles(filter: $filter) {
-      id
-      title
-      content
-      summary
-      tags
-    }
-  }`
-
-const query = gql`
-  query($searchInput: String) {
-    articles(filter: $searchInput) {
-      id
-      title
-      content
-      summary
-      tags
-    }
-  }`
+/* If needed, we can implement GraphQL later in the process - to allow for more streamlined/general searches.*/
 
 class HeaderMainStatic extends Component {
 
@@ -49,10 +13,6 @@ class HeaderMainStatic extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.keyPress = this.keyPress.bind(this);
-    this.client = new ApolloClient({
-      link: new HttpLink({ uri: '/api/graphql' }),
-      cache: new InMemoryCache()
-    });
   }
 
   handleChange(event) {
@@ -62,10 +22,9 @@ class HeaderMainStatic extends Component {
   //add authors to query later
   keyPress(event) {
     const { filter } = this.state;
-    if(event.keyCode==13){
-      this.client.query({ query: finalQuery, variables: { filter } })
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
+    if(event.keyCode==13) {
+      console.log(this.state)
+      window.location = '/search/' + this.state.searchInput;
     }
   }
 
