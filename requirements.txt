@@ -14,7 +14,7 @@ django-taggit==0.23.0
 django-treebeard==4.3
 django-webpack-loader==0.6.0
 django-widget-tweaks==1.4.3
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 draftjs-exporter==2.1.5
 elasticsearch==6.3.0
 graphene==2.1.3
