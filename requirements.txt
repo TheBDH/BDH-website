@@ -38,6 +38,6 @@ singledispatch==3.4.0.3
 six==1.11.0
 Unidecode==1.0.22
 urllib3==1.23
-wagtail==2.4
+wagtail==2.11.6
 webencodings==0.5.1
 Willow==1.1
