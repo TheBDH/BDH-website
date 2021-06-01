@@ -37,7 +37,7 @@ Rx==1.6.1
 singledispatch==3.4.0.3
 six==1.11.0
 Unidecode==1.0.22
-urllib3==1.23
+urllib3==1.26.5
 wagtail==2.4
 webencodings==0.5.1
 Willow==1.1
